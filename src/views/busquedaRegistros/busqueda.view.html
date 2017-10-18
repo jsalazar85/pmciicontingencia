@@ -1,0 +1,79 @@
+<style>
+	.gridBusqueda{
+		font-size: 12px;
+	}
+</style>
+<div class="container-fluid principalMain m-0 p-0" style="margin-top: 50px !important;">
+	<div class="row no-gutters m-0 p-1 mt-3">
+		<!-- FILA 1 ------------------------------------------------------>
+		<div class="col rounded p-2 m-0" style="background-color: whitesmoke;">
+			<span>Consulta de Información</span>
+		</div>
+		<div class="w-100">
+		</div>
+		<div class="col-4 m-0 pr-3">
+			<form class="rounded" style="background-color: white;">
+				<div class="form-group row m-0 p-2 bottom-line rounded-top" style="background-color: #e5e5e5;">
+					<span>Filtros</span>
+				</div>
+				<!--NSS -->
+				<div class="form-group row m-0 p-1 bottom-line">
+					<label for="busquedaNSS" class="col-4 col-form-label base-font-black-normal-md">NSS</label>
+					<div class="col-8">
+						<input ng-model="busqueda.nuNSS" type="number" class="form-control" id="busquedaNSS" placeholder="Número Seguro Social">
+					</div>
+				</div>
+				<!--Credito -->
+				<div class="form-group row m-0 p-1 bottom-line">
+						<label for="busquedaCredito" class="col-4 col-form-label base-font-black-normal-md">Crédito</label>
+						<div class="col-8">
+							<input ng-model="busqueda.nuCredito" type="text" class="form-control" id="busquedaCredito" placeholder="Crédito">
+						</div>
+				</div>
+				<!--ESTADO/Delegacion -->
+				<div class="form-group row m-0 p-1 bottom-line">
+						<label for="busquedaEstado" class="col-4 col-form-label base-font-black-normal-md">Delegación</label>
+						<div class="col-8">
+							<select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="busquedaEstado" ng-model="busqueda.txEstado" ng-options="option.txEstado for option in catLoc.estados track by option.nuId">
+							</select>
+						</div>
+				</div>
+				<!--Tpo Fuente -- >
+				<div class="form-group row m-0 p-0 bottom-line" style="background-color: #f6f6f6;">
+						<label for="busquedaFuente" class="col-sm-3 col-form-label base-font-black-normal-md">Fuente</label>
+						<div class="col-sm-8">
+							<select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect2" ng-model="busqueda.nuFuente" ng-options="option.tx for option in catLoc.tipos track by option.nu">
+								</select>
+						</div>
+				</div>
+				<!--Tpo Daño -->
+				<div class="form-group row m-0 p-1 bottom-line">
+					<label for="busquedaDano" class="col-4 col-form-label base-font-black-normal-md">Tipo de Daño</label>
+					<div class="col-8">
+						<select style="width: 100%;" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="busquedaDano" ng-model="busqueda.txDictamen" ng-options="option.tx for option in catLoc.tiposDanos track by option.nu">
+						</select>
+					</div>
+				</div>
+				<div class="form-group row m-0 p-1 bottom-line rounded-bottom justify-content-center">
+					<div class="col-auto p-1">
+						<button id="" type="button" class="btn btn-success" ng-click="buscar($event)"><i class="fa" aria-hidden="true"></i><span class="pl-1">Buscar</span></button>
+					</div>
+
+				</div>
+			</form>
+		</div>
+		<div class="col-8 rounded p-1 m-0 mb-1" style="background-color: whitesmoke;">
+			<div id="gridAtnSrv" ui-grid="gridAtnSrv.opt" class="gridBusqueda" style="width: 100%;height: 400px;"></div>
+		</div>
+		<div class="w-100 ">
+		<div class="col-12 m-0 p-0 mt-2">
+			<div class="row no-gutters gradiente mb-4 rounded">
+				<div class="col-12 pt-3 pl-2">
+					<div id="gridBusqueda" ui-grid="gridOptDet" class="gridBusqueda" ></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

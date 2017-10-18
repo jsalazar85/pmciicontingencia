@@ -26,6 +26,7 @@
         "angular-bootstrap": "~1.0.3",
         "angular-ui-router": "^0.2.15",
         "bootstrap": "~3.3.6",
+        "bootstrap4": "4.0.0-beta",
         "font-awesome": "~4.5.0"
     },
     "repository": {

@@ -1,0 +1,44 @@
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col" style="text-align: center;">
+            <img style="width: 250px; height: 200px;" src="img/logoInfo.png" />
+        </div>
+    </div>
+</div>
+
+
+<div class="container mt-1" style="background-color: white; ">
+    <form>
+        <!--Numero de equipo -->
+        <div class="form-group row" style="">
+            <label for="inputEmail3" class="col-sm-12 col-form-label">Usuario</label>
+            <div class="col-sm-10">
+                <input ng-model="dataLogin.txUsuario" type="text" class="form-control" id="inputEmail3" placeholder="Usuario">
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label  class="col-sm-12" for="exampleInputPassword1">Password</label>
+            <div class="col-sm-10">
+                <input ng-model="dataLogin.txPassword" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" ng-keypress="enter($event)">
+            </div>
+            <div class="col-sm-10">
+                <span class="base-font-gray-normal-xl" style="color: red;" ng-if="showPwdIncorrecto" >Usuario o contraseña incorrectos</span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <button type="button" class="btn btn-primary" ng-click="login()"><span class="pl-1">Entrar</span></button>
+            </div>
+        </div>
+
+
+
+    </form>
+</div>
+

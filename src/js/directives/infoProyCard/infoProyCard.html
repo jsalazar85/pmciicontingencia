@@ -1,0 +1,41 @@
+
+
+
+<div class="container pm-infoproycard-maincont" ng-class="{'border-style-01': !isfirst}">
+    <div class="row justify-content-center">
+
+        <!--  **********  Boton   ***********-->
+        <div class="col-12 pm-infoproycard-boton justify-content-center">
+            <!--<img src="img/botoncii01.png" class="align-self-center" ng-click="clickImg()" />-->
+            <img ng-src="{{imgPath}}" class="align-self-center" ng-click="clickImg()" />
+        </div>
+
+        <!--  **********  Proyectos   ***********-->
+        <div class="row pm-infoproycard-proy align-items-center">
+            <div class="col-3 pm-infoproycard-proyicon">
+                <img src="img/cerebro.png" />
+            </div>
+            <div class="col-8 pm-infoproycard-proytext">
+                <p>Proyectos</p>
+            </div>
+        </div>
+
+        <div class="col-12 pm-infoproycard-nuProy">
+            <p>{{mdato.nuProyectos}}</p>
+        </div>
+
+        <!--  **********  Avances   ***********-->
+        <div class="row align-items-center">
+            <div class="col-3 pm-infoproycard-avanceicon">
+                <img src="img/grfca.png" />
+            </div>
+            <div class="col-8 pm-infoproycard-avance">
+                <p>Avance</p>
+            </div>
+        </div>
+
+        <div class="col-12 pm-infoproycard-nuAvance">
+            <p>{{mdato.nuAvance * 100 | number:2}} %</p>
+        </div>
+    </div>
+</div>

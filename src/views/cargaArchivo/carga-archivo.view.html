@@ -1,0 +1,54 @@
+
+<div class="container-fluid detalleGerenciaMainCont m-0 p-0">
+    <div class="row no-gutters rowCont m-0 p-0" style="padding: 0px; background-color: #FFFFFF">
+        <div class="col-12 m-0 p-0">
+            <div class="progress m-0 p-0">
+                <div class="progress-bar" ng-style="{'width':pb.nuAvance+'%'}" role="progressbar" aria-valuenow="{{pb.nuAvance}}" aria-valuemin="0" aria-valuemax="{{100}}"></div>
+            </div>
+        </div>
+        <div class="col-12 m-0 pt-3 colCont">
+            <!---------------- FILA 1-------------------->
+            <div class="row no-gutters align-items-center align-content-center m-0 p-0 ">
+                <!---------------- 1 Avance -------------------->
+                <div class="col-12 col-sm-4 left-border-line p-3">
+                    <div style="width: 100%; height: 300px; margin-left: -15px">
+                        <input type="file" multiple="false"  />
+                    </div>
+                </div>
+
+                <!---------------- 2 Distribución por tipo de dictamn -------------------->
+                <div class="col-12 col-sm-8 left-border-line p-3">
+                    <div style="width: 100%; height: 300px;">
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!---------------- FILA 2-------------------->
+            <div class="row no-gutters gradiente mb-4">
+
+                <!-- Dictámenes por municipio --------------------------->
+                <div class="col-12 pt-3 pl-2">
+                    <div style="width: 100%; height: 320px;">
+                            <!-- < am-col-chart mdato="colChart1" id="2"></am-col-chart>-->
+                        <!--<am-col-multi-chart mdato="colChart3" id="4"></am-col-multi-chart>-->
+                        <am-col-chart mdato="colChart1" id="2"></am-col-chart>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row no-gutters m-0 p-0">
+        <div class="col-12">
+            <img ng-click="regresar()" src="img/Boton gris nav 01@2x.png" style="width: 204px; height: 68px; margin-top: -25px; cursor: pointer;" />
+        </div>
+        <div class="col-12">
+            <div ng-click="regresar()" style="margin-top: -60px;margin-left: 90px; ">
+                <span class="base-font-white-normal-lg" style="margin-top: -40px;">Regresar</span>
+            </div>
+        </div>
+    </div>
+</div>

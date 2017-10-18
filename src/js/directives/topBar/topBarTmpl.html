@@ -1,0 +1,55 @@
+
+<div class="container-fluid tb-cf fixed-top" id="mainTopBar">
+    <div class="row tb-mn-row" >
+
+        <!-------------  PRIMERA MITAD  ----------------->
+        <div class="col-6 tb-gen-col">
+            <div class="row tb-tt-row">
+                <!-- TITULO  ---------------------->
+                <div class="col-12 align-self-center p-0 m-0">
+                    <span>{{mdato.txTitulo}}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-------------  SEGUNDA MITAD  ----------------->
+        <div class="col-6 tb-gen-col">
+
+            <!-- ICON STACK  ---------------------->
+            <div class="row tb-is-01">
+                <div class="col-12 is-cn-02">
+                    <div class="is-cn-fx-03">
+                        <div class="is-cn-fx-04">
+                            <div  class="d-flex justify-content-center is-cn-fx-ic-05">
+                                <i id="globalLoading" class="fa fa-circle-o-notch fa-spin fa-2x fa-fw fast-spin" style="color: white;"></i>
+                            </div>
+                            <div class="d-flex justify-content-center is-cn-fx-tx-06">
+                                <span style="font-size: 12px;"></span>
+                            </div>
+                        </div>
+                        <!-- TABLERO -->
+                        <div class="is-cn-fx-04 ml-3 mt-1" style="cursor: pointer;" ng-click="menu('tablero')">
+                            <div class="d-flex justify-content-center is-cn-fx-ic-05" >
+                                <i class="fa fa-bar-chart fa-2x" aria-hidden="true"></i>
+                            </div>
+                            <div class="d-flex justify-content-center is-cn-fx-tx-06">
+                                <span style="font-size: 12px;">Tablero</span>
+                            </div>
+                        </div>
+                        <!-- Busqueda -->
+                        <div class="is-cn-fx-04 ml-3 mt-1" style="cursor: pointer;" ng-click="menu('busqueda')">
+                            <div class="d-flex justify-content-center is-cn-fx-ic-05">
+                                <i class="fa fa-search fa-2x" aria-hidden="true"></i>
+                            </div>
+                            <div class="d-flex justify-content-center is-cn-fx-tx-06">
+                                <span style="font-size: 12px;">Consulta</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

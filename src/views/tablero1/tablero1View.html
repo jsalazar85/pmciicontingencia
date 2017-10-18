@@ -1,0 +1,253 @@
+<style>
+
+.gridResumen .ui-grid-header-cell .ui-grid-cell-contents {
+    height: 100px;
+    white-space: normal;
+    -ms-text-overflow: clip;
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    overflow: hidden;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.gridResumen .ui-grid-cell .ui-grid-cell-contents {
+    white-space: normal;
+    -ms-text-overflow: clip;
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    overflow: hidden;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+</style>
+
+<div ui-view="plataformabrigada"></div>
+<div class="card text-center h-100">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item" ng-repeat="nt in navTabs">
+                <button class="nav-link" ng-class="nt.objClass" ng-click="selectTab(nt)">{{nt.txTitulo}}</button>
+            </li>
+        </ul>
+    </div>
+    <!---------------- 1 PRIMER TAB ------------------------------------ -------------------->
+    <div class="card-body p-0" ng-show="navTabs[0].objClass.active" style="height: 85%;">
+        <div class="container-fluid detalleGerenciaMainCont m-0 p-0">
+            <div class="row no-gutters rowCont m-0 p-0" style="padding: 0px; background-color: #FFFFFF">
+                <div class="col-12 m-0 p-0">
+                    <div class="progress m-0 p-0">
+                        <div class="progress-bar" ng-style="{'width':pb.nuAvance+'%'}" role="progressbar" aria-valuenow="{{pb.nuAvance}}" aria-valuemin="0" aria-valuemax="{{100}}"></div>
+                    </div>
+                </div>
+                <div class="col-12 m-0 pt-3 colCont">
+                    <!---------------- FILA 1-------------------->
+                    <div class="row no-gutters align-items-center align-content-center m-0 p-0 ">
+
+                        <!---------------- 2 Distribución por tipo de dictamn -------------------->
+                        <div class="col-12 col-sm-4 left-border-line p-3">
+                            <div class="row no-gutters align-items-center align-content-center m-0 p-0 ">
+                                <div class="col-12 col-sm-12 left-border-line p-3">
+                                    <div style="width: 100%; height: 300px;">
+                                        <!--<am-col-chart mdato="barChart1" id="1"></am-col-chart>-->
+                                        <am-donut-pie mdato="pieChart1" id="1"></am-donut-pie>
+                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <!-- Total de acreditados --------------------------->
+                                <!-- Total de acreditados --------------------------->
+                                <div class="col-7">
+                                    <i class="fa fa-credit-card" aria-hidden="true"></i>
+                                    <span>Total de Créditos:</span>
+                                </div>
+                                <div class="col-5">
+                                    <span>{{progressChart1.nuAvanceMaximo | number}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!---------------- 3 Datos Duros -------------------->
+                        <div class="col-12 col-sm-8 left-border-line p-2">
+
+                            <div id="grid1" ui-grid="chartOpt" class="grid" style="width: 100%;"></div>
+                        </div>
+                    </div>
+
+
+                    <!---------------- FILA 3-------------------->
+                    <div class="row no-gutters gradiente mb-4">
+                        <div class="col-12 col-sm-12 pt-3 pl-2">
+                            <!-- Dictámenes por Estado --------------------------->
+                            <div class="card text-center h-100">
+                                <!-- Tabs por Estado y Municipio ---------------------------------------------------------------------------->
+                                <div class="card-header">
+                                    <ul class="nav nav-tabs card-header-tabs">
+                                        <li class="nav-item" ng-repeat="nt in navTabs2">
+                                            <button class="nav-link" ng-class="nt.objClass" ng-click="selectTab2(nt)">{{nt.txTitulo}}</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- 1er tab ---------------------------------------------------------------------------->
+                                <div class="card-body p-0" ng-show="navTabs2[0].objClass.active" style="height: 85%;">
+                                    <div style="width: 100%; height: 320px;">
+                                        <!--<am-col-chart mdato="colChart2" id="3"></am-col-chart>-->
+                                        <am-col-multi-chart mdato="colChart2" id="3"></am-col-multi-chart>
+                                    </div>
+                                </div>
+                                <!-- 2do tab ---------------------------------------------------------------------------->
+                                <div class="card-body p-0" ng-show="navTabs2[1].objClass.active" style="height: 85%;">
+                                    <div style="width: 100%; height: 320px;">
+                                        <!--<am-col-chart mdato="colChart2" id="3"></am-col-chart>-->
+                                        <chart-saldo-estado mdato="colChart4" id="5"></chart-saldo-estado>
+                                    </div>
+                                </div>
+                                <!-- 3er tab ---------------------------------------------------------------------------->
+                                <div class="card-body p-0" ng-show="navTabs2[2].objClass.active" style="height: 85%;">
+                                    <div style="width: 100%; height: 320px;">
+                                        <!--<am-col-chart mdato="colChart2" id="3"></am-col-chart>-->
+                                        <!--<chart-saldo-estado mdato="colChart4" id="5"></chart-saldo-estado>-->
+                                        <am-col-multi-chart mdato="colChart3" id="4"></am-col-multi-chart>
+                                    </div>
+                                </div>
+                                <!-- 4to tab ---------------------------------------------------------------------------->
+                                <div class="card-body p-0" ng-show="navTabs2[3].objClass.active" style="height: 85%;">
+                                    <!--<div style="width: 100%; height: 320px;">-->
+                                        <!--<am-col-chart mdato="colChart2" id="3"></am-col-chart>-->
+                                        <!--<chart-saldo-estado mdato="colChart4" id="5"></chart-saldo-estado>-->
+
+                                    <!--</div>-->
+                                    <div style="background-color: whitesmoke; width: 1050px; height: 500px;" >
+                                        <!-- <am-gen-chart  data="" id="char1" chart-opts="chart1.chartOpts" cont-opts="" json-path="json/amchart/areaChart1.json"></am-gen-chart> -->
+                                        <div id="grid1" ui-grid="gridOpt" class="gridResumen" style="width: 1050px; height: 100%;"></div>
+                                    </div>
+                                    <input type="file" import-sheet-js="" opts="gridOptions" multiple="false"  />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div class="row no-gutters m-0 p-0">
+                <div class="col-12">
+                    <img ng-click="regresar()" src="img/Boton gris nav 01@2x.png" style="width: 204px; height: 68px; margin-top: -25px; cursor: pointer;" />
+                </div>
+                <div class="col-12">
+                    <div ng-click="regresar()" style="margin-top: -60px;margin-left: 90px; ">
+                        <span class="base-font-white-normal-lg" style="margin-top: -40px;">Regresar</span>
+                    </div>
+                </div>
+            </div>
+            -->
+        </div>
+    </div>
+    <!---------------- 2 PRIMER TAB ------------------------------------ -------------------->
+    <div class="card-body p-0" ng-show="navTabs[1].objClass.active" style="height: 85%;">
+        <div class="container-fluid detalleGerenciaMainCont m-0 p-0">
+            <div class="row no-gutters rowCont m-0 p-0" style="padding: 0px; background-color: #FFFFFF">
+                <div class="col-12 m-0 pt-3 colCont">
+                    <!---------------- FILA 1-------------------->
+                    <div class="row no-gutters align-items-center align-content-center m-0 p-0 ">
+                        <!---------------- 1 Avance -------------------->
+                        <div class="col-12 col-sm-4 left-border-line p-3">
+                            <div style="width: 100%; height: 300px; margin-left: -15px">
+                                <chart-por-relacion mdato="chartRelacion" id="20"></chart-por-relacion>
+                            </div>
+                        </div>
+
+                        <!---------------- 2 Distribución por tipo de dictamn -------------------->
+                        <div class="col-12 col-sm-8 left-border-line p-3">
+                            <div style="width: 100%; height: 300px;">
+                                <am-col-chart mdato="chartCanal" id="21"></am-col-chart>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!---------------- FILA 3-------------------->
+                    <div class="row no-gutters gradiente mb-4">
+                        <!-- Dictámenes por Estado --------------------------->
+                        <div class="col-12 col-sm-4 pt-3 pl-2">
+                            <div style="width: 100%; height: 320px;">
+                                <am-donut-pie mdato="chartTipoDictamen" id="21"></am-donut-pie>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-8 pt-3 pl-2">
+                            <div style="width: 100%; height: 320px;">
+                                <chart-detalle-dictamen mdato="chartDetalleDictamen" id="23"></chart-detalle-dictamen>
+                            </div>
+                        </div>
+                        <!--
+                        <div class="col-12 col-sm-3 pt-3 pl-2">
+                            <div style="width: 100%; height: 320px;">
+                                <!--<am-col-chart mdato="colChart2" id="3"></am-col-chart>--
+                                <!--<am-donut-pie mdato="pieChart2" id="2"></am-donut-pie>--
+                                <chart-por-producto mdato="pieChart2" id="2"></chart-por-producto>
+                            </div>
+                        </div>
+                        -->
+                    </div>
+
+                </div>
+            </div>
+            <!--
+            <div class="row no-gutters m-0 p-0">
+                <div class="col-12">
+                    <img ng-click="regresar()" src="img/Boton gris nav 01@2x.png" style="width: 204px; height: 68px; margin-top: -25px; cursor: pointer;" />
+                </div>
+                <div class="col-12">
+                    <div ng-click="regresar()" style="margin-top: -60px;margin-left: 90px; ">
+                        <span class="base-font-white-normal-lg" style="margin-top: -40px;">Regresar</span>
+                    </div>
+                </div>
+            </div>
+            -->
+        </div>
+    </div>
+
+
+
+    <!---------------- 4 PRIMER TAB ---------------------------------------------------------->
+    <div class="card-body p-0" ng-show="navTabs[2].objClass.active" style="height: 85%;">
+        <div class="container-fluid detalleGerenciaMainCont m-0 p-0">
+            <div class="row no-gutters rowCont m-0 p-0" style="padding: 0px; background-color: #FFFFFF">
+                <div class="col-12 m-0 pt-3 colCont">
+
+                    <!---------------- FILA 1-------------------->
+                    <div class="row no-gutters align-items-center align-content-center m-0 p-0 ">
+                        <!---------------- 2 DISTRIBUCIÓN POR TIPO DE DICTAMEN ASEGURADORA (PIE)  -------------------->
+                        <div class="col-12 col-sm-12 left-border-line p-3">
+                            <div style="width: 100%; height: 300px;">
+                                <span>Total de Personas Censadas</span>
+                                <am-gen-chart
+                                        data="censoChart1.data"
+                                        id="censo-chart1"
+                                        chart-opts="censoChart1.chartOpts"
+                                        cont-opts=""
+                                        json-path="json/censo/chart1.json">
+                                </am-gen-chart>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!---------------- FILA 3-------------------->
+                    <div class="row no-gutters gradiente mb-4">
+                        <!---------------- 3 DISTRIBUCIÓN POR TIPO DE DICTAMEN ASEGURADORA (PIE)  -------------------->
+                        <div class="col-12 col-sm-12 left-border-line p-3">
+                            <div style="width: 100%; height: 300px;">
+                                <span>Por Tipo de Desastre</span>
+                                <am-gen-chart  data="censoChart2.data" id="censo-chart2" chart-opts="censoChart2.chartOpts" cont-opts="" json-path="json/censo/chart2.json"></am-gen-chart>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

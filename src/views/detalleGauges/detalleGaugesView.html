@@ -1,0 +1,29 @@
+
+<div class="container-fluid">
+    <div class="row pm-row-group no-gutters pm-detger-cont" style="padding: 0px; background-color: #FFFFFF">
+        <div class="col-12 m-0 pt-3">
+            <!---------------- FILA 1-------------------->
+            <div class="row no-gutters">
+                <!---------------- 1 Gauge de Avance por Gerencia -------->
+                <div class="col-3 justify-content-center border-style-02" ng-repeat="m in mdato.data">
+                    <amprogresschart mdato="m" class=""></amprogresschart>
+                </div>
+            </div>
+            <!---------------- FILA 2-------------------->
+            <div class="row no-gutters gradiente mb-4">
+            </div>
+        </div>
+    </div>
+
+    <div class="row no-gutters m-0 p-0">
+        <div class="col-12">
+            <img ng-click="regresar()" src="img/Boton gris nav 01@2x.png" style="width: 204px; height: 68px; margin-top: -25px;" />
+        </div>
+        <div class="col-12">
+            <div ng-click="regresar()" style="margin-top: -60px;margin-left: 90px; ">
+                <span class="base-font-white-normal-lg" style="margin-top: -40px;">Regresar</span>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,63 @@
+
+<div class="container-fluid principalMain m-0 p-0">
+    <div class="row no-gutters m-0 p-0">
+
+        <!-- FILA 1 ------------------------------------------------------>
+        <div class="col-12 m-0 pt-3">
+            <!-- 1 Barra de acciones -------------------------->
+            <div class="row no-gutters align-content-sm-end" style="">
+                <div class="col-2 align-self-end">
+                    <button id="botonGuardarPrin" type="button" class="btn btn-primary" ng-click="nuevo()"><i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1">Nuevo</span></button>
+                </div>
+                <div class="col-12 col-sm-7 align-self-end justify-content-end" style="color: #fff;">
+                </div>
+                <div class="col-2 col-sm-1 align-self-end justify-content-end pr-2" style="color: #fff; text-align: right;">
+                    <label for="example-search-input" class="col-form-label">Buscar:</label>
+                </div>
+                <div class="col-8 col-sm-2 align-self-end justify-content-end">
+                    <input type="text" id="principalBusqueda" ng-keypress="typeBusqueda($event)" ng-model="txBusqueda">
+                </div>
+            </div>
+        </div>
+
+        <!-- 2 Grid de Consulta -------------------------->
+        <div class="col-12 m-0 pt-3">
+            <div class="row no-gutters gradiente mb-4">
+                <div class="col-12 pt-3 pl-2">
+                    <div style="width: 100%; height: 600px;">
+                        <table class="table table-scroll" style="font-size: 12px;">
+                            <thead class="thead-default">
+                            <tr>
+                                <th>Número de Equipo</th>
+                                <th>Zona</th>
+                                <th>Número de Crédito</th>
+                                <th>Dictamen</th>
+                                <th>Teléfono</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="m in lstAsignacion" ng-click="edit($event,m)" style="cursor: pointer;">
+                                <td>{{m.txEquipo}}</td>
+                                <td>{{m.txZona}}</td>
+                                <td>{{m.txNuCredito}}</td>
+                                <td>{{m.dictamen.txDictamen}}</td>
+                                <td>{{m.txTelefono}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container-fluid  m-0 p-0">
+    <div class="col-11 m-0 pt-0">
+        &nbsp;
+    </div>
+    <div class="col-1 m-0 pt-3" style="text-align: right;">
+        <button id="" type="button" class="btn btn-success" ng-click="reporte()"><i class="fa" aria-hidden="true"></i><span class="pl-1">Reporte</span></button>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+<style>
+    .gridBusqueda{
+        font-size: 12px;
+    }
+</style>
+<div id="tableroSeguimientoGlobalElement" class="container-fluid principalMain m-0 p-0" style="margin-top: 5px !important;">
+    <div class="form-group row m-0 p-1 bottom-line rounded-bottom justify-content-center">
+        <div class="col-auto p-1">
+            <button id="" type="button" class="btn btn-success" ng-click="PrintElem(tableroSeguimientoGlobalElement)"><i class="fa" aria-hidden="true"></i><span class="pl-1">Imprimir</span></button>
+        </div>
+    </div>
+    <div class="row no-gutters m-0 p-1 mt-3">
+        <!-- FILA 1 ------------------------------------------------------>
+        <div class="col rounded p-2 m-0" style="background-color: whitesmoke;">
+            <span>FORMATO UNICO DE REPORTE</span>
+            <p>
+                Medidas Ordinarias y extraordinarias para la atención de desastres
+            </p>
+            <p>
+                Plan de respuesta inmediata INFONAVIT
+            </p>
+            <span>Información al : 17/10/2017 </span>
+        </div>
+        <div class="w-100">
+        </div>
+        <div class="col-12 rounded p-1 m-0 mb-1" style="background-color: whitesmoke;">
+            <div id="grid3Medidas" ui-grid="maestroMedidasOpt" class="gridBusqueda" style="width: 100%;height: 400px;"></div>
+        </div>
+        <div class="w-100 ">
+            <div class="col rounded p-2 m-0" style="background-color: whitesmoke;" >
+                <span>Detalle de: {{currentMaster.txIniciativa}}        </span>
+                <button id="btnNuevoMedidaEdo" type="button" class="btn btn-success" ng-click="nuevo($event)"><i class="fa" aria-hidden="true"></i><span class="pl-1">Nuevo</span></button>
+                <!-- Button trigger modal -->
+                <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Launch demo modal
+                </button>-->
+
+                <!-- Modal Master Observacions-->
+                <div class="modal fade" id="observacionMasterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Observaciones</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div ui-view="capturaObservacion"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal Detalle-->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Detalle Iniciativa por Estado</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div ui-view="capturaInicioDetalle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 m-0 p-0 mt-2" ng-if="mostrar">
+                <div class="row no-gutters gradiente mb-4 rounded">
+                    <div class="col-12 pt-3 pl-2">
+                        <div id="grid4Medidas" ui-grid="detalleMedidasOpt" class="gridBusqueda" style="width: 100%;height: 400px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

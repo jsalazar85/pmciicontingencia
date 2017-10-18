@@ -1,0 +1,69 @@
+<div class="container" style="background-color: white">
+    <form>
+        <!--Medida -->
+        <div class="form-group row m-0 p-0 bottom-line">
+            <label for="inputEmail1" class="col-sm-12 col-form-label base-font-black-normal-md">Medida</label>
+            <div class="col-sm-10">
+                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inputEmail1" ng-model="selectedMedida" ng-options="option.txIniciativa for option in lstMedidas track by option.idIniciativa">
+                    <!--<option value="d" ng-repeat="d in lstDictamen">{{d.txDictamen}}</option>-->
+                </select>
+            </div>
+        </div>
+
+        <!--Estado -->
+        <div class="form-group row m-0 p-0 bottom-line">
+            <label for="inputEmail2" class="col-sm-12 col-form-label base-font-black-normal-md">Estado</label>
+            <div class="col-sm-10">
+                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect" ng-model="selectedEstado" ng-options="option.txEstado for option in lstEstado track by option.idEstado">
+                    <!--<option value="d" ng-repeat="d in lstDictamen">{{d.txDictamen}}</option>-->
+                </select>
+            </div>
+        </div>
+
+
+
+        <!--Por estado-->
+        <div class="form-group row m-0 p-0 bottom-line" style="background-color: #f6f6f6;">
+            <label for="inputEmail3" class="col-sm-12 col-form-label base-font-black-normal-md">No. Derechohabientes Beneficiarios</label>
+            <div class="col-sm-10">
+                <input ng-model="txDerechohabientes" type="number" min="0" class="form-control" id="inputEmail3" placeholder="Derechohabientes">
+            </div>
+        </div>
+
+        <!--Por estado-->
+        <div class="form-group row m-0 p-0 bottom-line" style="background-color: #f6f6f6;">
+            <label for="inputEmail4" class="col-sm-12 col-form-label base-font-black-normal-md">Monto Unitario</label>
+            <div class="col-sm-10">
+                <input ng-model="txMontoUnitario" type="number" min="0" class="form-control" id="inputEmail4" placeholder="Monto Unitario">
+            </div>
+        </div>
+
+        <!--Por estado-->
+        <div class="form-group row m-0 p-0 bottom-line" style="background-color: #f6f6f6;">
+            <label for="inputEmail5" class="col-sm-12 col-form-label base-font-black-normal-md">Monto Total</label>
+            <div class="col-sm-10">
+                <input ng-model="txMontoTotal" type="number" min="0" class="form-control" id="inputEmail5" placeholder="Monto Total">
+            </div>
+        </div>
+
+        <!--Por estado-->
+        <div class="form-group row m-0 p-0 bottom-line" style="background-color: #f6f6f6;">
+            <label for="inputEmail6" class="col-sm-12 col-form-label base-font-black-normal-md">Observaciones</label>
+            <div class="col-sm-10">
+                <input ng-model="txObservaciones" type="text" class="form-control" id="inputEmail6" placeholder="Observaciones">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col">
+                <button type="button" class="btn btn-primary" ng-click="guardar()"><i class="fa fa-floppy-o" aria-hidden="true"></i><span class="pl-1">Guardar</span></button>
+            </div>
+
+            <div class="col" style="text-align: right;">
+                <button type="button" class="btn btn-danger" ng-click="cancelar()"><i class="fa fa-sign-out" aria-hidden="true"></i><span class="pl-1">Cancelar</span></button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
