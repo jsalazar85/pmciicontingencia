@@ -1,0 +1,12 @@
+
+<div class="container-fluid" style="width:100%; height: 100%; background-color: whitesmoke">
+    <div class="row" style="height: 40%;">
+        <div class="col-7 w-100 h-100">
+            <ng-map style="width: 100%; height: 100%;" center="[40.74, -74.18]">
+                <marker ng-repeat="p in mapData track by $index" position="{{p}}"></marker>
+            </ng-map>
+        </div>
+        <div class="col-5 w-100 h-100">
+        </div>
+    </div>
+</div>

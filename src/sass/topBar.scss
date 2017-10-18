@@ -1,0 +1,23 @@
+@import "vars";
+@import "fontmixins";
+
+
+$tb-gray-color:#e2e2e2;
+
+.topBarMain{
+
+  .tituloCont{
+
+    .tituloText{
+      @extend .base-font-gray-title-lg;
+      color: $tb-gray-color;
+      font-size: 24px;
+    }
+
+    .subTituloText{
+      @extend .base-font-gray-title-lg;
+      color: $tb-gray-color;
+      font-size: 16px;
+    }
+  }
+}

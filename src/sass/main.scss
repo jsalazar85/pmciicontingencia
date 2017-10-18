@@ -1,0 +1,49 @@
+
+
+
+
+/*
+@import "infoproycard";
+@import "amprogchar";
+@import "dashboard";
+@import "../views/detalleGerencia/detalleGerencia";
+*/
+
+@import "vars";
+
+
+html,body{
+  height:100%;
+}
+body{
+  //background-color:$base-colo01;
+  background-color:#da162b !important;
+  min-width: 380px !important;
+  background-image: url('../img/background01.png');;
+  background-repeat: repeat-x;
+  background-position: left top;
+}
+
+.row.header{
+  background-color: #d91b32;
+}
+
+.bottom-line{
+  border-bottom: 1px solid #dcdcdc;
+}
+
+.left-border-line{
+  border-left: 1px solid #dcdcdc;
+}
+
+
+.fast-spin {
+  -webkit-animation: fa-spin 1100ms infinite linear !important;
+  animation: fa-spin 1100ms infinite linear !important;;
+}
+
+
+
+
+
+

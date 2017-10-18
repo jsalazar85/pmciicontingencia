@@ -1,0 +1,68 @@
+@import "vars";
+@import "../components/bootstrap4/scss/_functions.scss";
+@import "../components/bootstrap4/scss/_variables.scss";
+@import "../components/bootstrap4/scss/_mixins.scss";
+@import "fontmixins";
+
+
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+.pm-ini-gerencias{
+  @include media-breakpoint-down(md) {
+    background-color: transparent;
+  }
+
+  .pm-ini-gerencias-row1{
+    @include media-breakpoint-down(md) {
+      background-color: white;
+      margin-bottom: 50px;
+      padding-top:20px;
+      border-radius:$base-borderRad;
+    }
+    @include media-breakpoint-down(xs) {
+      background-color: transparent;
+    }
+
+    .pm-ini-gerencias-row2{
+      @include media-breakpoint-down(xs) {
+        background-color: white;
+        border-radius:$base-borderRad;
+      }
+    }
+  }
+}
+
+.pm-sgti-totalsgti{
+  .pm-sgti-totalsgti-col{
+    @extend .border-style-01;
+  }
+
+  .pm-sgti-avanceproy-col{
+    @extend .border-style-01;
+  }
+}
+
+
+.pm-progressChart-title{
+  @extend .base-font-gray-title-lg;
+}
+
+.pm-sgti-totalsgti-col-title{
+  @extend .base-font-gray-title-lg;
+}
+
+.pm-progressChart-txcomp{
+  @extend .base-font-gray-normal-md;
+}
+
+.pm-progressChart-txvar{
+  @extend .base-font-gray-normal-md;
+}
+

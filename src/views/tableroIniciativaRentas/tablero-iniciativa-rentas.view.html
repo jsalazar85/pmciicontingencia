@@ -1,0 +1,65 @@
+
+<!---------------- 1 PRIMER TAB ------------------------------------ -------------------->
+<div class="container-fluid detalleGerenciaMainCont m-0 p-0 h-100 w-100">
+    <div class="row no-gutters rowCont m-0 p-0 h-100 w-100" style="height:600px;">
+        <div class="col-4 m-0 pt-3 colCont">
+            <div style="height: 250px;">
+                <span>Casos Creados en CRM</span>
+                <am-gen-chart
+                        data="iniciativa.chart1.data"
+                        id="iniciativa-chart1"
+                        chart-opts="iniciativa.chart1.chartOpt"
+                        cont-opts=""
+                        post-create-function="iniciativa.chart1.setTop(chart)"
+                        json-path="json/iniciativas/chart1.json">
+                </am-gen-chart>
+            </div>
+        </div>
+        <div class="col-8 m-0 pl-5 colCont">
+            <div class="container-fluid detalleGerenciaMainCont m-0 p-0 h-100 w-100">
+                <div class="row">
+                    <div class="col-12 m-0 pl-5 colCont" style="height: 300px; padding: 5px!important;">
+                        <!--<am-gen-chart
+                                data="iniciativa.chart2.data"
+                                id="iniciativa-chart2"
+                                chart-opts="iniciativa.chart2.chartOpt"
+                                cont-opts=""
+                                post-create-function=""
+                                json-path="json/iniciativas/chart2.json">
+                        </am-gen-chart>-->
+                        <am-chart
+                                id="iniciativaChart02"
+                                json-chart-path="json/iniciativas/chart2.json"
+                                service-cnf="{
+                                    idTab:5,
+                                    idGra:21,
+                                    idQry:1
+                                }"
+                                zoom="{
+                                    ini:0,
+                                    end:3
+                                }"
+                        ></am-chart>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="row no-gutters rowCont m-0 p-0 h-100 w-100" style="height: 300px;">
+        <div class="col-12" style="">
+            <span>Monto DAP por Estado</span>
+        </div>
+        <div class="col-12 m-0 pl-5 colCont" style="height: 300px;">
+            <am-gen-chart
+                    data="iniciativa.chart3.data"
+                    id="iniciativa-chart3"
+                    chart-opts="iniciativa.chart3.chartOpt"
+                    cont-opts=""
+                    post-create-function=""
+                    json-path="json/iniciativas/chart3.json">
+            </am-gen-chart>
+        </div>
+    </div>
+</div>
+</div>
+
+

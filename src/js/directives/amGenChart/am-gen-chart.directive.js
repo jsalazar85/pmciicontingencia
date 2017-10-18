@@ -19,9 +19,32 @@ angular
                 link: function (scope, element, attrs, controllers, $jq) {
                     console.log("init link func    ++++++++++++++++++++++++++");
                     console.log(scope.jsonPath);
+                    scope.addZoomScroll=function (chartObj) {
+                        if(angular.isDefined(scope.zoom)){
+                            var zoom=scope.zoom;
+                            chartObj.listeners=[{
+                                event:"init",
+                                method:function (e) {
+                                    e.chart.zoomToIndexes(zoom.ini, zoom.end);
+                                }
+                            }
+
+                            ];
+                        }
+                        return chartObj;
+                    };
+
+                    scope.initAttrs=function () {
+                        if(angular.isDefined(attrs.zoom)){
+                            scope.zoom=scope.$eval(attrs.zoom);
+                        }else{
+                            scope.zoom=null;
+                        }
+                    };
 
                     //<editor-fold desc="Funciones">
                     scope.initChart=function () {
+                        scope.initAttrs();
                         console.log("[amGenChart].[initChart] Inicio");
                         //Establecer el id
                         //$(element).find(".chartContainer").first().attr("id",scope.mdato.idDiv);
@@ -54,6 +77,7 @@ angular
                         console.log("create chart -----------------");
                         if(angular.isDefined(scope.chartObj) && angular.isDefined(scope.chartObj.dataProvider)){
                             scope.chartObj.dataProvider=scope.data;
+                            scope.chartObj=scope.addZoomScroll(scope.chartObj);
                             if(angular.isDefined(scope.postCreateFunction) && typeof scope.postCreateFunction == 'function'){
                                 //console.log("Ejecutado desde directive");
                                 //console.log(scope.chartObj);

@@ -1,0 +1,78 @@
+@import "vars";
+@import "../components/bootstrap4/scss/bootstrap";
+
+
+
+//Estilo del container fluid principal
+.tb-cf{
+  @extend .m-0;
+  @extend .p-0;
+
+  height:$base-topbar-height;
+  background-color:#da162b;
+  color: whitesmoke;
+}
+
+//Fila genérica
+.tb-gen-row{
+  @extend .m-0;
+  @extend .p-0;
+  @extend .no-gutters;
+}
+
+//Columna genérica
+.tb-gen-col{
+  @extend .m-0;
+  @extend .p-0;
+}
+
+
+//Primer fila del main cointainer
+//top-bar main row
+.tb-mn-row{
+  @extend .tb-gen-row;
+  height: 100%;
+}
+
+//Top bar title text row
+.tb-tt-row{
+  @extend .tb-mn-row;
+  @extend .ml-1;
+}
+
+//Icon stack class
+//Top bar Icon Stack - Principal
+.tb-is-01{
+  @extend .tb-gen-row;
+  height: 100%;
+
+  .is-cn-02{
+    @extend .tb-gen-col;
+    height: 100%;
+
+    .is-cn-fx-03{
+      @extend .d-flex;
+      @extend .flex-row-reverse;
+      height: 100%;
+
+      .is-cn-fx-04{
+        @extend .d-flex;
+        @extend .flex-column;
+        @extend .justify-content-center;
+        width: 45px;
+        height: 100%;
+
+        //Estilo del icono
+        .is-cn-fx-ic-05{
+          height: 65%;
+        }
+
+        //Estilo del texto
+        .is-cn-fx-tx-06{
+        }
+
+      }
+    }
+
+  }
+}

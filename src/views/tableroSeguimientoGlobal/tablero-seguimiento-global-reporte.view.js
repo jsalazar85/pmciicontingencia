@@ -81,7 +81,7 @@ function tableroSeguimientoGlobalReportCtrl ($scope,$rootScope,$state,$statePara
                 field:"txIniciativa",
                 name:"MEDIDA",
                 footerCellTemplate:"<div style='height: 100%; padding-top: 5px;'><span>Totales: </span></div>",
-                width:"34%",
+                width:"50%",
                 //cellTemplate: selectionCellTemplateM
             },
             {

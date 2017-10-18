@@ -1,0 +1,88 @@
+@import "vars";
+
+$base-font-title-size-sm:13px;
+$base-font-title-size-md:16px;
+$base-font-title-size-lg:19px;
+
+$base-font-normal-size-sm:12px;
+$base-font-normal-size-md:14px;
+$base-font-normal-size-lg:18px;
+$base-font-normal-size-xl:22px;
+$base-font-normal-size-xl:12px;
+
+
+/********FUENTES PARA TITULOS*************/
+.base-font-gray-title{
+  color: $base-font-color-gray01;
+  font-family: $base-fontstack;
+}
+
+.base-font-white-title{
+  color: #ffffff;
+  font-family: $base-fontstack;
+}
+
+.base-font-red{
+  color: #da1a32;
+  font-family: $base-fontstack;
+}
+
+.base-font-gray-title-lg{
+  @extend .base-font-gray-title;
+  font-size: $base-font-title-size-lg;
+}
+
+.base-font-gray-title-md{
+  @extend .base-font-gray-title;
+  font-size: $base-font-title-size-md;
+}
+
+.base-font-white-title-lg{
+  @extend .base-font-white-title;
+  font-size: $base-font-title-size-lg;
+}
+
+
+
+
+/********FUENTES PARA TEXTO NORMAL*************/
+.base-font-gray-normal-xl{
+  @extend .base-font-gray-title;
+  font-size: $base-font-normal-size-xl;
+}
+
+.base-font-gray-normal-lg{
+  @extend .base-font-gray-title;
+  font-size: $base-font-normal-size-lg;
+}
+
+.base-font-gray-normal-md{
+  @extend .base-font-gray-title;
+  font-size: $base-font-normal-size-md;
+}
+
+.base-font-gray-normal-sm{
+  @extend .base-font-gray-title;
+  font-size: $base-font-normal-size-sm;
+}
+
+.base-font-white-normal-md{
+  @extend .base-font-white-title;
+  font-size: $base-font-normal-size-md;
+}
+
+.base-font-white-normal-lg{
+  @extend .base-font-white-title;
+  font-size: $base-font-normal-size-lg;
+}
+
+.base-font-red-normal-xl3{
+  @extend .base-font-red;
+  font-size: $base-font-normal-size-xl*3;
+}
+
+.base-font-black-normal-md{
+  @extend .base-font-gray-title;
+  color:#0d0d0d;
+  font-size: $base-font-normal-size-md;
+}

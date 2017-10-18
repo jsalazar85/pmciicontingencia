@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" ng-app="RDash">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>RDash AngularJS</title>
+  <!-- STYLES -->
+  <!-- build:css lib/css/main.min.css -->
+  <!-- <link rel="stylesheet" type="text/css" href="components/bootstrap/dist/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" type="text/css" href="components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="components/rdash-ui/dist/css/rdash.css">
+  <link rel="stylesheet" type="text/css" href="components/nvd3/build/nv.d3.min.css">
+  <link rel="stylesheet" type="text/css" href="components/amcharts3/amcharts/plugins/export/export.css">
+  <link rel="stylesheet" type="text/css" href="components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- endbuild -->
+
+
+  <!-- SCRIPTS -->
+  <!-- build:js lib/js/main.min.js -->
+  <script type="text/javascript" src="components/angular/angular.min.js"></script>
+  <script type="text/javascript" src="components/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="components/tether/dist/js/tether.min.js"></script>
+  <script type="text/javascript" src="components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- <script type="text/javascript" src="components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script> -->
+  <script type="text/javascript" src="components/angular-cookies/angular-cookies.min.js"></script>
+  <!--<script type="text/javascript" src="components/jquery/dist/jquery.min.js"></script>-->
+  <script type="text/javascript" src="components/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script type="text/javascript" src="components/d3/d3.min.js"></script>
+  <script type="text/javascript" src="components/nvd3/build/nv.d3.min.js"></script>
+  <script type="text/javascript" src="components/angular-nvd3/dist/angular-nvd3.min.js"></script>
+  <script type="text/javascript" src="components/amcharts3/amcharts/amcharts.js"></script>
+  <script type="text/javascript" src="components/amcharts3/amcharts/serial.js"></script>
+  <script type="text/javascript" src="components/amcharts3/amcharts/gauge.js"></script>
+  <script type="text/javascript" src="components/amcharts3/amcharts/themes/light.js"></script>
+
+  <!-- endbuild -->
+
+
+<!--
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+-->
+
+  <!-- Custom Scripts -->
+  <script type="text/javascript" src="js/dashboard.min.js"></script>
+  <!-- Custom Styles -->
+  <link rel="stylesheet" type="text/css" href="sass/main.css">
+
+</head>
+
+<body ng-controller="MasterCtrl">
+
+  <div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak>
+
+    <div id="content-wrapper">
+      <div class="page-content">
+        <!-- Header Bar -->
+        <div class="row header">
+          <div class="col-12">
+            <div class="user pull-right">
+              <div class="item dropdown" uib-dropdown>
+                <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
+                  <img src="img/avatar.jpg">
+                </a>
+              </div>
+              <div class="item dropdown" uib-dropdown>
+               <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
+                  <i class="fa fa-bell-o"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li class="dropdown-header">
+                    Notifications
+                  </li>
+                  <li class="divider"></li>
+                  <li>
+                    <a href="#">Server Down!</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="meta">
+              <div class="page font-cii-01">
+                Tablero de monitoreo replica de Laboratorios
+              </div>
+              <div class="breadcrumb-links font-cii-01">
+                Tablero / Inicio
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Header Bar -->
+
+        <!-- Main Content -->
+        <div ui-view class="cii-uiviewpanel"></div>
+
+      </div><!-- End Page Content -->
+    </div><!-- End Content Wrapper -->
+  </div><!-- End Page Wrapper -->
+</body>
+</html>

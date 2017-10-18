@@ -1,0 +1,76 @@
+@import "vars";
+
+.pm-row-group{
+  background-color: $base-bgc-white01;
+  padding: $base-pd-all;
+  border-radius: $base-borderRad;
+}
+
+.pm-sgti-log{
+  opacity: 0.2;
+  p {
+    font-size: 100px;
+
+  }
+}
+
+.pm-sgti-totalsgti{
+  .pm-sgti-totalsgti-txLabel{
+    text-align: right;
+  }
+}
+
+//Contenedor del Chart de Progreso
+.pm-progressChart-maincontainer{
+  width:$progchar-sm-width;
+}
+
+.pm-progressChart-container{
+
+  width:$progchar-sm-width;
+
+  .pm-progressChart-title{
+    p{
+      padding: 0px;
+      margin: 0px;
+      text-align: center;
+    }
+
+  }
+  .pm-progressChart-txcomp{
+    text-align: center;
+    padding: 0 auto;
+    margin: 0 auto;
+    background-color:$base-bgc-white01;
+    z-index: 2000;
+
+    p{
+      padding: 0px;
+      margin: 0px;
+    }
+  }
+
+  .pm-progressChart-chart{
+    width: $progchar-sm-width;
+    height: $progchar-sm-height;
+    margin-top: -25px;
+    margin-left: -15px;
+  }
+
+  .pm-progressChart-txavance{
+    width:$progchar-sm-width;
+    text-align: center;
+
+    margin-top: -50px;
+    font-size: 12px;
+  }
+
+  .pm-progressChart-txvar{
+    margin-top: -20px;
+    text-align: center;
+    p{
+      padding: 0px;
+      margin: 0px;
+    }
+  }
+}

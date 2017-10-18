@@ -1,0 +1,67 @@
+<style>
+    .grid{
+        font-size: 11px;
+    }
+
+    .grid .ui-grid-header-cell .ui-grid-cell-contents {
+        height: 40px;
+        white-space: normal;
+        -ms-text-overflow: clip;
+        -o-text-overflow: clip;
+        text-overflow: clip;
+        overflow: hidden;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    .grid .ui-grid-cell .ui-grid-cell-contents {
+        white-space: normal;
+        -ms-text-overflow: clip;
+        -o-text-overflow: clip;
+        text-overflow: clip;
+        overflow: hidden;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+</style>
+<!---------------- 1 PRIMER TAB ------------------------------------ -------------------->
+<div class="container-fluid detalleGerenciaMainCont m-0 p-0 h-100 w-100">
+    <div class="row no-gutters rowCont m-0 p-0 h-100 w-100" style="height:600px;">
+        <div class="col-4 m-0 pt-3 colCont">
+            <div class="row no-gutters rowCont m-0 p-0 h-100 w-100" style="height:600px;">
+                <div class="col-12 m-0" style="">
+                    <span>Reportes por Canal</span>
+                </div>
+                <div class="col-12" style="height: 250px;">
+                    <am-gen-chart
+                            data="areaAtnSrv.data"
+                            id="area-atn-chart1"
+                            chart-opts="areaAtnSrv.chartOpt"
+                            cont-opts=""
+                            post-create-function="areaAtnSrv.setTop(chart)"
+                            json-path="json/atencionServicios/chart1.json">
+                    </am-gen-chart>
+                </div>
+                <div class="col-12 m-0" style="">
+                    <span>Por Tipo de Persona</span>
+                </div>
+                <div class="col-12" style="height: 250px;">
+                    <am-gen-chart
+                            data="areaAtnSrvPie.data"
+                            id="area-atn-chart2"
+                            chart-opts="areaAtnSrvPie.chartOpt"
+                            cont-opts=""
+                            post-create-function="areaAtnSrvPie.setTop(chart)"
+                            json-path="json/atencionServicios/chart2.json">
+                    </am-gen-chart>
+                </div>
+            </div>
+        </div>
+        <div class="col-8 m-0 pl-5 colCont" style="height: 500px;">
+            <div id="gridAtnSrv" ui-grid="gridAtnSrv.opt" class="grid" style="width: 600px;height: 600px;"></div>
+        </div>
+    </div>
+
+
+</div>

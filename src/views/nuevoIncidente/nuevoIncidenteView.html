@@ -1,0 +1,91 @@
+
+
+
+<div class="container" style="background-color: white">
+    <form>
+        <!--Numero de equipo -->
+        <div class="form-group row m-0 p-0 bottom-line" style="background-color: #f6f6f6;">
+            <label for="inputEmail1" class="col-sm-12 col-form-label base-font-black-normal-md">Número de Equipo</label>
+            <div class="col-sm-10">
+                <input ng-model="asignacion.txEquipo" type="text" class="form-control" id="inputEmail1" placeholder="Número de equipo">
+            </div>
+        </div>
+
+        <!--Zona -->
+        <div class="form-group row m-0 p-0 bottom-line">
+            <label for="inputEmail2" class="col-sm-12 col-form-label base-font-black-normal-md">Zona</label>
+            <div class="col-sm-10">
+                <input ng-model="asignacion.txZona" type="text" class="form-control" id="inputEmail2" placeholder="Zona">
+            </div>
+        </div>
+
+        <!--Número de Crédito -->
+        <div class="form-group row has-danger m-0 p-0" style="background-color: #f6f6f6;">
+            <label for="inputEmail3" class="col-sm-12 col-form-label base-font-black-normal-md">Número de Crédito</label>
+            <div class="col-sm-8 has-danger">
+                <input ng-model="asignacion.txNuCredito" type="text" class="form-control form-control-danger" id="inputEmail4" placeholder="Número de crédito" ng-blur="blurEv()">
+                <div class="form-control-feedback base-font-gray-normal-xl" ng-if="!creditoEncontrado">Crédito no encontrado</div>
+            </div>
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-primary" ng-click="buscar()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <span class="pl-1">Búsqueda</span>
+                </button>
+            </div>
+            <div class="col-sm-2">
+                <i class="fa fa-cog fa-spin fa-3x fa-fw" aria-hidden="true" ng-if="busquedaCred"></i>
+            </div>
+        </div>
+
+        <div class="form-group row bottom-line" style="background-color: #f6f6f6;">
+            <label for="inputEmail3" class="col-sm-3 col-form-label base-font-black-normal-md">Colonia</label>
+            <label for="inputEmail3" class="col-sm-9 col-form-label base-font-gray-normal-md">{{direccion.txColonia}}</label>
+            <label for="inputEmail3" class="col-sm-3 col-form-label base-font-black-normal-md">Calle</label>
+            <label for="inputEmail3" class="col-sm-9 col-form-label base-font-gray-normal-md">{{direccion.txCalle}}</label>
+            <label for="inputEmail3" class="col-sm-3 col-form-label base-font-black-normal-md">Código Postal</label>
+            <label for="inputEmail3" class="col-sm-9 col-form-label base-font-gray-normal-md">{{direccion.txCodigoPostal}}</label>
+            <label for="inputEmail3" class="col-sm-3 col-form-label base-font-black-normal-md">Municipio</label>
+            <label for="inputEmail3" class="col-sm-9 col-form-label base-font-gray-normal-md">{{direccion.txMunicipio}}</label>
+        </div>
+
+        <!--Dictamen -->
+        <div class="form-group row m-0 p-0 bottom-line">
+            <label for="inputEmail3" class="col-sm-12 col-form-label base-font-black-normal-md">Dictamen</label>
+            <div class="col-sm-10">
+                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect" ng-model="asignacion.dictamen" ng-options="option.txDictamen for option in lstDictamen track by option.idDictamen">
+                    <!--<option value="d" ng-repeat="d in lstDictamen">{{d.txDictamen}}</option>-->
+                </select>
+            </div>
+        </div>
+
+        <!--Telefono -->
+        <div class="form-group row m-0 p-0 bottom-line" style="background-color: #f6f6f6;">
+            <label for="inputEmail3" class="col-sm-12 col-form-label base-font-black-normal-md">Teléfono</label>
+            <div class="col-sm-10">
+                <input ng-model="asignacion.txTelefono" type="text" class="form-control" id="inputEmail3" placeholder="Teléfono">
+            </div>
+        </div>
+
+        <!--Comentarios -->
+        <div class="form-group row m-0 p-0 bottom-line">
+            <label for="inputEmail3" class="col-sm-12 col-form-label base-font-black-normal-md">Comentarios</label>
+            <div class="col-sm-8">
+                    <textarea ng-model="asignacion.txComentario" class="form-control" id="exampleTextarea" rows="4"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col">
+                <button type="button" class="btn btn-primary" ng-click="guardar()"><i class="fa fa-floppy-o" aria-hidden="true"></i><span class="pl-1">Guardar</span></button>
+            </div>
+
+            <div class="col" style="text-align: right;">
+                <button type="button" class="btn btn-danger" ng-click="cancelar()"><i class="fa fa-sign-out" aria-hidden="true"></i><span class="pl-1">Cancelar</span></button>
+            </div>
+        </div>
+
+
+
+    </form>
+</div>
+

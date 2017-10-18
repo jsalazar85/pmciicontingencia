@@ -26,7 +26,7 @@ function tableroSeguimientoGlobalCtrl ($scope,$rootScope,$state,$stateParams,dc,
     $scope.currentMaster = {};
     $scope.currentDetail = {};
 
-    var selectionCellTemplateM = '<div class="ngCellText ui-grid-cell-contents">' +
+    var selectionCellTemplateM = '<div class="ngCellText ui-grid-cell-contents" style="cursor: pointer;">' +
         ' <div ng-click="grid.appScope.rowClick(row)">{{COL_FIELD}}</div>' +
         '</div>';
     var selectionCellTemplateMObs = '<div class="ngCellText ui-grid-cell-contents" style="cursor: pointer;">' +
@@ -92,9 +92,7 @@ function tableroSeguimientoGlobalCtrl ($scope,$rootScope,$state,$stateParams,dc,
                 aggregationType: uiGridConstants.aggregationTypes.sum,
                 footerCellFilter:"number:0",
                 aggregationHideLabel: false,
-                cellFilter:"number:0",
-                width:"16%",
-                cellTemplate: selectionCellTemplateM
+                width:"16%"
 
             },
             {
@@ -105,9 +103,7 @@ function tableroSeguimientoGlobalCtrl ($scope,$rootScope,$state,$stateParams,dc,
                 aggregationType: uiGridConstants.aggregationTypes.sum,
                 footerCellFilter:"number:0",
                 aggregationHideLabel: false,
-                cellFilter:"number:0",
-                width:"14%",
-                cellTemplate: selectionCellTemplateM
+                width:"14%"
             },
             {
                 field:"txObservaciones",
@@ -207,6 +203,7 @@ function tableroSeguimientoGlobalCtrl ($scope,$rootScope,$state,$stateParams,dc,
             console.log("success");
             console.log(response);
             $scope.maestroMedidasOpt.data = response.data;
+            window.isLoaded=true;
            // $scope.apply();
 
 
@@ -339,11 +336,15 @@ function tableroSeguimientoGlobalCtrl ($scope,$rootScope,$state,$stateParams,dc,
         myWindow.print();
         myWindow.close();
 */
+       var path="";
+        try {
+            var arr=window.location.href.split("/");
+            path=window.location.href.split("/").slice(0,arr.length-1).join("/")+"/reporteseguimiento";
+        }catch (e){
+            path='http://10.80.0.24:8020/DICTAMEN/#!/reporteseguimiento';
+        }
 
-        var w=window.open('http://localhost:63342/AppCaptura/dist/index.html?_ijt=ni0jol341f5s1akh607elc5m3p#!/reporteseguimiento', 'Imprimir tablero de Seguimiento Global', 'height=400, width=600');
-        console.log(w);
-
-        var w=window.open('http://localhost:63342/AppCaptura/dist/index.html?_ijt=ni0jol341f5s1akh607elc5m3p#!/reporteseguimiento', 'Imprimir tablero de Seguimiento Global', 'height=400, width=600');
+        var w=window.open(path, 'Imprimir tablero de Seguimiento Global', 'height=400, width=900');
         console.log(w);
 
         w.addEventListener('load', function () {
@@ -362,6 +363,62 @@ function tableroSeguimientoGlobalCtrl ($scope,$rootScope,$state,$stateParams,dc,
                     w.print();
                     w.close();
                 }
+            }, 1000);
+
+
+        }, true);
+
+        return true;
+
+
+    };
+
+    $scope.actualizar=function ($event) {
+        cds.doWorkTask('grid3Medidas');
+        if($scope.currentMaster && $scope.currentMaster.idIniciativa){
+            $scope.getDetalleTabla1Data($scope.currentMaster.idIniciativa);
+        }
+    };
+
+    $scope.imprimirDetalle = function(elem){
+        var path="";
+        try {
+            var arr=window.location.href.split("/");
+            path=window.location.href.split("/").slice(0,arr.length-1).join("/")+"/reporteseguimiento";
+        }catch (e){
+            path='http://10.80.0.24:8020/DICTAMEN/#!/reporteseguimientodetalle';
+        }
+
+
+        var w=window.open(path, 'Imprimir tablero de Seguimiento Global', 'height=400, width=900');
+        w.currentMaster=$scope.currentMaster;
+
+
+
+        w.addEventListener('load', function () {
+            var topbar=w.document.getElementById('mainTopBar');
+            topbar.parentNode.removeChild(topbar);
+
+            var maxAttempts=100;
+            var attempts=0;
+
+            var myInt=setInterval(function(){
+                console.log("chequeo --------");
+                if(w.isLoadedDetalle){
+                    w.isLoaded=false;
+                    myInt=null;
+                    w.document.close();
+                    w.focus();
+
+                    w.print();
+                    w.close();
+                }
+
+                if(maxAttempts == attempts){
+                    myInt=null;
+                }
+
+                attempts=attempts+1;
             }, 1000);
 
 

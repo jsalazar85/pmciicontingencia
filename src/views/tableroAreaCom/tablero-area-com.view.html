@@ -1,0 +1,55 @@
+<style>
+    .grid{
+        font-size: 11px;
+    }
+
+    .grid .ui-grid-header-cell .ui-grid-cell-contents {
+        height: 40px;
+        white-space: normal;
+        -ms-text-overflow: clip;
+        -o-text-overflow: clip;
+        text-overflow: clip;
+        overflow: hidden;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    .grid .ui-grid-cell .ui-grid-cell-contents {
+        white-space: normal;
+        -ms-text-overflow: clip;
+        -o-text-overflow: clip;
+        text-overflow: clip;
+        overflow: hidden;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+</style>
+<!---------------- 1 PRIMER TAB ------------------------------------ -------------------->
+<div class="container-fluid detalleGerenciaMainCont m-0 p-0 h-100 w-100">
+    <div class="row no-gutters rowCont m-0 p-0 h-100 w-100" style="height:600px;">
+        <div class="col-4 m-0 pt-3 colCont">
+            <div style="height: 250px;">
+                <am-gen-chart
+                        data="censo.data"
+                        id="censo-chart1"
+                        chart-opts="censo.chartOpt"
+                        cont-opts=""
+                        post-create-function="grid.setTop(chart)"
+                        json-path="json/censo/chart3.json">
+                </am-gen-chart>
+            </div>
+        </div>
+        <div class="col-8 m-0 pl-5 colCont">
+            <div id="grid1" ui-grid="grid.opt" class="grid" style="width: 100%;height: 250px;"></div>
+        </div>
+    </div>
+    <div class="row no-gutters rowCont m-0 p-0 h-100 w-100">
+        <div class="col-12" style="">
+            <div style="height: 300px; width:100%;">
+                <am-gen-chart  data="censoEstado.data" id="censo-chart2" chart-opts="censoEstado.chartOpt" cont-opts="" json-path="json/censo/chart4.json"></am-gen-chart>
+            </div>
+
+        </div>
+    </div>
+</div>

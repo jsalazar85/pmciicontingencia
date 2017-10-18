@@ -20,23 +20,38 @@ angular.module('RDash').config(['$stateProvider', '$urlRouterProvider',
                     }
                 }
             })
+            /*
             .state('test', {
                 url: '/test',
                 views:{
                     '':{
-                        templateUrl: 'templates/tablero-seguimiento-global.view.html',
-                        controller: 'tableroSeguimientoGlobalCtrl',
-                       // templateUrl: 'templates/tablero-iniciativa-04.view.html',
-                        //controller: 'tableroIniciativa04ViewCtrl'
+                        templateUrl: 'templates/seccion-iniciativas.view.html',
+                        controller: 'seccionIniciativasViewCtrl'
+                    },
+                    'tableroIniciativaGenericoView@test':{
+                        templateUrl: 'templates/tablero-iniciativa-generico.view.html',
+                        controller: 'tableroIniciativaGenericoViewCtrl'
                     }
                 }
             })
+            */
+
+
             .state('reporteSeguimiento', {
                 url: '/reporteseguimiento',
                 views:{
                     '':{
                         templateUrl: 'templates/tablero-seguimiento-global-reporte.view.html',
                         controller: 'tableroSeguimientoGlobalReportCtrl'
+                    }
+                }
+            })
+            .state('reporteSeguimientoDetalle', {
+                url: '/reporteseguimientodetalle',
+                views:{
+                    '':{
+                        templateUrl: 'templates/tablero-seguimiento-global-reporte-detalle.view.html',
+                        controller: 'tableroSeguimientoDetalleGlobalReportCtrl'
                     }
                 }
             })
@@ -58,6 +73,7 @@ angular.module('RDash').config(['$stateProvider', '$urlRouterProvider',
                     },
                     'seccionIniciativas@tableroMaster':{
                         templateUrl: 'templates/seccion-iniciativas.view.html',
+                        controller: 'seccionIniciativasViewCtrl',
                     },
                     'seccionResumen@tableroMaster':{
                         templateUrl: 'templates/seccion-resumen.view.html',
@@ -104,7 +120,12 @@ angular.module('RDash').config(['$stateProvider', '$urlRouterProvider',
                     'capturaObservacion@tableroMaster':{
                         templateUrl: 'templates/captura-inicio-masterObs.view.html',
                         controller: 'capturaObservacionViewCtrl'
+                    },
+                    'tableroIniciativaGenericoView@tableroMaster':{
+                        templateUrl: 'templates/tablero-iniciativa-generico.view.html',
+                        controller: 'tableroIniciativaGenericoViewCtrl'
                     }
+
                 }
             })
 

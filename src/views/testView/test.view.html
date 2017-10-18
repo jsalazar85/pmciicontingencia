@@ -1,0 +1,65 @@
+
+<style>
+/*
+    .gridResumen .ui-grid-header-cell {
+        height: 100px !important;
+    }
+
+    .gridResumen .ui-grid-header-cell div {
+        height: 100% !important;
+        overflow: auto;
+    }
+
+
+    .gridResumen .ui-grid-viewport .ui-grid-cell-contents {
+  word-wrap: break-word;
+  white-space: normal !important;
+}
+
+.ui-grid-row, .ui-grid-cell {
+  height: auto !important;
+}
+
+.ui-grid-row div[role=row] {
+  display: flex ;
+  align-content: stretch;
+}
+*/
+
+
+
+
+.gridResumen .ui-grid-header-cell .ui-grid-cell-contents {
+    height: 100px;
+    white-space: normal;
+    -ms-text-overflow: clip;
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    overflow: hidden;
+    margin-right: 5px;
+    margin-left: 5px;
+
+}
+</style>
+
+<div style="background-color: whitesmoke; width: 100%; height: 500px;" >
+    <!-- <am-gen-chart  data="" id="char1" chart-opts="chart1.chartOpts" cont-opts="" json-path="json/amchart/areaChart1.json"></am-gen-chart> -->
+    <!--<div id="grid1" ui-grid="gridOpt" class="gridResumen" style="width: 100%; height: 100%;"></div>
+    <input type="file" import-sheet-js="" opts="gridOptions" multiple="false"  />
+    <ui-view name="plataforma"></ui-view>-->
+
+    <am-chart
+            id="censo-chart1"
+            json-chart-path="json/censo/chart3.json"
+            service-cnf="{
+                idTab:2,
+                idGra:10,
+                idQry:1
+            }"
+
+    >
+    </am-chart>
+</div>
+
+
+

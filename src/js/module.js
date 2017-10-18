@@ -5,7 +5,8 @@ angular.module('RDash', [
     'nvd3',
     'ngProgress',
     'ui.grid',
-    'ngMap'
+    'ngMap',
+    'ui.grid.autoResize'
 ]).config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('LoadingInterceptor');
 }]).config(["$locationProvider", function($locationProvider) {

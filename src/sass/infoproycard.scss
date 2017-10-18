@@ -1,0 +1,105 @@
+
+@import 'vars';
+
+$ipc-img-w:160px;
+$ipc-img-h:100px;
+$ipc-fontsize-sm:14px;
+$ipc-main-w:165px;
+
+
+.no-border-box{
+  margin: 0px  auto!important;
+  padding: 0px !important;
+}
+
+.pm-infoproycard-maincont{
+
+  @extend .no-border-box;
+
+  width: $ipc-main-w;
+
+  .row{
+    width: $ipc-main-w;
+
+    //Imagen del boton
+    .pm-infoproycard-boton{
+      @extend .no-border-box;
+      text-align: center;
+
+      img{
+        width: $ipc-img-w;
+        height: $ipc-img-h;
+      }
+      margin-top: -50px !important;
+    }//.pm-infoproycard-boton
+
+    .pm-infoproycard-proy{
+      margin-top: 15px;
+      .pm-infoproycard-proyicon{
+        @extend .no-border-box;
+
+        img{
+          width: 36px;
+          height: 36px;
+        }
+      }
+
+      .pm-infoproycard-proytext{
+        @extend .no-border-box;
+
+        text-align: center;
+        font: bold 16px  $base-fontstack;
+        color: $base-font-red01;
+
+        p{
+          @extend .no-border-box;
+        }
+      }
+    }//pm-infoproycard-proy
+
+  }//row
+}
+
+
+
+
+
+.pm-infoproycard-nuProy{
+  @extend .no-border-box;
+
+  p{
+    text-align: center;
+    font: bold 16px  $base-fontstack;
+    color: $base-font-red01;
+  }
+
+}
+
+.pm-infoproycard-avanceicon{
+  @extend .no-border-box;
+
+  img{
+    width: 36px;
+    height: 36px;
+  }
+}
+
+.pm-infoproycard-avance{
+  @extend .no-border-box;
+
+  p{
+    @extend .no-border-box;
+    text-align: center;
+    font: bold 16px  $base-fontstack;
+    color: $base-font-green01;
+  }
+}
+
+.pm-infoproycard-nuAvance{
+  p{
+    text-align: center;
+    color: $base-font-green01;
+    font: bold 16px  $base-fontstack;
+  }
+
+}

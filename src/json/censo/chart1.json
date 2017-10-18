@@ -1,0 +1,77 @@
+{
+  "language": "es",
+  "type": "serial",
+  "categoryField": "",
+  "startDuration": 1,
+  "fontFamily": "Helvetica",
+  "fontSize": 12,
+  "autoDisplay": true,
+  "autoResize": true,
+  "categoryAxis": {
+    "gridPosition": "start",
+    "axisColor": "#AAB3B3",
+    "gridThickness": 0
+  },
+  'pathToImages':'amcharts/images/',
+  'svgIcons': false,
+  "trendLines": [],
+  "graphs": [
+    {
+      "balloonText": "[[category]]:[[value]]",
+      "color": "#000000",
+      "fillAlphas": 1,
+      "fontSize": 12,
+      "id": "AmGraph-1",
+      "labelAnchor": "middle",
+      "labelPosition": "middle",
+      "title": "graph 1",
+      "type": "column",
+      "valueField": "",
+      "visibleInLegend": false,
+      "fillColors": "",
+      "lineColor": ""
+    },
+    {
+      "id": "scrollbar",
+      "valueField": "",
+      "lineAlpha": 0,
+      "labelText": "[[value]]",
+      "visibleInLegend": false,
+    }
+  ],
+  "guides": [],
+  "valueAxes": [
+    {
+      "id": "ValueAxis-1",
+      "title": ""
+    }
+  ],
+  "allLabels": [],
+  "balloon": {},
+  "legend": {
+    "enabled": false
+  },
+  "chartScrollbar": {
+    "graph": 'scrollbar',
+    "scrollbarHeight": 30,
+    "graphType": "column",
+
+  },
+  "chartCursor": {
+    "limitToGraph":"scrollbar"
+  },
+  "dataProvider": scope.chartOpt.data,
+  "listeners": [{
+    "event": "zoomed",
+    "method": function(e) {
+    console.log('Start zoom index: ', e.chart.startIndex,  'End zoom index: ', e.chart.endIndex);
+  }
+  },
+    {
+      event: "init",
+      method: function(e) {
+      e.chart.zoomToIndexes(0, 6); //set default zoom
+    }
+  }
+  ]
+}

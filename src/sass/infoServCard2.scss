@@ -1,0 +1,39 @@
+@import 'vars';
+@import 'fontmixins';
+
+//LOCAL VARIABLES-----------
+$isc-border-radius:15px;
+$isc-bgcolor:#ffffff;
+$isc-white-color:#dfdfdf;
+
+
+.pm-infoServCard-main{
+  background-color: $isc-bgcolor;
+  border-radius: $isc-border-radius;
+
+  .tituloCol{
+    .divCont{
+      text-align: center;
+      background-color: red;
+      border-top-left-radius: $isc-border-radius;
+      border-top-right-radius: $isc-border-radius;
+
+      cursor: pointer;
+
+      .spanCont{
+        @extend .base-font-gray-normal-lg;
+        color: $isc-white-color;
+        cursor: pointer;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .datoLabel{
+    @extend .base-font-gray-normal-md;
+  }
+
+  .datoValue{
+    @extend .base-font-gray-normal-lg;
+  }
+}
