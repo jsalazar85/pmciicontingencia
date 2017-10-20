@@ -24,9 +24,6 @@ function tableroCargaArchivoGenCtrl ($scope,$rootScope,$state,$stateParams,dc,gc
 
     // columnas que se esperan encontrar en el excel (ejemplo)
     var dataMockCols=[ //Columnas que deben ser similar o igual a ($scope.gridOptions.columnDefs [field,name,type,...])
-
-
-
     {
             nuOrden:0,
         txColumna:"Fecha",
@@ -98,6 +95,7 @@ function tableroCargaArchivoGenCtrl ($scope,$rootScope,$state,$stateParams,dc,gc
         // se recupera del UPLOAD del excel (no txt, no csv), columna 2 .. n
     ];
     $scope.detalleExcelOpt = {
+        enableHorizontalScrollbar:uiGridConstants.scrollbars.ALWAYS,
         MessageErrors:[], //errores generados por la carga del archivo y su "pre"procesamiento. .push({msg:error.toString(), type:"danger", dismiss:"alert"})
         matchColumnDef:dataMockCols,// aqui se copiará el arreglo de SOLO los nombres de los campos REQUERIDOS/MANDATORIOS
         matchColumnHead:{
