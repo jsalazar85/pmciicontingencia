@@ -134,11 +134,32 @@ function tableroCargaArchivoGenCtrl ($scope,$rootScope,$state,$stateParams,dc,gc
         }
     });
 
+//////////////////////
+    cds.addWorkTask('insertXlsDataArchivo',{
+        url:gc.conf.xsServicesBaseUrl+'/dbCargaJson.xsjs',
+        query:{
+            idLayout:$scope.currentColumnsReq,
+            lstData:$scope.detalleExcelOpt.data,
+        },
+        success:function (response) {
+            console.log("success");
+            console.log(response);
+            //$scope.censo.data=response.data;
+            if(response.insertStatus.blError){
+                $scope.detalleExcelOpt.MessageErrors=[];
+                $scope.detalleExcelOpt.MessageErrors.push({msg:response.insertStatus.txInsertErr, type:"danger", dismiss:"alert"});
+            }
+        },
+        error:function (response,error) {
+            console.log("Error");
+            console.log(error);
+        }
+    });
 
-
-    $scope.uploadDB=function ($event) {
+//////////////////
+    $scope.nuevoUploadDB = function ($event) {
         console.log("subiendo");
-        $scope.detalleExcelOpt.data = [];
+        cds.doWorkTask('insertXlsDataArchivo');
     };
 
     this.init=function() {
