@@ -18,7 +18,7 @@ angular
                         var maxErrorTolerancia = 10; // mas errores... no  vale la pena despegar
                         var bstr = e.target.result;
                         var wb = undefined;
-                        var tmpDate;
+                        var tmpValue;
                         try{
                             wb = XLSX.read(bstr, {type: 'binary'});
                             /* grab first sheet */
@@ -82,11 +82,11 @@ angular
                                             }
 
                                             cols.push({
-                                                field: localMCD[j].txColumna,
+                                                field: localMCD[j].txColumnaFisica,
                                                 name: aoa[0][i],
                                                 displayName: aoa[0][i]
                                             });
-                                            aoa[0][i] = localMCD[j].txColumna; //Temporalmente se asigna el CaMel del txColumna, para que sea identico al de la BD
+                                            aoa[0][i] = localMCD[j].txColumnaFisica; //Temporalmente se asigna el CaMel del txColumna, para que sea identico al de la BD
                                             break;
                                         }
                                     }
@@ -130,10 +130,10 @@ angular
                                                     }
                                                 }
                                                 if(aoa[r][i]) {
-                                                    if (validCols[i][1] === "DAT"){
-                                                        tmpDate = new Date(data[r - 1][aoa[0][i]]);
-                                                        if(tmpDate) {
-                                                            data[r - 1][aoa[0][i]] = tmpDate
+                                                    if (validCols[i][1] === "3"){
+                                                        tmpValue = new Date(data[r - 1][aoa[0][i]]);
+                                                        if(tmpValue) {
+                                                            data[r - 1][aoa[0][i]] = tmpValue;
                                                         }else{
                                                             localMsgError.push({
                                                                 msg: "el Campo '" + aoa[0][i] + "' del renglon "+ r +
@@ -145,6 +145,21 @@ angular
 
                                                         }
                                                     // si está presente. validar si aplica conversion de Fecha, Hora o FechaHora (talvez timeStamp)
+                                                    }
+                                                    if (validCols[i][1] === "3"){
+                                                        tmpValue = Number(data[r - 1][aoa[0][i]]);
+                                                        if(tmpValue) {
+                                                            data[r - 1][aoa[0][i]] = tmpValue;
+                                                        }else{
+                                                            localMsgError.push({
+                                                                msg: "el Campo '" + aoa[0][i] + "' del renglon "+ r +
+                                                                ", Es una Fecha Invalida ",
+                                                                type: "danger",
+                                                                dismiss: "alert"
+                                                            });
+                                                            maxErrorTolerancia--;
+
+                                                        }
                                                     }
                                                 }
                                             }
@@ -183,9 +198,6 @@ angular
                                     }
                                 }
                             }
-                            if(cols.length>0){
-                                cols.unshift({field: 'txRowNumber', displayName: '#', width:'5%'});
-                            }
                         }
                         catch(error){
                             console.log(error);
@@ -194,6 +206,8 @@ angular
                         finally {
                             /* update scope */
                             $scope.$apply(function() {
+                                console.log("Data:");
+                                console.log(data);
                                 $scope.opts.columnDefs = cols;
                                 $scope.opts.data = data;
                                 $scope.opts.MessageErrors = localMsgError;
