@@ -63,6 +63,7 @@ angular
                             var aoa = XLSX.utils.sheet_to_json(ws, {header: 1, raw: false, blankrows: false});
                             console.log(aoa);
                             console.log(localMCD);
+
                             if (localMCD && localMCD.length) { // si no lo mandas... nada será truncado
                                 var lengCD = localMCD.length;
                                 //Agregar e inicializar matchColumnDef.txFound
@@ -208,6 +209,12 @@ angular
                             $scope.$apply(function() {
                                 console.log("Data:");
                                 console.log(data);
+
+                                $scope.opts.canSubmit = true; //Cualquier error lo pone en false;
+                                if(localMsgError.findIndex(function (elem){return elem.type==="danger";})>=0) {
+                                    $scope.opts.canSubmit = false;
+                                }
+
                                 $scope.opts.columnDefs = cols;
                                 $scope.opts.data = data;
                                 $scope.opts.MessageErrors = localMsgError;
