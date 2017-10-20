@@ -121,7 +121,7 @@ angular
                                                 if (validCols[i][0] > 1 ){
                                                     if(!(aoa[r][i])){
                                                         localMsgError.push({
-                                                            msg: "La columna '" + localMCD[j].txColumna +
+                                                            msg: "La columna '" + aoa[0][i] +
                                                             "' es mandatoria, y requiere un valor en el renglon " + r,
                                                             type: "danger",
                                                             dismiss: "alert"
@@ -136,7 +136,7 @@ angular
                                                             data[r - 1][aoa[0][i]] = tmpDate
                                                         }else{
                                                             localMsgError.push({
-                                                                msg: "el Campo '" + localMCD[j].txColumna + "' del renglon "+ r +
+                                                                msg: "el Campo '" + aoa[0][i] + "' del renglon "+ r +
                                                                 ", Es una Fecha Invalida ",
                                                                 type: "danger",
                                                                 dismiss: "alert"
@@ -182,6 +182,9 @@ angular
                                         data[r - 1][aoa[0][i]] = aoa[r][i]
                                     }
                                 }
+                            }
+                            if(cols.length>0){
+                                cols.unshift({field: 'txRowNumber', displayName: '#', width:'5%'});
                             }
                         }
                         catch(error){
