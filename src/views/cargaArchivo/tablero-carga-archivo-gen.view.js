@@ -20,31 +20,34 @@ angular
 
 function tableroCargaArchivoGenCtrl ($scope,$rootScope,$state,$stateParams,dc,gc,ngProgressFactory,dss,cs,$interval,tools,cds,uiGridConstants,$http)  {
     //Conjunto de columnas requeridas (debe venir por parametro externo
-    $scope.currentColumnsReq = 100;
+    $scope.currentColumnsReq = 1;
 
     // columnas que se esperan encontrar en el excel (ejemplo)
     var dataMockCols=[ //Columnas que deben ser similar o igual a ($scope.gridOptions.columnDefs [field,name,type,...])
         {
-            txField:"campo1",
-            blMandatory:true,
-            txType:"string" // 'string', 'boolean', 'number', 'date', 'object', 'numberStr'
+            txField:"100",
+            idTipoDato:"000",
+            txTipoDato:"number", //txTipoDato:"string" // 'string', 'boolean', 'number', 'date', 'object', 'numberStr'
+            nuObligatorio:0
         },
         {
-            txField:"campo2",
-            blMandatory:true,
-            txType:"string" // 'string', 'boolean', 'number', 'date', 'object', 'numberStr'
+            txField:"Campo1",
+            idTipoDato:"000",
+            txTipoDato:"string", //txTipoDato:"string" // 'string', 'boolean', 'number', 'date', 'object', 'numberStr'
+            nuObligatorio:0
         },
         {
-            txField:"campo3",
-            blMandatory:false,
-            txType:"string" // 'string', 'boolean', 'number', 'date', 'object', 'numberStr'
+            txField:"Campo2",
+            idTipoDato:"000",
+            txTipoDato:"string", //txTipoDato:"string" // 'string', 'boolean', 'number', 'date', 'object', 'numberStr'
+            nuObligatorio:0
         },
         {
-            txField:"name",
-            blMandatory:false,
-            txType:"string" // 'string', 'boolean', 'number', 'date', 'object', 'numberStr'
-        },
-    ];
+            txField:"Nombre",
+            idTipoDato:"000",
+            txTipoDato:"string", //txTipoDato:"string" // 'string', 'boolean', 'number', 'date', 'object', 'numberStr'
+            nuObligatorio:0
+        },];
 
 // estructura (nombre de campos por definir) para desplegar los campos esperados para la carga.
     $scope.colRequeridasOpt = {
@@ -57,15 +60,15 @@ function tableroCargaArchivoGenCtrl ($scope,$rootScope,$state,$stateParams,dc,gc
                 width:"50%"
             },
             {
-                field:"txType",
+                field:"txTipoDato",
                 name:"Tipo",
                 type:"string",
                 width:"30%"
             },
             {
-                field:"blMandatory",
+                field:"nuObligatorio",
                 name:"Obligado",
-                type:"boolean",
+                type:"number",
                 width:"10%"
             },
             {
@@ -82,59 +85,39 @@ function tableroCargaArchivoGenCtrl ($scope,$rootScope,$state,$stateParams,dc,gc
     ];
     $scope.detalleExcelOpt = {
         matchColumnDef:dataMockCols,// aqui se copiará el arreglo de SOLO los nombres de los campos REQUERIDOS/MANDATORIOS
+        matchColumnHead:[], // informacion de encabezado util, (
+                                                // datos.idArea=resultSet.getInteger(1);
+                                                // datos.txArea=""; //resultSet.getInteger();
+                                                // datos.idLayout=resultSet.getInteger(2);
+                                                // datos.txNombreLayout=resultSet.getString(3);
+                                                // datos.txNombreHoja=resultSet.getString(4);
         data: dataMockExcel, //[];
         columnDefs:[
             // se recupera del excel , columna1, filtrado por los nombres que coincidan en colRequeridasOpt.data.txField
-            {
-                field:"timestamp",
-                name:"timestamp",
-                type:"string"},
-            {
-                field:"campo1",
-                name:"campo1",
-                type:"string"}
         ]
     };
 
-    //Carga de Archivo
-    $scope.fileNameChanged = function ($event) {
-        console.log("my UPLOAD files namesArr ele");
-        console.log($event);
-        var files = ele.files;
-        var l = files.length;
-        var namesArr = [];
-
-        var reader = new FileReader();
-
-        for (var i = 0; i < l; i++) {
-            namesArr.push(files[i].name);
-        }
-        console.log("my UPLOAD files namesArr ele");
-        console.log(files);
-        console.log(namesArr);
-
-    };
-
-
-
     //lectura de las Columnas requeridas.
     cds.addWorkTask('gridColumnasRequeridas',{
-        url:gc.conf.xsServicesBaseUrl+'/execTabQuery.xsjs',
+        url:gc.conf.xsServicesBaseUrl+'/dbGetLayoutInfo.xsjs',
         query:{
-            idTab:120,
-            idGra:$scope.currentColumnsReq,
-            idQry:10
+            idLayout:$scope.currentColumnsReq,
         },
         success: function(response){
             console.log("success");
             console.log(response);
-            $scope.colRequeridasOpt.data = response.data;
+            //  layoutDef:getLayoutDef(JSONObj.idQuery),
+            //  matchColumnDef:getLayoutColDef(JSONObj.idQuery)
+            $scope.detalleExcelOpt.matchColumnHead  = response.layoutDef;
+            $scope.detalleExcelOpt.matchColumnDef  = response.matchColumnDef;
+            $scope.colRequeridasOpt.data = response.matchColumnDef;
             //window.isLoaded=true;
         },
         error: function(response,error){
             console.log("Error");
             console.log(error);
-            //$scope.gridOptDet.data=dataMockCols; //[];
+            $scope.detalleExcelOpt.matchColumnDef  = [];
+            $scope.colRequeridasOpt.data = [];
         }
     });
 
@@ -176,7 +159,7 @@ function tableroCargaArchivoGenCtrl ($scope,$rootScope,$state,$stateParams,dc,gc
     };
 
     this.init=function() {
-        //cds.doWorkTask('gridColumnasRequeridas');
+        cds.doWorkTask('gridColumnasRequeridas');
     };
 
     ////////////////////////////////////////////
