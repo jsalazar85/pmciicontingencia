@@ -97,6 +97,7 @@ function tableroCargaArchivoGenCtrl ($scope,$rootScope,$state,$stateParams,dc,gc
     $scope.detalleExcelOpt = {
         enableHorizontalScrollbar:uiGridConstants.scrollbars.ALWAYS,
         MessageErrors:[], //errores generados por la carga del archivo y su "pre"procesamiento. .push({msg:error.toString(), type:"danger", dismiss:"alert"})
+        canSubmit : false,
         matchColumnDef:dataMockCols,// aqui se copiará el arreglo de SOLO los nombres de los campos REQUERIDOS/MANDATORIOS
         matchColumnHead:{
             idArea:2,
@@ -134,31 +135,32 @@ function tableroCargaArchivoGenCtrl ($scope,$rootScope,$state,$stateParams,dc,gc
         }
     });
 
-//////////////////////
-    cds.addWorkTask('insertXlsDataArchivo',{
-        url:gc.conf.xsServicesBaseUrl+'/dbCargaJson.xsjs',
-        query:{
-            idLayout:$scope.currentColumnsReq,
-            lstData:$scope.detalleExcelOpt.data,
-        },
-        success:function (response) {
-            console.log("success");
-            console.log(response);
-            //$scope.censo.data=response.data;
-            if(response.insertStatus.blError){
-                $scope.detalleExcelOpt.MessageErrors=[];
-                $scope.detalleExcelOpt.MessageErrors.push({msg:response.insertStatus.txInsertErr, type:"danger", dismiss:"alert"});
-            }
-        },
-        error:function (response,error) {
-            console.log("Error");
-            console.log(error);
-        }
-    });
-
-//////////////////
     $scope.nuevoUploadDB = function ($event) {
         console.log("subiendo");
+        cds.addWorkTask('insertXlsDataArchivo',{
+            url:gc.conf.xsServicesBaseUrl+'/dbCargaJson.xsjs',
+            query:{
+                idLayout:$scope.currentColumnsReq,
+                lstData:$scope.detalleExcelOpt.data,
+            },
+            success:function (response) {
+                console.log("success");
+                console.log(response);
+                $scope.detalleExcelOpt.canSubmit = false;
+                //$scope.censo.data=response.data;
+                if(response.insertStatus.blError){
+                    $scope.detalleExcelOpt.MessageErrors=[];
+                    $scope.detalleExcelOpt.MessageErrors.push({msg:response.insertStatus.txInsertErr, type:"danger", dismiss:"alert"});
+                }
+            },
+            error:function (response,error) {
+                console.log("Error");
+                console.log(error);
+                $scope.detalleExcelOpt.MessageErrors=[];
+                $scope.detalleExcelOpt.MessageErrors.push({msg:error, type:"danger", dismiss:"alert"});
+                $scope.detalleExcelOpt.canSubmit = false;
+            }
+        });
         cds.doWorkTask('insertXlsDataArchivo');
     };
 
@@ -166,8 +168,6 @@ function tableroCargaArchivoGenCtrl ($scope,$rootScope,$state,$stateParams,dc,gc
         cds.doWorkTask('gridColumnasRequeridas');
     };
 
-    ////////////////////////////////////////////
-    //INICIALIZADOR *********************
     this.init();
 
 };
