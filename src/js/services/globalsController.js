@@ -12,7 +12,9 @@ angular
 
 
 
-            xsServicesBaseUrl:"http://10.80.0.24:8020/DICTAMEN/AppCaptura/xsservices",
+            xsServicesBaseUrl:"http://10.81.0.24:8010/SMFIND/APP/xsservices/", //Desarrollo
+            //Productivo // xsServicesBaseUrl:"http://10.80.0.24:8020/DICTAMEN/AppCaptura/xsservices",
+
             //xsServicesBaseUrl:"/DICTAMEN/AppCaptura/xsservices",
             //xsServicesBaseUrl:"http://10.81.0.24:8010/TableroSacsyr/AppCaptura/xsservices",
             fotosBaseUrl:"http://091402OT003.infonavit.net/OTCS/cs.exe?func=LL.login&username=consulta&password=infonavit2017&NextURL=/OTCS/cs.exe/open/CR_@@CRED"

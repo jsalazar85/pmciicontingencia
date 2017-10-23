@@ -117,8 +117,9 @@ angular
                                     for (var r = 1; r < aoa.length; ++r) {
                                         data[r - 1] = {};
                                         for (i = 0; i < aoa[r].length; ++i) {
+                                            tmpValue = aoa[r][i];
                                             if (validCols[i][0] > 0){ // SOLO los que INTERESAN
-                                                data[r - 1][aoa[0][i]] = aoa[r][i]; //pretendemos que el campo esta Ok
+                                                data[r - 1][aoa[0][i]] = tmpValue; //pretendemos que el campo esta Ok
                                                 if (validCols[i][0] > 1 ){
                                                     if(!(aoa[r][i])){
                                                         localMsgError.push({
@@ -130,16 +131,19 @@ angular
                                                         maxErrorTolerancia--;
                                                     }
                                                 }
-                                                if(aoa[r][i]) {
-                                                    if (validCols[i][1] === "3"){
-                                                        tmpValue = new Date(data[r - 1][aoa[0][i]]);
+                                                if(tmpValue) {
+                                                    //001 Numero
+                                                    //002 Texto
+                                                    //003 Fecha
+                                                    if (validCols[i][1] === "3"){//Fecha
+                                                        tmpValue = new Date(tmpValue);
                                                         if(tmpValue) {
                                                             data[r - 1][aoa[0][i]] = tmpValue;
                                                         }else{
                                                             localMsgError.push({
                                                                 msg: "el Campo '" + aoa[0][i] + "' del renglon "+ r +
-                                                                ", Es una Fecha Invalida ",
-                                                                type: "danger",
+                                                                ", Es una Fecha Invalida, Cambie el formato de fecha.",
+                                                                type: "warning",
                                                                 dismiss: "alert"
                                                             });
                                                             maxErrorTolerancia--;
@@ -147,19 +151,18 @@ angular
                                                         }
                                                     // si está presente. validar si aplica conversion de Fecha, Hora o FechaHora (talvez timeStamp)
                                                     }
-                                                    if (validCols[i][1] === "3"){
-                                                        tmpValue = Number(data[r - 1][aoa[0][i]]);
+                                                    else if (validCols[i][1] === "1"){ //Numero
+                                                        tmpValue.parseFloat(a.replace(/[$%()\s,a-df-zA-DF-Z]/g, ''));
                                                         if(tmpValue) {
                                                             data[r - 1][aoa[0][i]] = tmpValue;
                                                         }else{
                                                             localMsgError.push({
                                                                 msg: "el Campo '" + aoa[0][i] + "' del renglon "+ r +
-                                                                ", Es una Fecha Invalida ",
+                                                                ", No se puede interpretar como número.",
                                                                 type: "danger",
                                                                 dismiss: "alert"
                                                             });
                                                             maxErrorTolerancia--;
-
                                                         }
                                                     }
                                                 }
