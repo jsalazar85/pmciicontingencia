@@ -15,8 +15,14 @@
         <div class="col-6 rounded p-2 m-0" style="background-color: whitesmoke;">
             <input type="file" import-sheet-js=""  opts="detalleExcelOpt" multiple="false"  />
             <!--div id="grid1" ui-grid="gridOptions" ui-grid-selection ui-grid-exporter class="grid"></div-->
-            <span></span>
-            <p>{{detalleExcelOpt.matchColumnHead.txInfoFile}}</p>
+            <p>Información del Documento.</p>
+            <p>Aplicación:{{detalleExcelOpt.ResumenInfo.Props.Application}}</p>
+            <p>Autor:{{detalleExcelOpt.ResumenInfo.Props.Author}}</p>
+            <p>Compañia:{{detalleExcelOpt.ResumenInfo.Props.Company}}</p>
+            <p></p>
+            <p>total columnas:{{detalleExcelOpt.ResumenInfo.totalCols}}</p>
+            <p>total renglones:{{detalleExcelOpt.ResumenInfo.totalReg}}</p>
+            
         </div>
         <div class="col-1 "></div>
         <div class="col-5 rounded p-1 m-0 mb-1" style="background-color: whitesmoke;">

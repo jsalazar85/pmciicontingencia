@@ -36,7 +36,16 @@ angular.module('RDash').config(['$stateProvider', '$urlRouterProvider',
             })
             */
 
-
+            .state('RJtest', {
+                url: '/ricardoTest',
+                views:{
+                    '':{
+                        templateUrl: 'templates/tablero-carga-archivo-gen.view.html',
+                        controller: 'tableroCargaArchivoGenCtrl',
+                     },
+                }
+            })
+  
             .state('reporteSeguimiento', {
                 url: '/reporteseguimiento',
                 views:{

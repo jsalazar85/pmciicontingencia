@@ -96,6 +96,10 @@ function tableroCargaArchivoGenCtrl ($scope,$rootScope,$state,$stateParams,dc,gc
     ];
     $scope.detalleExcelOpt = {
         enableHorizontalScrollbar:uiGridConstants.scrollbars.ALWAYS,
+        ResumenInfo:{Props:{},//AppVersion:"15.0300",Application:"Microsoft Excel",Author:"Ricardo Lopez", Company:""
+        	totalCols:0,
+        	totalReg:0,
+        },
         MessageErrors:[], //errores generados por la carga del archivo y su "pre"procesamiento. .push({msg:error.toString(), type:"danger", dismiss:"alert"})
         canSubmit : false,
         matchColumnDef:dataMockCols,// aqui se copiará el arreglo de SOLO los nombres de los campos REQUERIDOS/MANDATORIOS

@@ -14,6 +14,8 @@ angular
                         var cols = [];
                         var data = [];
                         var localMCD = $scope.opts.matchColumnDef;
+                        var localResumenInfo = $scope.opts.ResumenInfo;
+                        
                         var localMsgError=[];// = $scope.opts.MessageErrors;
                         var maxErrorTolerancia = 10; // mas errores... no  vale la pena despegar
                         var bstr = e.target.result;
@@ -21,6 +23,8 @@ angular
                         var tmpValue;
                         try{
                             wb = XLSX.read(bstr, {type: 'binary'});
+                            localResumenInfo.Props = wb.Props;
+                            
                             /* grab first sheet */
                             var wsname = wb.SheetNames[0];
                             var foundSheet = false;
@@ -60,17 +64,27 @@ angular
                             var ws = wb.Sheets[wsname];
 
                             /* grab first row and generate column headers */
-                            var aoa = XLSX.utils.sheet_to_json(ws, {header: 1, raw: false, blankrows: false});
+                            var aoa = XLSX.utils.sheet_to_json(ws, {header: 1, raw: true, blankrows: false});
                             console.log(aoa);
+                            localResumenInfo.totalReg = 0;
+                            localResumenInfo.totalCols = 0;
+                            
+                            if(aoa){
+                            	localResumenInfo.totalReg = aoa.length;
+                            	if(aoa.length){
+                            		localResumenInfo.totalCols = aoa[0].length;
+                            	}
+                            };
                             console.log(localMCD);
 
                             if (localMCD && localMCD.length) { // si no lo mandas... nada será truncado
+                            	var tmpIdx = 0;
                                 var lengCD = localMCD.length;
                                 //Agregar e inicializar matchColumnDef.txFound
                                 for (var j = 0; j < lengCD; j++) {
                                     localMCD[j].txFound = false;
                                 }
-                                console.log("localMCD:" + localMCD);
+                                console.log( localMCD);
                                 //Buscsr l columnas
                                 for (var i = 0; i < aoa[0].length; ++i) {
                                     validCols[i] = [0,""]; // Ignorar
@@ -82,11 +96,27 @@ angular
                                                 validCols[i] = [2, localMCD[j].idTipoDato]; //Obligatoria su presencia
                                             }
 
-                                            cols.push({
+                                            tmpIdx = cols.push({
                                                 field: localMCD[j].txColumnaFisica,
                                                 name: aoa[0][i],
-                                                displayName: aoa[0][i]
+                                                displayName: aoa[0][i],
                                             });
+                                            switch(localMCD[j].idTipoDato){
+                                            case "1": //Numero;
+                                            	break;
+                                            case "2"://texto;
+                                            	break;
+                                            case "3": //Fecha;
+                                            	cols[tmpIdx-1].cellFilter = 'date';
+                                            	break;
+                                            case "TIME": //Fecha;
+                                            	cols[tmpIdx-1].cellFilter = 'date:"HH:mm:ss"';
+                                            	break;
+                                            case "TIMESTAMP": //Fecha;
+                                            	cols[tmpIdx-1].cellFilter = 'date:"YYYY-MM-DD HH:mm:ss.sss"';
+                                            	
+                                            	
+                                            }
                                             aoa[0][i] = localMCD[j].txColumnaFisica; //Temporalmente se asigna el CaMel del txColumna, para que sea identico al de la BD
                                             break;
                                         }
@@ -115,9 +145,13 @@ angular
                                 // /* generate rest of the data */
                                 if (cols.length) { // si solo si, se tiene al menos una columna valida
                                     for (var r = 1; r < aoa.length; ++r) {
+                                    	console.log("var r loop");
                                         data[r - 1] = {};
                                         for (i = 0; i < aoa[r].length; ++i) {
                                             tmpValue = aoa[r][i];
+                                        	console.log("tmpValue");
+                                        	console.log(tmpValue);
+
                                             if (validCols[i][0] > 0){ // SOLO los que INTERESAN
                                                 data[r - 1][aoa[0][i]] = tmpValue; //pretendemos que el campo esta Ok
                                                 if (validCols[i][0] > 1 ){
@@ -136,7 +170,19 @@ angular
                                                     //002 Texto
                                                     //003 Fecha
                                                     if (validCols[i][1] === "3"){//Fecha
-                                                        tmpValue = new Date(tmpValue);
+
+                                                    	switch(typeof(tmpValue)){
+                                                    	case "string":
+                                                    		tmpValue = new Date(tmpValue);
+                                                    		break;
+                                                    	case "number":
+                                                    		tmpDate = new Date("12/31/1899");
+                                                    		tmpDate.setDate(tmpValue);
+                                                    		tmpValue = tmpDate;
+                                                    	default:
+                                                    		//sin cambios
+                                                    	}
+                                                    	
                                                         if(tmpValue) {
                                                             data[r - 1][aoa[0][i]] = tmpValue;
                                                         }else{
@@ -152,8 +198,14 @@ angular
                                                     // si está presente. validar si aplica conversion de Fecha, Hora o FechaHora (talvez timeStamp)
                                                     }
                                                     else if (validCols[i][1] === "1"){ //Numero
-                                                        tmpValue.parseFloat(a.replace(/[$%()\s,a-df-zA-DF-Z]/g, ''));
-                                                        if(tmpValue) {
+                                                    	if(typeof(tmpValue)==="string"){
+                                                    		tmpValue = tmpValue.replace(/[$%()\s,a-df-zA-DF-Z]/g, '');
+                                                        	tmpValue = parseFloat(tmpValue);
+                                                    	}
+                                                    	else{//"number":
+                                                    		//sin cambios
+                                                    	}
+                                                    	if(tmpValue) {
                                                             data[r - 1][aoa[0][i]] = tmpValue;
                                                         }else{
                                                             localMsgError.push({
@@ -223,7 +275,8 @@ angular
                                 $scope.opts.MessageErrors = localMsgError;
                                 if (localMCD && localMCD.length ) {
                                     $scope.opts.matchColumnDef = localMCD;
-                                }
+                                };
+                                $scope.opts.ResumenInfo = localResumenInfo;
                             });
                         };
 
