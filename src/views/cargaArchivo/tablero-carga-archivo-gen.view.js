@@ -21,6 +21,22 @@ angular
 function tableroCargaArchivoGenCtrl ($scope,$rootScope,$state,$stateParams,dc,gc,ngProgressFactory,dss,cs,$interval,tools,cds,uiGridConstants,$http)  {
     //Conjunto de columnas requeridas (debe venir por parametro externo
     $scope.currentColumnsReq = 1;
+    $scope.layoutDef = {
+    		//Dummy data (mokUp)
+            "idArea": 1,
+            "txArea": "ÁREA 1 TEST XXXX",
+            "idLayout": 1,
+            "txNombreLayout": "PRUEBA DE CARGA EXCEL XXX",
+            "txNombreHoja": "HOJA22",
+            "nuLineaEncabezado": 1
+    		
+    };
+    $scope.muestreoExcel = [
+		{nu:50,tx:'primeros 50 registros' },
+		{nu:100,tx:'primeros 100 registros' },
+		{nu:1000,tx:'primeros 1000 registros' },
+		{nu:0,tx:'Todos los registros'  },
+	]
 
     // columnas que se esperan encontrar en el excel (ejemplo)
     var dataMockCols=[ //Columnas que deben ser similar o igual a ($scope.gridOptions.columnDefs [field,name,type,...])
@@ -74,11 +90,17 @@ function tableroCargaArchivoGenCtrl ($scope,$rootScope,$state,$stateParams,dc,gc
                 field:"txTipoDato",
                 name:"Tipo",
                 type:"string",
-                width:"30%"
+                width:"20%"
             },
             {
                 field:"nuObligatorio",
-                name:"Obligado",
+                name:"Requerida",
+                type:"number",
+                width:"10%"
+            },
+            {
+                field:"nuNoNulo",
+                name:"no nulos",
                 type:"number",
                 width:"10%"
             },
@@ -100,16 +122,10 @@ function tableroCargaArchivoGenCtrl ($scope,$rootScope,$state,$stateParams,dc,gc
         	totalCols:0,
         	totalReg:0,
         },
+        muestreo:$scope.muestreoExcel[0] , // cantidad maxima que se van a desplegar en el componente tabla
         MessageErrors:[], //errores generados por la carga del archivo y su "pre"procesamiento. .push({msg:error.toString(), type:"danger", dismiss:"alert"})
         canSubmit : false,
-        matchColumnDef:dataMockCols,// aqui se copiará el arreglo de SOLO los nombres de los campos REQUERIDOS/MANDATORIOS
-        matchColumnHead:{
-            idArea:2,
-            txArea:"Area X",
-            idLayout:$scope.currentColumnsReq = 1,
-            txNombreLayout:"Layout X",
-            txNombreHoja:" HojaVarios "
-        },
+
         data: dataMockExcel, //[];
         columnDefs:[
             // se recupera del excel , columna1, filtrado por los nombres que coincidan en colRequeridasOpt.data.txField
@@ -125,17 +141,17 @@ function tableroCargaArchivoGenCtrl ($scope,$rootScope,$state,$stateParams,dc,gc
         success: function(response){
             console.log("success");
             console.log(response);
-            $scope.detalleExcelOpt.matchColumnHead  = response.layoutDef;
-            $scope.detalleExcelOpt.matchColumnDef  = response.colDef;
+            $scope.layoutDef = response.layoutDef;
+            //$scope.colDef  = response.colDef;
             $scope.colRequeridasOpt.data = response.colDef;
             //window.isLoaded=true;
         },
         error: function(response,error){
             console.log("Error");
             console.log(error);
-            $scope.detalleExcelOpt.matchColumnDef  = [];
+            //$scope.colDef  = [];
             $scope.colRequeridasOpt.data = [];
-            $scope.detalleExcelOpt.matchColumnHead = [];
+            $scope.layoutDef = {};
         }
     });
 

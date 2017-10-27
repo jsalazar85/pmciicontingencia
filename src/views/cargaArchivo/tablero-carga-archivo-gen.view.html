@@ -6,27 +6,33 @@
 <div class="container-fluid principalMain m-0 p-0" style="margin-top: 60px !important;">
     <div class="form-group row m-0 p-1 bottom-line rounded-bottom justify-content-center">
         <div class="col-auto p-1">
-            <span>Carga de Archivos excel</span>
-            <span>{{detalleExcelOpt.matchColumnHead.txArea}}</span>
+            <span>Carga de Archivos Excel</span>
+            <p>Área:{{layoutDef.txArea}}</p>
         </div>
     </div>
     <div class="row  m-0 p-1 mt-3">
 
         <div class="col-6 rounded p-2 m-0" style="background-color: whitesmoke;">
-            <input type="file" import-sheet-js=""  opts="detalleExcelOpt" multiple="false"  />
+            <label for="muestra">limite de muestra:</label>
+        	<select style="width: 100%;" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="muestra" ng-model="detalleExcelOpt.muestreo" ng-options="option.tx for option in muestreoExcel track by option.nu">
+			</select>
+            <label for="HeaderLine">linea de Encabezado:</label>
+        	<input ng-model="layoutDef.nuLineaEncabezado" type="number" class="form-control" id="HeaderLine" placeholder="renglón">
+            <input type="file" import-sheet-js=""  opts="detalleExcelOpt" hcfg="layoutDef" ccfg="colRequeridasOpt.data" multiple="false"  />
             <!--div id="grid1" ui-grid="gridOptions" ui-grid-selection ui-grid-exporter class="grid"></div-->
             <p>Información del Documento.</p>
-            <p>Aplicación:{{detalleExcelOpt.ResumenInfo.Props.Application}}</p>
-            <p>Autor:{{detalleExcelOpt.ResumenInfo.Props.Author}}</p>
-            <p>Compañia:{{detalleExcelOpt.ResumenInfo.Props.Company}}</p>
+            <p>Aplicación: {{detalleExcelOpt.ResumenInfo.Props.Application}}</p>
+            <p>Autor: {{detalleExcelOpt.ResumenInfo.Props.Author}}</p>
+            <p>Compañia: {{detalleExcelOpt.ResumenInfo.Props.Company}}</p>
             <p></p>
-            <p>total columnas:{{detalleExcelOpt.ResumenInfo.totalCols}}</p>
-            <p>total renglones:{{detalleExcelOpt.ResumenInfo.totalReg}}</p>
+            <p>total columnas: {{detalleExcelOpt.ResumenInfo.totalCols}}</p>
+            <p>total renglones: {{detalleExcelOpt.ResumenInfo.totalReg}}</p>
             
         </div>
         <div class="col-1 "></div>
         <div class="col-5 rounded p-1 m-0 mb-1" style="background-color: whitesmoke;">
-            <span>Plantilla para: "{{detalleExcelOpt.matchColumnHead.txNombreLayout}}"</span>
+
+            <span>Plantilla para: "{{layoutDef.txNombreLayout}}" Hoja: "{{layoutDef.txNombreHoja}}"</span>
             <div id="gridColumnasRequeridas" ui-grid="colRequeridasOpt" class="gridBusqueda" style="width: 99.9%;"></div>
         </div>
         <div class="w-100 ">

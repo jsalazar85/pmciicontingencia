@@ -3,19 +3,20 @@ angular
     .directive('importSheetJs', ['globalsController','$state','$rootScope','dataController',
     function (gc,$state,$rootScope,dc) {
         return {
-            scope: { opts: '=' },
+            scope: { opts: '=', hcfg: '=', ccfg: '=' },
             link: function ($scope, $elm) {
                 $elm.on('change', function (changeEvent) {
                     var reader = new FileReader();
 
                     reader.onload = function (e) {
+                    	console.log(Date());
                         /* read workbook */
-                        var validCols = [];// {[Requerido,tipoConversion]//aqui almacenamos si la columna n del archivo Excel esta presente en "opts.matchColumnDef" (1 opcional 2 mandatorio, 0 ignorar) y
-                        var cols = [];
+                        var validCols = [];// {[Requerido,tipoConversion]//aqui almacenamos si la columna n del archivo Excel esta presente en "$scope.ccfg" (1 opcional 2 mandatorio, 0 ignorar) y
+                        var cols = [];//solo las columnas que coinciden
                         var data = [];
-                        var localMCD = $scope.opts.matchColumnDef;
+                        var localMCD = $scope.ccfg;
                         var localResumenInfo = $scope.opts.ResumenInfo;
-                        
+                        //console.log($scope);
                         var localMsgError=[];// = $scope.opts.MessageErrors;
                         var maxErrorTolerancia = 10; // mas errores... no  vale la pena despegar
                         var bstr = e.target.result;
@@ -29,7 +30,7 @@ angular
                             var wsname = wb.SheetNames[0];
                             var foundSheet = false;
                             for (var i in wb.SheetNames) {
-                                foundSheet = wb.SheetNames[i].toUpperCase() === $scope.opts.matchColumnHead.txNombreHoja.toUpperCase();
+                                foundSheet = wb.SheetNames[i].toUpperCase() === $scope.hcfg.txNombreHoja.toUpperCase();
                                 if(foundSheet){
                                     wsname = wb.SheetNames[i];
                                     break;
@@ -37,11 +38,11 @@ angular
                             }
                             if(!foundSheet){
                                 for (var i in wb.SheetNames) {
-                                    foundSheet = wb.SheetNames[i].trim().toUpperCase() === $scope.opts.matchColumnHead.txNombreHoja.trim().toUpperCase();
+                                    foundSheet = wb.SheetNames[i].trim().toUpperCase() === $scope.hcfg.txNombreHoja.trim().toUpperCase();
                                     if(foundSheet){
                                         wsname = wb.SheetNames[i];
                                         localMsgError.push({
-                                            msg: "No existe la Hoja '" + $scope.opts.matchColumnHead.txNombreHoja +
+                                            msg: "No existe la Hoja '" + $scope.hcfg.txNombreHoja +
                                             "', pero se encontró un nombre que difiere por los espacios adicionales",
                                             type: "info",
                                             dismiss: ""
@@ -52,20 +53,21 @@ angular
                             }
                             if(!foundSheet) {
                                 localMsgError.push({
-                                    msg: "No existe la Hoja '" + $scope.opts.matchColumnHead.txNombreHoja +
+                                    msg: "No existe la Hoja '" + $scope.hcfg.txNombreHoja +
                                     "', se utilizará la Hoja '" + wsname + "'",
                                     type: "warning",
                                     dismiss: ""
                                 });
                             }
-                            console.log(e);
-                            console.log(wb);
-                            console.log($scope.opts);
+                            //console.log(e);
+                            //console.log(wb);
+                            //console.log($scope.opts);
                             var ws = wb.Sheets[wsname];
 
+                        	console.log(Date());
                             /* grab first row and generate column headers */
-                            var aoa = XLSX.utils.sheet_to_json(ws, {header: 1, raw: true, blankrows: false});
-                            console.log(aoa);
+                            var aoa = XLSX.utils.sheet_to_json(ws, {header: $scope.hcfg.nuLineaEncabezado, raw: true, blankrows: false});
+                            //console.log(aoa);
                             localResumenInfo.totalReg = 0;
                             localResumenInfo.totalCols = 0;
                             
@@ -75,31 +77,33 @@ angular
                             		localResumenInfo.totalCols = aoa[0].length;
                             	}
                             };
-                            console.log(localMCD);
+                            //console.log(localMCD);
+                        	console.log(Date());
 
                             if (localMCD && localMCD.length) { // si no lo mandas... nada será truncado
                             	var tmpIdx = 0;
                                 var lengCD = localMCD.length;
-                                //Agregar e inicializar matchColumnDef.txFound
+                                //Agregar e inicializar $scope.ccfg.txFound
                                 for (var j = 0; j < lengCD; j++) {
                                     localMCD[j].txFound = false;
                                 }
-                                console.log( localMCD);
+                                //console.log( localMCD);
                                 //Buscsr l columnas
                                 for (var i = 0; i < aoa[0].length; ++i) {
-                                    validCols[i] = [0,""]; // Ignorar
+                                    validCols[i] = [0,"",0]; // [0 Ignorar Columna, tipo de dato, permite nulo/vacio el campo]
                                     for (var j = 0; j < lengCD; j++) {
                                         if (aoa[0][i].toUpperCase() === localMCD[j].txColumna.toUpperCase()) {
                                             localMCD[j].txFound = true;
-                                            validCols[i] = [1, localMCD[j].idTipoDato]; // incluir, pero puede faltar
+                                            validCols[i] = [1, localMCD[j].idTipoDato,localMCD[j].nuNoNulo]; // 1 incluir, pero puede faltar
                                             if (localMCD[j].nuObligatorio) {
-                                                validCols[i] = [2, localMCD[j].idTipoDato]; //Obligatoria su presencia
+                                                validCols[i] = [2, localMCD[j].idTipoDato,localMCD[j].nuNoNulo]; //2 Columna obligatoria 
                                             }
 
                                             tmpIdx = cols.push({
-                                                field: localMCD[j].txColumnaFisica,
-                                                name: aoa[0][i],
+                                            	enableHiding:false,
+                                            	field: localMCD[j].txColumnaFisica,
                                                 displayName: aoa[0][i],
+                                                visible: true
                                             });
                                             switch(localMCD[j].idTipoDato){
                                             case "1": //Numero;
@@ -113,14 +117,20 @@ angular
                                             	cols[tmpIdx-1].cellFilter = 'date:"HH:mm:ss"';
                                             	break;
                                             case "TIMESTAMP": //Fecha;
-                                            	cols[tmpIdx-1].cellFilter = 'date:"YYYY-MM-DD HH:mm:ss.sss"';
-                                            	
-                                            	
+                                            	cols[tmpIdx-1].cellFilter = 'date:"YYYY-MM-DD HH:mm:ss.sss"';	
                                             }
                                             aoa[0][i] = localMCD[j].txColumnaFisica; //Temporalmente se asigna el CaMel del txColumna, para que sea identico al de la BD
                                             break;
-                                        }
-                                    }
+                                        } // if columna name
+                                        /*else{
+                                        	tmpIdx = cols.push({
+                                            	enableHiding:false,
+                                            	//field: localMCD[j].txColumnaFisica,
+                                                displayName: aoa[0][i],
+                                                visible: false
+                                            });
+                                        }*/
+                                    } //for j
                                 }
                                 // si la columna es mandatoria y esta marcada como (NO existe en el excel): error
                                 for (var j = 0; j < lengCD; j++) {
@@ -145,20 +155,16 @@ angular
                                 // /* generate rest of the data */
                                 if (cols.length) { // si solo si, se tiene al menos una columna valida
                                     for (var r = 1; r < aoa.length; ++r) {
-                                    	console.log("var r loop");
-                                        data[r - 1] = {};
+                                    	data[r - 1] = {};
                                         for (i = 0; i < aoa[r].length; ++i) {
                                             tmpValue = aoa[r][i];
-                                        	console.log("tmpValue");
-                                        	console.log(tmpValue);
-
                                             if (validCols[i][0] > 0){ // SOLO los que INTERESAN
                                                 data[r - 1][aoa[0][i]] = tmpValue; //pretendemos que el campo esta Ok
-                                                if (validCols[i][0] > 1 ){
+                                                if (validCols[i][2] > 1 ){
                                                     if(!(aoa[r][i])){
                                                         localMsgError.push({
                                                             msg: "La columna '" + aoa[0][i] +
-                                                            "' es mandatoria, y requiere un valor en el renglon " + r,
+                                                            "' no permite nulos o vacios, y requiere un valor en el renglon " + r,
                                                             type: "danger",
                                                             dismiss: "alert"
                                                         });
@@ -176,8 +182,8 @@ angular
                                                     		tmpValue = new Date(tmpValue);
                                                     		break;
                                                     	case "number":
-                                                    		tmpDate = new Date("12/31/1899");
-                                                    		tmpDate.setDate(tmpValue);
+                                                    		tmpDate = new Date("01/01/1900");
+                                                    		tmpDate.setDate(tmpValue-1);
                                                     		tmpValue = tmpDate;
                                                     	default:
                                                     		//sin cambios
@@ -256,14 +262,14 @@ angular
                             }
                         }
                         catch(error){
-                            console.log(error);
+                            //console.log(error);
                             localMsgError.push({msg:error.toString(), type:"danger", dismiss:"alert"});
                         }
                         finally {
                             /* update scope */
                             $scope.$apply(function() {
                                 console.log("Data:");
-                                console.log(data);
+                                //console.log(data);
 
                                 $scope.opts.canSubmit = true; //Cualquier error lo pone en false;
                                 if(localMsgError.findIndex(function (elem){return elem.type==="danger";})>=0) {
@@ -274,11 +280,12 @@ angular
                                 $scope.opts.data = data;
                                 $scope.opts.MessageErrors = localMsgError;
                                 if (localMCD && localMCD.length ) {
-                                    $scope.opts.matchColumnDef = localMCD;
+                                    $scope.ccfg = localMCD;
                                 };
                                 $scope.opts.ResumenInfo = localResumenInfo;
                             });
                         };
+                    	console.log(Date());
 
                     };
                     reader.readAsBinaryString(changeEvent.target.files[0]);
