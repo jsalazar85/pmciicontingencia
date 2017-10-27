@@ -1,20 +1,18 @@
-<div class="container-fluid" style="margin-top: 60px; height: 600px; width: 80%; background-color: whitesmoke">
-    <div class="row border mt-2" style="height: 45%;">
-        <div class="col-12 col-sm-10 m-0 p-3" >
-
-                <span>Beneficiados por Estado</span>
-                <am-gen-chart
-                        data="iniciativa.chart1.data"
-                        id="iniciativaChart01"
-                        chart-opts="iniciativa.chart1.chartOpt"
-                        cont-opts=""
-                        zoom="{
-                                    ini:0,
-                                    end:4
-                                }"
-                        json-path="json/iniciativasGenerico/iniciativaChart01.json">
-                </am-gen-chart>
-
+<div class="container-fluid" style="height: 950px; width: 95%; background-color: whitesmoke">
+    <div class="row border m-0 p-0 mt-2" style="height: 45%;">
+        <div class="col-12 col-sm-10 m-0 p-1" >
+            <span>Beneficiados por Estado</span>
+            <am-gen-chart
+                    data="iniciativa.chart1.data"
+                    id="iniciativaChart01"
+                    chart-opts="iniciativa.chart1.chartOpt"
+                    cont-opts=""
+                    zoom="{
+                                ini:0,
+                                end:4
+                            }"
+                    json-path="json/iniciativasGenerico/iniciativaChart01.json">
+            </am-gen-chart>
         </div>
         <div class="col-12 col-sm-2 m-0 p-0" style="font-size: 13px;">
             <!----- indicador ------>
@@ -48,6 +46,28 @@
                                 }"
                     json-path="json/iniciativasGenerico/iniciativaChart02.json">
             </am-gen-chart>
+
+            <!--<light-chart-container
+                    str-title="Monto Total Otorgado para la Mejora o Reparación de Vivienda"
+                    str-footer=""
+            >
+                <chart>
+                    <am-chart-vertical-bar
+                            id="censoNew2"
+                            json-chart-path="json/censo/chart5.json"
+                            zoom="{
+                                ini:0,
+                                end:5
+                            }"
+                            lst-ob-conditions="iniciativa.filtro"
+                            service-cnf="{
+                            idTab:2,
+                            idGra:13,
+                            idQry:1
+                        }">
+                    </am-chart-vertical-bar>
+                </chart>
+            </light-chart-container>-->
 
         </div>
         <div class="col-12 col-sm-2 m-0 p-0" style="font-size: 13px;">

@@ -1,10 +1,24 @@
 
-<div class="container-fluid" style="width:100%; height: 100%; background-color: whitesmoke">
-    <div class="row" style="height: 40%;">
-        <div class="col-7 w-100 h-100">
-            <ng-map style="width: 100%; height: 100%;" center="[40.74, -74.18]">
-                <marker ng-repeat="p in mapData track by $index" position="{{p}}"></marker>
-            </ng-map>
+<div class="container-fluid pmtl-nospc" style="width:100%; height: 100%; background-color: whitesmoke; margin-top: 65px!important;">
+    <div class="row pmtl-nospc" style="height: 600px">
+        <div class="col-8 w-100 h-100 pmtl-nospc">
+            <div class="d-flex flex-column h-100">
+                <div class="d-flex justify-content-center" style="position: relative; top:30px; z-index: 9999;">
+                    <button ng-click="mapRecenter()">Test</button>
+                </div>
+                <div class="d-flex align-items-stretch" style="flex:1;">
+                    <ng-map style="width: 100%; height: 100%;" center="[23.35, -100.91]" zoom="5">
+                        <map-data
+                                set-style="mapSetStyle"
+                                on-click="mapOnClick()"
+                                on-mouseover="mapOnMouseOver()"
+                                on-mouseout="mapOnMouseOut()"
+                                load-geo-json="json/estados.json">
+                        </map-data>
+
+                    </ng-map>
+                </div>
+            </div>
         </div>
         <div class="col-5 w-100 h-100">
         </div>

@@ -1,0 +1,54 @@
+<div class="container-fluid h-100 w-100" style="margin-top: 55px !important;background-color: whitesmoke">
+    <div class="row h-100 w-100">
+        <div style="padding-top: 40px">
+            <div class="table-responsive">
+                <h3 style="color:#000000;text-transform: uppercase;" align="center">Formato unico de reporte</h3>
+                <p style="color:#d91b32;font-weight: bold;">{{encabezado}}</p>
+                <table class="table table-striped table-bordered">
+                    <thead style="background-color:#d91b32">
+                    <tr style="color:#FFF;text-transform: uppercase;text-align: center;">
+                        <th>Medida</th>
+                        <th>Unidad</th>
+                        <th># Derechohabientes Beneficiados</th>
+                        <th># Empresas</th>
+                        <th>Monto Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="font-weight: bold;">
+                            <td style="background-color: olive">{{resumen.medida}}</td>
+                            <td style="background-color: olivedrab">{{resumen.unidad}}</td>
+                            <td style="background-color: olivedrab">{{resumen.beneficiados}}</td>
+                            <td style="background-color: olivedrab">{{resumen.empresas}}</td>
+                            <td style="background-color: orange">{{resumen.monto}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-striped table-bordered">
+                    <thead style="background-color:#d91b32">
+                        <tr style="color:#FFF;text-transform: uppercase;text-align: center;">
+                            <th>Por Estado</th>
+                            <th># Derechohabientes Beneficiados</th>
+                            <th>Monto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="ob in rows">
+                            <td>{{ob.estado}}</td>
+                            <td>{{ob.beneficiados}}</td>
+                            <td>{{ob.monto}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-bordered">
+                    <tr>
+                        <th style="background-color: grey;font-weight: bold;">Observaciones/Consideraciones</th>
+                        <td>{{observaciones}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

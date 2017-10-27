@@ -168,9 +168,21 @@
 <style>
 
 </style>
-<div class="row">
+<div class="row" style="margin-top: 5px;">
     <div class="nav flex-column nav-pills col-3" id="v-pills-tab" role="tablist" style="font-size: 11px;background-color: whitesmoke;">
-        <a class="nav-item nav-link active navred" target="_self" id="nav-home3-tab1" data-toggle="tab" href="#nav-home31" role="tab" aria-controls="nav-home3-tab1" aria-expanded="true" ng-click="loadChart(1)">
+        <div style="height: 800px; overflow: scroll">
+            <a class="nav-item nav-link" target="_self" id="{{'nav-home3-tab'+$index}}"
+               data-toggle="tab" href="{{'#nav-home3'+$index}}" role="tab" aria-controls="nav-home3-tab1"
+               aria-expanded="true" ng-click="loadChart(obIn.idIniciativa)"
+               ng-repeat="obIn in lstIniciativas"
+            >
+                {{obIn.txIniciativa}}
+            </a>
+        </div>
+
+
+<!--
+        <a class="nav-item nav-link active" target="_self" id="nav-home3-tab1" data-toggle="tab" href="#nav-home31" role="tab" aria-controls="nav-home3-tab1" aria-expanded="true" ng-click="loadChart(1)">
             1.- Movilidad Habitacional Uso del saldo de la subcuenta de vivienda
         </a>
         <a class="nav-item nav-link" target="_self" id="nav-home3-tab2" data-toggle="tab" href="#nav-home32" role="tab" aria-controls="nav-home3-tab2" ng-click="loadChart(2)">
@@ -239,10 +251,14 @@
         <a class="nav-item nav-link" target="_self" id="nav-home3-tab23" data-toggle="tab" href="#nav-home315" role="tab" aria-controls="nav-home3-tab23" ng-click="loadChart(23)">
             16.- Mecanismo Especial de Atención y Servicio
         </a>
+-->
     </div>
     <div class="tab-content col-9 m-0 p-0" id="v-pills-tabContent">
-        <div style="height:  700px; background-color: white;">
+<!--        <div style="height:  1000px; background-color: white;">
             <div ui-view="tableroIniciativaGenericoView"></div>
+        </div>-->
+        <div style="height:  1000px; background-color: white;">
+            <div ui-view="tableroReporteFormatoUnico"></div>
         </div>
     </div>
 

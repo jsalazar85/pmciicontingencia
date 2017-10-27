@@ -1,0 +1,49 @@
+<div class="container-fluid h-100 w-100" style="margin-top: 0px !important;background-color: whitesmoke">
+    <div class="row h-100 w-100">
+        <div style="padding-top: 40px">
+            <div class="table-responsive">
+                <h3 style="color:#000000;text-transform: uppercase;" align="center">Formato unico de reporte</h3>
+                <p style="color:#d91b32;font-weight: bold;">{{obResumen.txDescripcion}}</p>
+                <table class="table table-striped table-bordered">
+                    <thead style="background-color:#d91b32">
+                    <tr style="color:#FFF;text-transform: uppercase;text-align: center;">
+                        <th>Medida</th>
+                        <th>Unidad</th>
+                        <th># de Derechohabientes Atendidos</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="font-weight: bold;">
+                            <td style="background-color: olive">{{obResumen.txIniciativa}}</td>
+                            <td style="background-color: olivedrab">{{obResumen.txUnidad}}</td>
+                            <td style="background-color: orange">{{ (obResumen.nuBeneficiados==null)?"": " "+(obResumen.nuBeneficiados | number:0)}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-striped table-bordered">
+                    <thead style="background-color:#d91b32">
+                        <tr style="color:#FFF;text-transform: uppercase;text-align: center;">
+                            <th>Por Estado</th>
+                            <th># de Derechohabientes Atendidos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="ob in obDetalle">
+                            <td>{{ob.txEstado}}</td>
+                            <td>{{ (ob.nuBeneficiados==null)?"": " "+(ob.nuBeneficiados | number:0)}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-bordered">
+                    <tr>
+                        <th style="background-color: grey;font-weight: bold;">Observaciones/Consideraciones</th>
+                        <td>{{obResumen.txObservaciones}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -23,7 +23,10 @@ var paths = {
     viewsHtml: 'src/views/**/*.html',
     bower_fonts: 'src/components/**/*.{ttf,woff,eof,svg}',
     sass: 'src/sass/*.*',
-    viewSass: 'src/views/**/*.scss'
+    viewSass: 'src/views/**/*.scss',
+    directiveHtml:'src/directives/**/*.html',
+    directiveJS:'src/directives/**/*.js',
+    directiveSCSS:'src/directives/**/*.scss'
 };
 
 /**
@@ -77,7 +80,7 @@ gulp.task('custom-images', function() {
 
 
 gulp.task('custom-js', function() {
-    return gulp.src([paths.scripts,paths.viewScripts],{base:'src/'})
+    return gulp.src([paths.scripts,paths.viewScripts,paths.directiveJS],{base:'src/'})
         .pipe(minifyJs())
         .pipe(concat('dashboard.min.js'))
         .pipe(gulp.dest('dist/js'));
@@ -99,7 +102,7 @@ gulp.task('custom-less', function() {
 });
 
 gulp.task('custom-sass', function() {
-    return gulp.src([paths.sass,paths.viewSass],{base:'src/'})
+    return gulp.src([paths.sass,paths.viewSass,paths.directiveSCSS],{base:'src/'})
     //return gulp.src(paths.sass)
         .pipe(sass())
         .pipe(concat('main.css'))
@@ -119,7 +122,8 @@ gulp.task('custom-templates-directives', function() {
 });
 
 gulp.task('view-templates', function() {
-    return gulp.src(paths.viewsHtml)
+    //return gulp.src(paths.viewsHtml)
+    return gulp.src([paths.viewsHtml,paths.directiveHtml],{base:'src/'})
         .pipe(minifyHTML())
         .pipe(rename({dirname:''}))
         .pipe(gulp.dest('dist/templates'));
@@ -131,14 +135,12 @@ gulp.task('view-templates', function() {
 gulp.task('watch', function() {
     gulp.watch([paths.images], ['custom-images']);
     gulp.watch([paths.styles], ['custom-less']);
-    gulp.watch([paths.sass], ['custom-sass']);
-    gulp.watch([paths.scripts], ['custom-js']);
+    gulp.watch([paths.sass,paths.viewSass,paths.directiveSCSS], ['custom-sass']);
+    gulp.watch([paths.scripts,paths.viewScripts,paths.directiveJS], ['custom-js']);
     gulp.watch([paths.templates], ['custom-templates']);
     gulp.watch([paths.index], ['usemin']);
     gulp.watch([paths.directiveTemplates], ['custom-templates-directives']);
-    gulp.watch([paths.viewsHtml], ['view-templates']);
-    gulp.watch([paths.viewSass], ['custom-sass']);
-    gulp.watch([paths.viewScripts], ['custom-js']);
+    gulp.watch([paths.viewsHtml,paths.directiveHtml], ['view-templates']);
 });
 
 gulp.task('browser-sync',function(){

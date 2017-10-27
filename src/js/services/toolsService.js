@@ -34,5 +34,16 @@ angular
             return  (( (val/max)*100).toFixed(2));
         };
 
+        this.columnNameToCamelCase=function (txColum) {
+            var tmpArr=txColum.split("_");
+            for(var i in tmpArr){
+                tmpArr[i]=tmpArr[i].toLowerCase();
+                if(i>0){
+                    tmpArr[i]=tmpArr[i].substr(0,1).toUpperCase()+tmpArr[i].substr(1,tmpArr[i].length).toLowerCase();
+                }
+            }
+            return tmpArr.join("");
+        };
+
 
     }]);

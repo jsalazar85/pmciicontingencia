@@ -10,6 +10,7 @@
 */
 
 @import "vars";
+@import "../components/bootstrap4/scss/bootstrap";
 
 
 html,body{
@@ -40,6 +41,11 @@ body{
 .fast-spin {
   -webkit-animation: fa-spin 1100ms infinite linear !important;
   animation: fa-spin 1100ms infinite linear !important;;
+}
+
+.pmtl-nospc{
+  @extend .p-0;
+  @extend .m-0;
 }
 
 

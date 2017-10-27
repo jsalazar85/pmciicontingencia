@@ -48,11 +48,39 @@
         </div>
     </div>
     <div class="row no-gutters rowCont m-0 p-0 h-100 w-100">
-        <div class="col-12" style="">
+<!--        <div class="col-12" style="">
             <div style="height: 300px; width:100%;">
                 <am-gen-chart  data="censoEstado.data" id="censo-chart2" chart-opts="censoEstado.chartOpt" cont-opts="" json-path="json/censo/chart4.json"></am-gen-chart>
             </div>
-
+        </div>-->
+        <div class="col-12" style="height: 800px;">
+            <!--
+            set-on-top="true"
+                            maximize-attr="nuServidores"
+                            max-attr="nuMaxCPU"
+                            max-attr-format="#,##0"
+                            max-graph-id="AmGraph-2"
+            -->
+            <light-chart-container
+                    str-title="Resúmen por Estado"
+                    str-footer=""
+            >
+                <chart>
+                    <am-chart-vertical-bar
+                            id="censoNew2"
+                            json-chart-path="json/censo/chart5.json"
+                            zoom="{
+                                ini:0,
+                                end:5
+                            }"
+                            service-cnf="{
+                            idTab:2,
+                            idGra:13,
+                            idQry:1
+                        }">
+                    </am-chart-vertical-bar>
+                </chart>
+            </light-chart-container>
         </div>
     </div>
 </div>

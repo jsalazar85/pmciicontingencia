@@ -25,7 +25,11 @@ angular
                             chartObj.listeners=[{
                                 event:"init",
                                 method:function (e) {
-                                    e.chart.zoomToIndexes(zoom.ini, zoom.end);
+                                    if(zoom){
+                                        if(zoom.hasOwnProperty("ini") && zoom.hasOwnProperty("end")){
+                                            e.chart.zoomToIndexes(zoom.ini, zoom.end);
+                                        }
+                                    }
                                 }
                             }
 

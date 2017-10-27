@@ -153,18 +153,6 @@ function tableroSeguimientoGlobalCtrl ($scope,$rootScope,$state,$stateParams,dc,
                 //cellTemplate: selectionCellTemplateD
             },
             {
-                field:"nuMontoUnitario",
-                name:"Monto Unitario",
-                type:"number",
-                cellFilter:"number:0",
-                aggregationType: uiGridConstants.aggregationTypes.sum,
-                footerCellFilter:"number:0",
-                aggregationHideLabel: false,
-                cellFilter:"number:0",
-                width:"16.6%",
-                //cellTemplate: selectionCellTemplateD
-            },
-            {
                 field:"nuMontoTotal",
                 name:"Monto Total",
                 type:"number",
@@ -191,6 +179,7 @@ function tableroSeguimientoGlobalCtrl ($scope,$rootScope,$state,$stateParams,dc,
             }
         ]
     };
+
 
     cds.addWorkTask('grid3Medidas',{
         url:gc.conf.xsServicesBaseUrl+'/execTabQuery.xsjs',
@@ -428,7 +417,6 @@ function tableroSeguimientoGlobalCtrl ($scope,$rootScope,$state,$stateParams,dc,
 
 
     };
-
 
     this.init=function() {
 

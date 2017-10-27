@@ -1,0 +1,27 @@
+<div class="container-fluid h-100 w-100" style="margin-top: 55px !important;background-color: whitesmoke">
+    <div class="row h-100 w-100">
+       <div style="padding-top: 40px">
+            <div class="table-responsive">
+                <h1 style="color:#d91b32;text-transform: uppercase;">Reporte Global de Implementaci&oacute;n de medidas</h1>
+                <table class="table table-striped table-bordered">
+                    <thead style="background-color:#d91b32">
+                        <tr style="color:#FFF;text-transform: uppercase;text-align: center;">
+                            <th colspan="2">Medidas</th>
+                            <th>DH Beneficiados</th>
+                            <th>Monto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="ob in rows">
+                            <td>{{ob.idIniciativa}}</td>
+                            <td>{{ob.txIniciativa}}</td>
+                            <td>{{ob.nuBeneficiados | number:0}}</td>
+                            <td>{{ (ob.nuMonto==null)?"": "$ "+(ob.nuMonto | number:2)}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>   
+</div>

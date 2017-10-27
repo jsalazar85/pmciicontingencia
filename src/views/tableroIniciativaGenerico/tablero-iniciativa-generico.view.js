@@ -23,6 +23,20 @@ angular
             $scope.iniciativa.chart2.data=[];
             $scope.idIniciativa=1;
 
+            /*
+            $scope.iniciativa.filtros={
+                {
+                    txCol:"TX_AREA_NEGOCIO",
+                        txAlias:"",
+                    varValue:txArea,
+                    txValueType:"TEXTO",
+                    txLogicOperator:"AND",
+                    txCompOperator:"="
+                }
+
+            };
+            */
+
             $scope.getChart1=function () {
                 cds.addWorkTask('iniciativa.indicador',{
                     url:gc.conf.xsServicesBaseUrl+'/dbTableroIniciativasGenerico.xsjs',
@@ -73,12 +87,12 @@ angular
                 $scope.iniciativa.nuBeneficiados=data.total.nuBeneficiados;
                 $scope.iniciativa.nuMonto=data.total.nuMontoTotal;
             };
+
             $scope.setChart2Data=function (data) {
                 console.log(data);
                 $scope.iniciativa.chart2.data=data.porEdo;
 
             };
-
 
 
             $scope.init=function () {

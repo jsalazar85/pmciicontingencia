@@ -27,7 +27,7 @@ angular
             $scope.init=function() {
 
 
-             //   $scope.consultaRegistro();
+                //$scope.consultaRegistro();
 
                 //$scope.setServicioInicitiva();
                 //$scope.setServicioEstado();
@@ -95,6 +95,7 @@ angular
             $rootScope.$on('consultaIncidenteMasterObs',function(event,data){
                 console.log(data);
                 $scope.idIniciativa=data.currentMaster.idIniciativa;
+                $scope.txObservaciones=data.currentMaster.txObservaciones;
                 $scope.init();
                 $('#observacionMasterModal').modal();
             });
@@ -104,7 +105,9 @@ angular
             $scope.consultaRegistro=function () {
                 console.log("consultaRegistro");
 
-                $scope.consulta={};
+                $scope.consulta={
+                    idIniciativa:$scope.idIniciativa
+                };
                 //$scope.consulta.txEstado=$rootScope.selectedIniciativaDetalle.txEstado.;
 
                 $http({

@@ -60,6 +60,9 @@ function topBarDir($rootScope,$state) {
                     $state.go('consulta');
                 }else if (tx == "tablero"){
                     $state.go('tableroMaster');
+                }else if (tx == "cargas"){
+                    console.log("click");
+                    $state.go('menuCargaArchivo');
                 }
             };
 

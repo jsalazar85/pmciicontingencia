@@ -12,25 +12,74 @@ angular
                 scope: {
                     id: '@',
                     chartOpts : "=?chartOpts",
-                    jsonChartPath:"@"
+                    jsonChartPath:"@",
+                    mockData:"=?",
+                    postCreateFunction:"=?",
+                    lstObConditions:"=?"
                 },
-                templateUrl: 'templates/directives/amGenChart/am-gen-chart.directive.html',
+                templateUrl: 'templates/am-chart.directive.html',
                 link: function (scope, element, attrs, controllers, $jq) {
                     console.log(attrs);
                     console.log(scope.$eval(attrs.serviceCnf));
                     scope.dataServiceCnf=scope.$eval(attrs.serviceCnf);
 
                     var DATA_TASK_NAMESPACE="amChart";
-                    var DATA_XSSERVICE_NAME="execTabQuery.xsjs";
+                    var DATA_XSSERVICE_NAME="execTabQueryFilter.xsjs";
 
                     //<editor-fold desc="Funciones">
                     scope.initChart=function () {
                         console.log("[amChart].[initChart] Inicio");
+                        //console.log(scope.id);
+                        //console.log(scope.jsonChartPath);
                         //Establecer el id
                         //$(element).find(".chartContainer").first().attr("id",scope.mdato.idDiv);
                         //$(element).attr("id",scope.id);
                         scope.idCont=scope.id+"-cont";
                         $(element).find(".chartContainer").first().attr("id",scope.idCont);
+                        scope.runTimes=0;
+
+                        if(angular.isDefined(scope.lstObConditions)){
+                            scope.$watch('lstObConditions',function (newVal,oldVal) {
+                                //scope.lstObConditions=newVal;
+                                console.log("on Watch");
+                                console.log("on lstObConditions");
+                                /*
+                                scope.initDataService();
+                                scope.getData();
+                                */
+                                if(scope.runTimes<1){
+                                    return;
+                                }
+
+                                tools.getLocalJson(scope.jsonChartPath).then(
+                                    function (res) {
+                                        console.log("[amChart].[getLocalJson] Inicio");
+                                        var dest={};
+                                        var jsonData=res.data;
+                                        //console.log(scope.chartOpts)
+                                        if(!angular.isDefined(scope.chartOpts)){
+                                            scope.chartOpts={};
+                                        }
+
+                                        angular.merge(dest,jsonData,scope.chartOpts);
+                                        console.log(dest);
+                                        scope.chartObj=dest;
+                                        scope.chartObj.dataProvider=scope.data;
+
+                                        //Crear chart
+                                        //scope.createChart();
+                                        console.log("[amChart].[getLocalJson] Fin");
+
+                                        scope.initAttrs();
+                                        scope.initDataService();
+                                        scope.getData();
+                                    }
+                                );
+
+                                console.log("end Watch");
+                            });
+                        }
+
 
                         //Obtener json del chart
                         tools.getLocalJson(scope.jsonChartPath).then(
@@ -67,6 +116,10 @@ angular
                         }else{
                             scope.zoom=null;
                         }
+
+                        if(angular.isDefined(attrs.clickEventName)){
+                            scope.clickEventName=attrs.clickEventName;
+                        }
                     };
 
                     scope.addZoomScroll=function (chartObj) {
@@ -75,13 +128,27 @@ angular
                             chartObj.listeners=[{
                                 event:"init",
                                 method:function (e) {
-                                    e.chart.zoomToIndexes(zoom.ini, zoom.end);
+                                    if(zoom){
+                                        if(zoom.hasOwnProperty("ini") && zoom.hasOwnProperty("end")){
+                                            e.chart.zoomToIndexes(zoom.ini, zoom.end);
+                                        }
+                                    }
                                 }
                             }
 
                             ];
                         }
                         return chartObj;
+                    };
+
+                    scope.addClickGraph=function (chartObj) {
+                        if(angular.isDefined(scope.clickEventName)){
+                            if(scope.clickEventName!=""){
+                                chartObj.addListener("clickGraphItem",function (event) {
+                                    $rootScope.$emit(scope.clickEventName,event,scope.chartObj);
+                                });
+                            }
+                        }
                     };
 
                     scope.initDataService=function () {
@@ -92,6 +159,9 @@ angular
                         //console.log(scope.$eval(attrs.dataServiceCnf));
 
                         //scope.dataServiceCnf=scope.$eval(attrs.dataServiceCnf);
+                        if(angular.isDefined(scope.lstObConditions)){
+                            scope.dataServiceCnf.lstObConditions=scope.lstObConditions;
+                        }
 
                         var taskURL=gc.conf.xsServicesBaseUrl+'/'+DATA_XSSERVICE_NAME;
                         cds.addWorkTask(scope.dataTaskName,{
@@ -104,6 +174,7 @@ angular
                                 scope.data=response.data;
                                 scope.chartObj.dataProvider=scope.data;
                                 scope.createChart();
+                                scope.addClickGraph(scope.chart);
                                 console.log("[amChart].[initDataService].[success] End");
                             },
                             error:function (response,error) {
@@ -118,11 +189,20 @@ angular
 
                     scope.getData=function () {
                         console.log("[amChart].[getData] Init get data");
-                        cds.doWorkTask(scope.dataTaskName);
+                        if(!angular.isDefined(scope.mockData)){
+                            cds.doWorkTask(scope.dataTaskName);
+                        }else{
+                            scope.data=scope.mockData;
+                            scope.chartObj.dataProvider=scope.mockData;
+                            scope.createChart();
+                            scope.addClickGraph(scope.chart);
+                        }
+
                         console.log("[amChart].[getData] End get data");
                     };
 
                     scope.createChart=function () {
+                        scope.runTimes=scope.runTimes+1;
                         console.log("create chart -----------------");
                         if(angular.isDefined(scope.chartObj) && angular.isDefined(scope.chartObj.dataProvider)){
                             scope.chartObj.dataProvider=scope.data;

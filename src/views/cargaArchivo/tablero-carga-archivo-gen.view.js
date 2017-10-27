@@ -20,7 +20,7 @@ angular
 
 function tableroCargaArchivoGenCtrl ($scope,$rootScope,$state,$stateParams,dc,gc,ngProgressFactory,dss,cs,$interval,tools,cds,uiGridConstants,$http)  {
     //Conjunto de columnas requeridas (debe venir por parametro externo
-    $scope.currentColumnsReq = 1;
+    $scope.currentColumnsReq = 2;
 
     // columnas que se esperan encontrar en el excel (ejemplo)
     var dataMockCols=[ //Columnas que deben ser similar o igual a ($scope.gridOptions.columnDefs [field,name,type,...])
@@ -101,7 +101,7 @@ function tableroCargaArchivoGenCtrl ($scope,$rootScope,$state,$stateParams,dc,gc
         matchColumnHead:{
             idArea:2,
             txArea:"Area X",
-            idLayout:$scope.currentColumnsReq = 1,
+            idLayout:$scope.currentColumnsReq,
             txNombreLayout:"Layout X",
             txNombreHoja:" HojaVarios "
         },
@@ -111,64 +111,84 @@ function tableroCargaArchivoGenCtrl ($scope,$rootScope,$state,$stateParams,dc,gc
         ]
     };
 
-    //lectura de las Columnas requeridas.
-    cds.addWorkTask('gridColumnasRequeridas',{
-        url:gc.conf.xsServicesBaseUrl+'/dbGetLayoutInfo.xsjs',
-        query:{
-            idLayout:$scope.currentColumnsReq,
-        },
-        success: function(response){
-            console.log("success");
-            console.log(response);
-            $scope.detalleExcelOpt.matchColumnHead  = response.layoutDef;
-            $scope.detalleExcelOpt.matchColumnDef  = response.colDef;
-            $scope.colRequeridasOpt.data = response.colDef;
-            //window.isLoaded=true;
-        },
-        error: function(response,error){
-            console.log("Error");
-            console.log(error);
-            $scope.detalleExcelOpt.matchColumnDef  = [];
-            $scope.colRequeridasOpt.data = [];
-            $scope.detalleExcelOpt.matchColumnHead = [];
-        }
-    });
+
 
 //////////////////////
-    cds.addWorkTask('insertXlsDataArchivo',{
-        url:gc.conf.xsServicesBaseUrl+'/dbCargaJson.xsjs',
-        query:{
-            idLayout:$scope.currentColumnsReq,
-            lstData:$scope.detalleExcelOpt.data,
-        },
-        success:function (response) {
-            console.log("success");
-            console.log(response);
-            //$scope.censo.data=response.data;
-            if(response.insertStatus.blError){
-                $scope.detalleExcelOpt.MessageErrors=[];
-                $scope.detalleExcelOpt.MessageErrors.push({msg:response.insertStatus.txInsertErr, type:"danger", dismiss:"alert"});
-            }
-        },
-        error:function (response,error) {
-            console.log("Error");
-            console.log(error);
-        }
-    });
+
 
 //////////////////
     $scope.nuevoUploadDB = function ($event) {
+        if($scope.detalleExcelOpt.data.length == 0){
+            return;
+        }
         console.log("subiendo");
+        $("#btnUploadFile").prop("disabled",true);
+
+        cds.addWorkTask('insertXlsDataArchivo',{
+            url:gc.conf.xsServicesBaseUrl+'/dbCargaJson.xsjs',
+            query:{
+                idLayout:$scope.currentColumnsReq,
+                lstData:$scope.detalleExcelOpt.data,
+            },
+            success:function (response) {
+                console.log("success");
+                console.log(response);
+                //$scope.censo.data=response.data;
+                if(response.insertStatus.blError){
+                    $scope.detalleExcelOpt.MessageErrors=[];
+                    $scope.detalleExcelOpt.MessageErrors.push({msg:response.insertStatus.txInsertErr, type:"danger", dismiss:"alert"});
+                }
+                $("#btnUploadFile").prop("disabled",false);
+                alert("Archivo cargado correctamente");
+            },
+            error:function (response,error) {
+                console.log("Error");
+                console.log(error);
+                $("#btnUploadFile").prop("disabled",false);
+                alert("Ocurrió un error al cargar el archivo");
+
+            }
+        });
         cds.doWorkTask('insertXlsDataArchivo');
     };
 
-    this.init=function() {
+    $scope.init=function() {
+        //lectura de las Columnas requeridas.
+        cds.addWorkTask('gridColumnasRequeridas',{
+            url:gc.conf.xsServicesBaseUrl+'/dbGetLayoutInfo.xsjs',
+            query:{
+                idLayout:$scope.currentColumnsReq,
+            },
+            success: function(response){
+                console.log("success");
+                console.log(response);
+                $scope.detalleExcelOpt.matchColumnHead  = response.layoutDef;
+                $scope.detalleExcelOpt.matchColumnDef  = response.colDef;
+                $scope.colRequeridasOpt.data = response.colDef;
+                //$scope.$apply();
+            },
+            error: function(response,error){
+                console.log("Error");
+                console.log(error);
+                $scope.detalleExcelOpt.matchColumnDef  = [];
+                $scope.colRequeridasOpt.data = [];
+                $scope.detalleExcelOpt.matchColumnHead = [];
+            }
+        });
+
         cds.doWorkTask('gridColumnasRequeridas');
     };
+    $scope.init();
 
     ////////////////////////////////////////////
     //INICIALIZADOR *********************
-    this.init();
+    //$scope.init();
+
+    $rootScope.$on('areaArchivoSeleccionado',function ($event,valor) {
+        console.log(valor);
+        $scope.currentColumnsReq = valor.idArchivo;
+        $scope.init();
+    });
 
 };
 //app.directive("importSheetJs", [SheetJSImportDirective]);
