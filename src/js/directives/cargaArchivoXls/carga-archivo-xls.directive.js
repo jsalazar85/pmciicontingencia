@@ -131,7 +131,10 @@ angular
                                             });
                                         }*/
                                     } //for j
-                                }
+                                }//For Columnas analisis
+                                console.log("validCols");
+                                console.log(validCols);
+                                console.log(aoa);
                                 // si la columna es mandatoria y esta marcada como (NO existe en el excel): error
                                 for (var j = 0; j < lengCD; j++) {
                                     if (!(localMCD[j].txFound) && localMCD[j].nuObligatorio) {
@@ -160,18 +163,18 @@ angular
                                             tmpValue = aoa[r][i];
                                             if (validCols[i][0] > 0){ // SOLO los que INTERESAN
                                                 data[r - 1][aoa[0][i]] = tmpValue; //pretendemos que el campo esta Ok
-                                                if (validCols[i][2] > 1 ){
-                                                    if(!(aoa[r][i])){
-                                                        localMsgError.push({
-                                                            msg: "La columna '" + aoa[0][i] +
-                                                            "' no permite nulos o vacios, y requiere un valor en el renglon " + r,
-                                                            type: "danger",
-                                                            dismiss: "alert"
-                                                        });
-                                                        maxErrorTolerancia--;
-                                                    }
+                                                if (validCols[i][2] > 0 && !tmpValue ){
+                                                    
+                                                    localMsgError.push({
+                                                        msg: "La columna '" + aoa[0][i] +
+                                                        "' no permite nulos o vacios, y requiere un valor en el renglon " + r,
+                                                        type: "danger",
+                                                        dismiss: "alert"
+                                                    });
+                                                    maxErrorTolerancia--;
+
                                                 }
-                                                if(tmpValue) {
+                                                if(tmpValue) { // procesar si tiene valor (sea o no nulo o requerido  o  no
                                                     //001 Numero
                                                     //002 Texto
                                                     //003 Fecha
