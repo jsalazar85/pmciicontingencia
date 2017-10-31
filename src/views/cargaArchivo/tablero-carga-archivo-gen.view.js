@@ -40,77 +40,12 @@ function tableroCargaArchivoGenCtrl ($scope,$rootScope,$state,$stateParams,dc,gc
 
     // columnas que se esperan encontrar en el excel (ejemplo)
     var dataMockCols=[ //Columnas que deben ser similar o igual a ($scope.gridOptions.columnDefs [field,name,type,...])
-    {
-            nuOrden:0,
-        txColumna:"Fecha",
-            idTipoDato:"000",
-            txTipoDato:"DAT", //txTipoDato:"string" // 'string', 'boolean', 'number', 'date', 'object', 'numberStr'
-            nuObligatorio:0
-        },
-        {
-            nuOrden:0,
-        txColumna:"100",
-            idTipoDato:"000",
-            txTipoDato:"NUM", //txTipoDato:"string" // 'string', 'boolean', 'number', 'date', 'object', 'numberStr'
-            nuObligatorio:0
-        },
-        {
-            nuOrden:0,
-        txColumna:"Campo1",
-            idTipoDato:"000",
-            txTipoDato:"string", //txTipoDato:"string" // 'string', 'boolean', 'number', 'date', 'object', 'numberStr'
-            nuObligatorio:0
-        },
-        {
-            nuOrden:0,
-        txColumna:"Campo2",
-            idTipoDato:"000",
-            txTipoDato:"string", //txTipoDato:"string" // 'string', 'boolean', 'number', 'date', 'object', 'numberStr'
-            nuObligatorio:1
-        },
-        {
-            nuOrden:0,
-        txColumna:"Nombre",
-            idTipoDato:"000",
-            txTipoDato:"string", //txTipoDato:"string" // 'string', 'boolean', 'number', 'date', 'object', 'numberStr'
-            nuObligatorio:0
-        },];
+    ];
 
 // estructura (nombre de campos por definir) para desplegar los campos esperados para la carga.
     $scope.colRequeridasOpt = {
         data:dataMockCols,
-        columnDefs:[
-            {
-                field:"txColumna",
-                name:"Nombre",
-                type:"string",
-                width:"50%"
-            },
-            {
-                field:"txTipoDato",
-                name:"Tipo",
-                type:"string",
-                width:"20%"
-            },
-            {
-                field:"nuObligatorio",
-                name:"Requerida",
-                type:"number",
-                width:"10%"
-            },
-            {
-                field:"nuNoNulo",
-                name:"no nulos",
-                type:"number",
-                width:"10%"
-            },
-            {
-                field:"txFound",
-                name:"status", //marcar si esta presente en el excel (verde = presente, rojo = ausente y es mandatorio, gris= ausente no mandatorio, )
-                width:"10%",
-                type: 'object' //TBD
-            }
-        ]
+        columnDefs:[]
     };
 
     dataMockExcel = [

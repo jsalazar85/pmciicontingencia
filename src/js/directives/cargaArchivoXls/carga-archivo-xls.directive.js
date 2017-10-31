@@ -106,18 +106,19 @@ angular
                                                 visible: true
                                             });
                                             switch(localMCD[j].idTipoDato){
-                                            case "1": //Numero;
+                                            /*case "1": //Numero;
                                             	break;
                                             case "2"://texto;
-                                            	break;
-                                            case "3": //Fecha;
+                                            	break;*/
+                                            case 14: //Fecha;
                                             	cols[tmpIdx-1].cellFilter = 'date';
                                             	break;
-                                            case "TIME": //Fecha;
+                                            case 15: //Hora;
                                             	cols[tmpIdx-1].cellFilter = 'date:"HH:mm:ss"';
                                             	break;
-                                            case "TIMESTAMP": //Fecha;
-                                            	cols[tmpIdx-1].cellFilter = 'date:"YYYY-MM-DD HH:mm:ss.sss"';	
+                                            case 16: //"TIMESTAMP"
+                                            case 62: //Seconddate;
+                                            	cols[tmpIdx-1].cellFilter = 'date:"yyyy-MM-dd HH:mm:ss.sss"';	
                                             }
                                             aoa[0][i] = localMCD[j].txColumnaFisica; //Temporalmente se asigna el CaMel del txColumna, para que sea identico al de la BD
                                             break;
@@ -175,13 +176,16 @@ angular
 
                                                 }
                                                 if(tmpValue) { // procesar si tiene valor (sea o no nulo o requerido  o  no
-                                                    //001 Numero
-                                                    //002 Texto
-                                                    //003 Fecha
-                                                    if (validCols[i][1] === "3"){//Fecha
+                                                	//solo se procesan Fechas (dia, hora y Dia/hora) y Numeros (enteros o fraccionarios)
+                                                	switch(validCols[i][1]){//Fecha
+                                                    case 14://Date
+                                                    case 15://Time
+                                                    case 16://TimeStamp
+                                                    case 62://SecondDate
 
                                                     	switch(typeof(tmpValue)){
                                                     	case "string":
+                                                    		//Aqui deben ser Formatos de acuerdo a como viene la informacion. Por lo regular falla el convertir textos a fechas, al menos que sea un ISO o similar
                                                     		tmpValue = new Date(tmpValue);
                                                     		break;
                                                     	case "number":
@@ -205,15 +209,24 @@ angular
 
                                                         }
                                                     // si está presente. validar si aplica conversion de Fecha, Hora o FechaHora (talvez timeStamp)
-                                                    }
-                                                    else if (validCols[i][1] === "1"){ //Numero
+                                                    	break;
+                                                    case 1://TINYINT
+                                                    case 2://smallInt
+                                                    case 3://int/integer
+                                                    case 4://BigInteger (seguro será string)
+                                                    case 5://decimal
+                                                    case 6://Real
+                                                    case 7://Double
+                                                    case 47://SmallDecimal
+//Numeros
                                                     	if(typeof(tmpValue)==="string"){
-                                                    		tmpValue = tmpValue.replace(/[$%()\s,a-df-zA-DF-Z]/g, '');
-                                                        	tmpValue = parseFloat(tmpValue);
+                                                    		var tmpValStr = tmpValue.replace(/[$%()\s,a-df-zA-DF-Z]/g, '');
+                                                        	tmpValue = parseFloat(tmpValStr);
+                                                        	if (tmpValue.toString()!==tmpValStr){
+                                                        		tmpValue = tmpValStr //vuelve a ser String, pero sin casting
+                                                        	}
                                                     	}
-                                                    	else{//"number":
-                                                    		//sin cambios
-                                                    	}
+
                                                     	if(tmpValue) {
                                                             data[r - 1][aoa[0][i]] = tmpValue;
                                                         }else{
