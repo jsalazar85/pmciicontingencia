@@ -4,6 +4,7 @@ angular
     .controller('tablerReporteFormatUnicoCtrl', [
         '$scope',
         '$rootScope',
+
         '$state',
         '$stateParams',
         'dataController',
@@ -17,7 +18,8 @@ angular
         'uiGridConstants',
         'uiGridFactoryService',
         '$http',
-        function ($scope,$rootScope,$state,$stateParams,dc,gc,ngProgressFactory,dss,cs,$interval,tools,cds,uiGridConstants,gridFactory,$http) {
+        '$element',
+        function ($scope,$rootScope,$state,$stateParams,dc,gc,ngProgressFactory,dss,cs,$interval,tools,cds,uiGridConstants,gridFactory,$http,$element) {
             var selectionCellTemplateD = '<div class="ngCellText ui-grid-cell-contents" style="cursor: pointer;">' +
                 ' <div ng-click="grid.appScope.rowClickD(row)"><i class="fa fa-pencil" aria-hidden="true"></div>' +
                 '</div>';
@@ -26,6 +28,7 @@ angular
             };
 
             $scope.resumenIniciativas=[];
+            $scope.imagenes=[];
 
             var detalleColDefTemplate=[
                 {
@@ -143,7 +146,84 @@ angular
                 }
             };
             //-----------------
+            // OBTIENE IMAGEN POR NODO
+            function generaImagenAsync(nodo){
+                console.log("generaImagenAsync");
+                var deferred = $.Deferred();
+                console.log('nodo:'+nodo);
+                domtoimage.toBlob(nodo)
+                    .then(function(blob) {
+                        var reader = new window.FileReader();
+                        reader.readAsDataURL(blob);
+                        var df2=deferred;
+                        reader.onloadend = function() {
+                            base64data = reader.result;
+                            $scope.imagenes.push(base64data);
+                            console.log($scope.imagenes);
+                            df2.resolve(base64data);
+                        }
+                    });
+                return deferred.promise();
+            }
+            // FUNCION PARA GENERAR PPTX
+            $scope.generaPPTX = function(){
+                $scope.imagenes=[];
+                //obtenemos los nodos a generar imagenes
+                console.log("generaPPTX");
+                var nodos = document.getElementsByClassName("exportar-pptx");
+                var promesas = [];
+                console.log(nodos);
+                console.log(nodos.length);
+                //obtenemos las imagenes por cada nodo
+                for(var i=0; i<nodos.length;i++){
+                    promesas.push(generaImagenAsync(nodos[i]));
+                }
+                console.log($scope.imagenes);
+                $.when.apply($, promesas).then(function() {
+                    console.log("imagenes:"+$scope.imagenes.length);
+                    // generamos el pptx
+                    var pptx = new PptxGenJS();
+                    for(var i=0; i<$scope.imagenes.length;i++){
+                        var slide = pptx.addNewSlide();
+                        slide.addImage({
+                            data: $scope.imagenes[($scope.imagenes.length-1)-i],
+                            x: 1.0,
+                            y: 0.5,
+                            w: 7.0,
+                            h: 5.0
+                        });
+                    }
+                    pptx.save('Iniciativa');
+                }, function(e) {
+                    console.log("error");
+                });
+            }
 
+            $scope.generaXLSX = function(){
+                var nodos = document.getElementsByClassName("exportar-pptx");
+                var nodo = nodos[0];
+                console.log(nodo)
+                var wb = XLSX.utils.table_to_book(nodo, {sheet:"Iniciativa"});
+                var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'});
+                var fname = 'Iniciativa.xlsx';
+                try {
+                    saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), fname);
+                } catch(e) { if(typeof console != 'undefined') console.log(e, wbout); }
+                return wbout;
+            }
+
+            function s2ab(s) {
+                if(typeof ArrayBuffer !== 'undefined') {
+                    var buf = new ArrayBuffer(s.length);
+                    var view = new Uint8Array(buf);
+                    for (var i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+                    return buf;
+                } else {
+                    var buf = new Array(s.length);
+                    for (var i=0; i!=s.length; ++i) buf[i] = s.charCodeAt(i) & 0xFF;
+                    return buf;
+                }
+            }
 
             $rootScope.$on("refreshTableroIniciativaGenerico",function (event,id) {
                 //console.log("Evento refreshTableroIniciativaGenerico");
@@ -157,11 +237,19 @@ angular
             $scope.init=function () {
                 //$scope.createDetalleColums();
                 //$scope.idIniciativa=17;
+                console.log("init ----------");
+                console.log();
+
+                if(!_.isEmpty($($element).parent().attr("iniciativa"))){
+                    $scope.idIniciativa=$($element).parent().attr("iniciativa");
+                }
 
                 $scope.selectView($scope.idIniciativa);
                 $scope.initObjets();
                 $scope.getResumen();
                 $scope.getDetalle($scope.idIniciativa);
+
+
             };
 
             $scope.init();
