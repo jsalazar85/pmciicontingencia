@@ -5,7 +5,6 @@
  */
 angular.module('RDash').config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
-
         // For unmatched routes
         $urlRouterProvider.otherwise('/tabmas');
 
@@ -20,19 +19,65 @@ angular.module('RDash').config(['$stateProvider', '$urlRouterProvider',
                     }
                 }
             })
+            // .state('jsd', {
+            //     url: '/jsd',
+            //     views:{
+            //         '':{
+            //             templateUrl: 'templates/tablero-area-credito.view.html',
+            //             controller: 'tableroAreaCarteraCtrl'
+            //         }
+            //     }
+            // })
             .state('jsd', {
                 url: '/jsd',
                 views:{
                     '':{
-                        templateUrl: 'templates/tablero-mapa.view.html',
-                        controller: 'tableroMapaViewCtrl'
+                        templateUrl: 'templates/tablero-reporte-formato-unico-consolidado.view.html'
                     },
-                    'cargaArchivos@jsd':{
-                        templateUrl: 'templates/tablero-carga-archivo-gen.view.html',
-                        controller: 'tableroCargaArchivoGenCtrl'
+                    'tableroReporteFormatoUnicoS1@jsd':{
+                        templateUrl: 'templates/tablero-reporte-formato-unico-s1.view.html',
+                        controller: 'tablerReporteFormatUnicoCtrl'
                     },
+                    'tableroReporteFormatoUnicoS2@jsd':{
+                        templateUrl: 'templates/tablero-reporte-formato-unico-s2.view.html',
+                        controller: 'tablerReporteFormatUnicoCtrl'
+                    },
+                    'tableroReporteFormatoUnicoS3@jsd':{
+                        templateUrl: 'templates/tablero-reporte-formato-unico-s3.view.html',
+                        controller: 'tablerReporteFormatUnicoCtrl'
+                    },
+                    'tableroReporteFormatoUnicoS4@jsd':{
+                        templateUrl: 'templates/tablero-reporte-formato-unico-s4.view.html',
+                        controller: 'tablerReporteFormatUnicoCtrl'
+                    },
+                    'tableroReporteFormatoUnicoS5@jsd':{
+                        templateUrl: 'templates/tablero-reporte-formato-unico-s5.view.html',
+                        controller: 'tablerReporteFormatUnicoCtrl'
+                    },
+                    'tableroReporteFormatoUnicoS6@jsd':{
+                        templateUrl: 'templates/tablero-reporte-formato-unico-s6.view.html',
+                        controller: 'tablerReporteFormatUnicoCtrl'
+                    },
+                    'tableroReporteFormatoUnicoS7@jsd':{
+                        templateUrl: 'templates/tablero-reporte-formato-unico-s7.view.html',
+                        controller: 'tablerReporteFormatUnicoCtrl'
+                    },
+                    'tableroReporteFormatoUnicoS8@jsd':{
+                        templateUrl: 'templates/tablero-reporte-formato-unico-s8.view.html',
+                        controller: 'tablerReporteFormatUnicoCtrl'
+                    },
+                    'tableroReporteFormatoUnicoS9@jsd':{
+                        templateUrl: 'templates/tablero-reporte-formato-unico-s9.view.html',
+                        controller: 'tablerReporteFormatUnicoCtrl'
+                    },
+                    'tableroAreaCreditoView@jsd':{
+                        templateUrl: 'templates/tablero-area-credito.view.html',
+                        controller: 'tableroAreaCredtioCtrl'
+                    }
                 }
             })
+
+
             .state('menuCargaArchivo', {
                 url: '/cargaarchivo',
                 views:{
@@ -81,11 +126,60 @@ angular.module('RDash').config(['$stateProvider', '$urlRouterProvider',
                     }
                 }
             })
+            .state('recons', {
+                url: '/recons',
+                views:{
+                    '':{
+                        templateUrl: 'templates/tablero-reporte-formato-unico-consolidado.view.html'
+                    },
+                    'tableroReporteFormatoUnicoS1@recons':{
+                        templateUrl: 'templates/tablero-reporte-formato-unico-s1.view.html',
+                        controller: 'tablerReporteFormatUnicoCtrl'
+                    },
+                    'tableroReporteFormatoUnicoS2@recons':{
+                        templateUrl: 'templates/tablero-reporte-formato-unico-s2.view.html',
+                        controller: 'tablerReporteFormatUnicoCtrl'
+                    },
+                    'tableroReporteFormatoUnicoS3@recons':{
+                        templateUrl: 'templates/tablero-reporte-formato-unico-s3.view.html',
+                        controller: 'tablerReporteFormatUnicoCtrl'
+                    },
+                    'tableroReporteFormatoUnicoS4@recons':{
+                        templateUrl: 'templates/tablero-reporte-formato-unico-s4.view.html',
+                        controller: 'tablerReporteFormatUnicoCtrl'
+                    },
+                    'tableroReporteFormatoUnicoS5@recons':{
+                        templateUrl: 'templates/tablero-reporte-formato-unico-s5.view.html',
+                        controller: 'tablerReporteFormatUnicoCtrl'
+                    },
+                    'tableroReporteFormatoUnicoS6@recons':{
+                        templateUrl: 'templates/tablero-reporte-formato-unico-s6.view.html',
+                        controller: 'tablerReporteFormatUnicoCtrl'
+                    },
+                    'tableroReporteFormatoUnicoS7@recons':{
+                        templateUrl: 'templates/tablero-reporte-formato-unico-s7.view.html',
+                        controller: 'tablerReporteFormatUnicoCtrl'
+                    },
+                    'tableroReporteFormatoUnicoS8@recons':{
+                        templateUrl: 'templates/tablero-reporte-formato-unico-s8.view.html',
+                        controller: 'tablerReporteFormatUnicoCtrl'
+                    },
+                    'tableroReporteFormatoUnicoS9@recons':{
+                        templateUrl: 'templates/tablero-reporte-formato-unico-s9.view.html',
+                        controller: 'tablerReporteFormatUnicoCtrl'
+                    },
+                    'tableroAreaCreditoView@recons':{
+                        templateUrl: 'templates/tablero-area-credito.view.html',
+                        controller: 'tableroAreaCredtioCtrl'
+                    }
+                }
+            })
             .state('tableroMaster', {
                 url: '/tabmas',
                 views:{
                     '':{
                         templateUrl: 'templates/tablero-maestro.view.html',
+                        controller:'tableroMaestroViewCtrl'
                     },
                     'seccionSeguimientoGlobal@tableroMaster':{
                         templateUrl: 'templates/tablero-seguimiento-global.view.html',
@@ -96,6 +190,10 @@ angular.module('RDash').config(['$stateProvider', '$urlRouterProvider',
                     },
                     'seccionAreas@tableroMaster':{
                         templateUrl: 'templates/seccion-areas.view.html',
+                    },
+                    'tableroAreaCartera@tableroMaster':{
+                        templateUrl: 'templates/tablero-area-cartera.view.html',
+                        controller: 'tableroAreaCarteraCtrl',
                     },
                     'seccionIniciativas@tableroMaster':{
                         templateUrl: 'templates/seccion-iniciativas.view.html',
@@ -112,9 +210,10 @@ angular.module('RDash').config(['$stateProvider', '$urlRouterProvider',
                         templateUrl: 'templates/tablero-dictamen.view.html',
                         controller: 'tableroDictamenCtrl',
                     },
-                    'tableroAreaCartera@tableroMaster':{
-                        templateUrl: 'templates/tablero-area-cartera.view.html',
-                        controller: 'tableroAreaCarteraCtrl',
+
+                    'tableroMapaView@tableroMaster':{
+                        templateUrl: 'templates/tablero-mapa.view.html',
+                        controller: 'tableroMapaViewCtrl'
                     },
                     'tableroAreaRH@tableroMaster':{
                         templateUrl: 'templates/tablero-area-rh.view.html',
@@ -202,12 +301,29 @@ angular.module('RDash').config(['$stateProvider', '$urlRouterProvider',
                     'tableroReporteFormatoUnicoS9@tableroMaster':{
                         templateUrl: 'templates/tablero-reporte-formato-unico-s9.view.html',
                         controller: 'tablerReporteFormatUnicoCtrl'
+                    },
+                    'tableroAreaCreditoView@tableroMaster':{
+                        templateUrl: 'templates/tablero-area-credito.view.html',
+                        controller: 'tableroAreaCredtioCtrl'
                     }
-
-                    //
-
                 }
             })
+            // .state('jsd', {
+            //     url: '/tabmas',
+            //     views:{
+            //         '':{
+            //             templateUrl: 'templates/tablero-maestro.view.html',
+            //             controller:'tableroMaestroViewCtrl'
+            //         },
+            //         'seccionAreas@jsd':{
+            //             templateUrl: 'templates/seccion-areas.view.html',
+            //         },
+            //         'tableroAreaCreditoView@jsd':{
+            //             templateUrl: 'templates/tablero-area-credito.view.html',
+            //             controller: 'tableroAreaCarteraCtrl'
+            //         }
+            //     }
+            // })
 
     }
 ]).filter('percentFilter', function () {
