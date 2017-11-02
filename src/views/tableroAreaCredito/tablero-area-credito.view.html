@@ -1,0 +1,66 @@
+
+    <div class="row">
+        <div class="col-12">
+            <div class="h-100 w-100" style="overflow: scroll">
+                <tablero-area-credito-tabla
+                        grid-data="gridData"
+                >
+                </tablero-area-credito-tabla>
+            </div>
+
+        </div>
+    </div>
+    <div class="row" style="height: 400px;">
+        <div class="col-6 h-100" >
+            <light-chart-container
+                    str-title="Distribución por Medida"
+                    str-footer=""
+            >
+                <chart>
+                    <am-chart
+                            id="tacv-gra1"
+                            json-chart-path="json/tableroAreaCartera/chart5.json"
+                            zoom="{
+                                ini:0,
+                                end:5
+                            }"
+                            service-cnf="{
+                            idTab:18,
+                            idGra:2,
+                            idQry:1
+                        }"
+
+                    >
+                    </am-chart>
+                </chart>
+            </light-chart-container>
+        </div>
+        <div class="col-6 h-100" >
+            <light-chart-container
+                    str-title="Distribución por Delegación"
+                    str-footer=""
+            >
+                <chart>
+                    <am-chart
+                            id="tacv-gra2"
+                            json-chart-path="json/tableroAreaCartera/chart6.json"
+                            zoom="{
+                                ini:0,
+                                end:5
+                            }"
+                            service-cnf="{
+                            idTab:18,
+                            idGra:3,
+                            idQry:1
+                        }"
+
+                    >
+                    </am-chart>
+                </chart>
+            </light-chart-container>
+        </div>
+    </div>
+
+
+
+

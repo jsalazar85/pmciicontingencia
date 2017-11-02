@@ -6,7 +6,8 @@ angular.module('RDash', [
     'ngProgress',
     'ui.grid',
     'ngMap',
-    'ui.grid.autoResize'
+    'ui.grid.autoResize',
+    'smart-table',
 ]).config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('LoadingInterceptor');
 }]).config(["$locationProvider", function($locationProvider) {

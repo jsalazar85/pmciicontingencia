@@ -1,12 +1,37 @@
 
+<style>
+    .gridResumen .ui-grid-header-cell .ui-grid-cell-contents {
+        height: 100px;
+        white-space: normal;
+        -ms-text-overflow: clip;
+        -o-text-overflow: clip;
+        text-overflow: clip;
+        overflow: hidden;
+        margin-right: 5px;
+        margin-left: 5px;
+        font-size: 12px;
+    }
+
+    .gridResumen .ui-grid-cell .ui-grid-cell-contents {
+        white-space: normal;
+        -ms-text-overflow: clip;
+        -o-text-overflow: clip;
+        text-overflow: clip;
+        overflow: hidden;
+        margin-right: 5px;
+        margin-left: 5px;
+        font-size: 12px;
+    }
+</style>
+
 <div class="container-fluid pmtl-nospc" style="width:100%; height: 100%; background-color: whitesmoke; margin-top: 65px!important;">
     <div class="row pmtl-nospc" style="height: 600px">
-        <div class="col-8 w-100 h-100 pmtl-nospc">
-            <div class="d-flex flex-column h-100">
+        <div class="col-6 w-100 h-100 pmtl-nospc">
+            <div class="d-flex flex-column h-100 w-100">
                 <div class="d-flex justify-content-center" style="position: relative; top:30px; z-index: 9999;">
-                    <button ng-click="mapRecenter()">Test</button>
+                    <button ng-click="mapRecenter()">Centrar</button>
                 </div>
-                <div class="d-flex align-items-stretch" style="flex:1;">
+                <div class="d-flex align-items-stretch h-100 w-100" style="flex:2;">
                     <ng-map style="width: 100%; height: 100%;" center="[23.35, -100.91]" zoom="5">
                         <map-data
                                 set-style="mapSetStyle"
@@ -15,12 +40,94 @@
                                 on-mouseout="mapOnMouseOut()"
                                 load-geo-json="json/estados.json">
                         </map-data>
-
+                        <info-window id="bar">
+                            <div class="container" style="width: 280px;">
+                                <div class="row">
+                                    <div class="col-12" style="text-align: center;">
+                                        <span>{{selObEstado.txEstado}}</span>
+                                    </div>
+                                </div>
+                                <!--  Porcentaje de Avance  -->
+                                <div class="row">
+                                    <div class="col-9">
+                                        <span>Porcentaje de Avance</span>
+                                    </div>
+                                    <div class="col-3">
+                                        <span>{{selObEstado.nuPorcentaje}}%</span>
+                                    </div>
+                                </div>
+                                <!--  Pérdida Total  -->
+                                <div class="row">
+                                    <div class="col-9">
+                                        <span>Pérdida Total</span>
+                                    </div>
+                                    <div class="col-3">
+                                        <span>{{selObEstado.nuPT | number:0}}</span>
+                                    </div>
+                                </div>
+                                <!--  Daño Parcial -->
+                                <div class="row">
+                                    <div class="col-9">
+                                        <span>Daño Parcial</span>
+                                    </div>
+                                    <div class="col-3">
+                                        <span>{{selObEstado.nuDP | number:0}}</span>
+                                    </div>
+                                </div>
+                                <!--  Sin Daño -->
+                                <div class="row">
+                                    <div class="col-9">
+                                        <span>Sin Daños</span>
+                                    </div>
+                                    <div class="col-3">
+                                        <span>{{selObEstado.nuSDD | number:0}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </info-window>
                     </ng-map>
                 </div>
             </div>
         </div>
-        <div class="col-5 w-100 h-100">
+        <div class="col-6 w-100 h-100">
+            <div class="row mt-2 align-items-center">
+                <div class="col-2 w-100 h-100">
+                    <span>Indicador</span>
+                </div>
+                <div class="col-6 w-100 h-100">
+                    <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="busquedaEstado" ng-model="selectedIndicador" ng-options="option.txindicador for option in catIndicador track by option.idIndicador">
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 w-100 h-100">
+                    <div id="grid3" ui-grid="gridOpt2" class="grid gridResumen" ui-grid-auto-resize style="width: 100%; height: 550px;"></div>
+                </div>
+            </div>
+
+
+            <!--
+            <table class="table">
+                <thead>
+                    <tr class="bg-danger">
+                        <th class="bg-danger" scope="col" colspan="2">{{selObEstado.txEstado}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="table-secondary">Porcentaje de Avance</td>
+                    <td>{{selObEstado.txPorcentaje}}</td>
+                </tr>
+                <tr>
+                    <td class="table-secondary">Porcentaje de Avance</td>
+                    <td>{{selObEstado.txPorcentaje}}</td>
+                </tr>
+                <tr>
+                    <td class="table-secondary">Porcentaje de Avance</td>
+                    <td>{{selObEstado.txPorcentaje}}</td>
+                </tr>
+                </tbody>
+            </table>-->
         </div>
     </div>
 </div>

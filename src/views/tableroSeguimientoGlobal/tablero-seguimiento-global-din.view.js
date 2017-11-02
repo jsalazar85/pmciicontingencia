@@ -362,6 +362,38 @@ function tableroSeguimientoGlobalDinCtrl ($scope,$rootScope,$state,$stateParams,
 
     };
 
+    $scope.actualizarIniciativasCredito=function () {
+        $http({
+            url:gc.conf.xsServicesBaseUrl+'/dbInsertIniciativasCredito.xsjs',
+            method:'POST',
+            dataType:'json',
+            data:{},
+            //data: JSON.stringify ( {dataobject:{testob:"test"}} ),
+            transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Accept':'application/json, text/javascript, */*; q=0.01'
+            }
+        }).then(function(response){
+            console.log(response);
+
+            //Mandar a llamar los servicios de actualización
+            cds.doWorkTask('grid3Medidas');
+            if($scope.currentMaster && $scope.currentMaster.idIniciativa){
+                $scope.getDetalleTabla1Data($scope.currentMaster.idIniciativa);
+            }
+        },function(response,error){
+            console.log(response);
+            console.log(error);
+        });
+
+    };
+
     $scope.nuevo=function ($event) {
         $scope.$emit('consultaIncidenteDetalle', {currentMaster:$scope.currentMaster,currentDetail:{
             txEstado:"",
@@ -424,10 +456,13 @@ function tableroSeguimientoGlobalDinCtrl ($scope,$rootScope,$state,$stateParams,
     };
 
     $scope.actualizar=function ($event) {
+        $scope.actualizarIniciativasCredito();
+        /*
         cds.doWorkTask('grid3Medidas');
         if($scope.currentMaster && $scope.currentMaster.idIniciativa){
             $scope.getDetalleTabla1Data($scope.currentMaster.idIniciativa);
         }
+        */
     };
 
     $scope.imprimirDetalle = function(elem){

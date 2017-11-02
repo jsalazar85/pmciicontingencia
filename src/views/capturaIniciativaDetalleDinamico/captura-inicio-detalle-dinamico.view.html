@@ -4,9 +4,10 @@
         <div class="form-group row m-0 p-0 bottom-line">
             <label for="inputEmail1" class="col-sm-12 col-form-label base-font-black-normal-md">Medida</label>
             <div class="col-sm-10">
-                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inputEmail1" ng-model="selectedMedida" ng-options="option.txIniciativa for option in lstMedidas track by option.idIniciativa">
+                <!--<select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inputEmail1" ng-model="selectedMedida" ng-options="option.txIniciativa for option in lstMedidas track by option.idIniciativa" >-->
                     <!--<option value="d" ng-repeat="d in lstDictamen">{{d.txDictamen}}</option>-->
-                </select>
+                <!--</select>-->
+                <span>{{selectedMedida.txIniciativa}}</span>
             </div>
         </div>
 

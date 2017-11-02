@@ -61,7 +61,7 @@ function tableroAreaDelCtrl($scope,$rootScope,$state,$stateParams,dc,gc,ngProgre
             },
             {
                 field:"txFecha",
-                name:"Fecha Envio Información",
+                name:"Fecha",
                 aggregationHideLabel: true
             },
             {
