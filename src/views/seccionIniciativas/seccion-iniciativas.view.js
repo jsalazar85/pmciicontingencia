@@ -52,7 +52,20 @@ angular
                 }
             };
             */
+            $scope.generaReporte=function(elem){
+                console.log("generarReporte");
+                var path="";
+                try {
+                    var arr=window.location.href.split("/");
+                    path=window.location.href.split("/").slice(0,arr.length-1).join("/")+"/recons";
+                }catch (e){
+                    path='http://10.80.0.24:8020/DICTAMEN/#!/recons';
+                }
 
+                var w=window.open(path, 'tablero de reporte Consolidado', 'height=600, width=1300');
+                console.log(w);
+
+            };
 
             $scope.loadChart=function (id) {
                 console.log(id);
