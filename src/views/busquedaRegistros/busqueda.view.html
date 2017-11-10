@@ -20,7 +20,7 @@
 				<div class="form-group row m-0 p-1 bottom-line">
 					<label for="busquedaNSS" class="col-4 col-form-label base-font-black-normal-md">NSS</label>
 					<div class="col-8">
-						<input ng-model="busqueda.nuNSS" type="number" class="form-control" id="busquedaNSS" placeholder="Número Seguro Social">
+						<input ng-model="busqueda.nuNSS" type="text" class="form-control" id="busquedaNSS" placeholder="Número Seguro Social">
 					</div>
 				</div>
 				<!--Credito -->
@@ -54,6 +54,13 @@
 						</select>
 					</div>
 				</div>
+				<!--Caso -->
+				<div class="form-group row m-0 p-1 bottom-line">
+					<label for="busquedaCaso" class="col-4 col-form-label base-font-black-normal-md">Caso</label>
+					<div class="col-8">
+						<input ng-model="busqueda.txCaso" type="text" class="form-control" id="busquedaCaso" placeholder="Caso">
+					</div>
+				</div>
 				<div class="form-group row m-0 p-1 bottom-line rounded-bottom justify-content-center">
 					<div class="col-auto p-1">
 						<button id="" type="button" class="btn btn-success" ng-click="buscar($event)"><i class="fa" aria-hidden="true"></i><span class="pl-1">Buscar</span></button>
@@ -70,6 +77,22 @@
 			<div class="row no-gutters gradiente mb-4 rounded">
 				<div class="col-12 pt-3 pl-2">
 					<div id="gridBusqueda" ui-grid="gridOptDet" class="gridBusqueda" ></div>
+				</div>
+			</div>
+		</div>
+		<!-- Modal Detalle-->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Detalle</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div ui-view="detalleBusqueda"></div>
+					</div>
 				</div>
 			</div>
 		</div>

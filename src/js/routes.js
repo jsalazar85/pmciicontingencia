@@ -16,6 +16,10 @@ angular.module('RDash').config(['$stateProvider', '$urlRouterProvider',
                     '':{
                         templateUrl: 'templates/busqueda.view.html',
                         controller: 'busquedaCtrl'
+                    },
+                    'detalleBusqueda@consulta':{
+                        templateUrl: 'templates/detalle-busqueda.view.html',
+                        controller: 'busquedaDetalleCtrl'
                     }
                 }
             })
@@ -95,17 +99,9 @@ angular.module('RDash').config(['$stateProvider', '$urlRouterProvider',
                 url: '/test',
                 views:{
                     '':{
-                        templateUrl: 'templates/reporte-pptx-global.view.html'
-                    },
-                    'tableroReporteGlobalImplMedidasView@test':{
-                        templateUrl: 'templates/tablero-reporte-global-impl-medidas.view.html',
-                        controller: 'tableroReporteGlobalImplMedidasViewCtrl'
-                    },
-                    'tableroReporteGlobalUsoReservaView@test':{
-                        templateUrl: 'templates/tablero-reporte-global-uso-reserva.view.html',
-                        controller: 'tableroReporteGlobalUsoReservaViewCtrl'
+                        templateUrl: 'templates/reporte-comunicacion.view.html',
+                        controller: 'reporteComunicacionView'
                     }
-
                 }
             })
             .state('reporteSeguimiento', {
@@ -130,7 +126,8 @@ angular.module('RDash').config(['$stateProvider', '$urlRouterProvider',
                 url: '/recons',
                 views:{
                     '':{
-                        templateUrl: 'templates/tablero-reporte-formato-unico-consolidado.view.html'
+                        templateUrl: 'templates/tablero-reporte-formato-unico-consolidado.view.html',
+                        controller:'tableroReporteFormatoUnicoConsiolidado'
                     },
                     'tableroReporteFormatoUnicoS1@recons':{
                         templateUrl: 'templates/tablero-reporte-formato-unico-s1.view.html',
@@ -226,6 +223,10 @@ angular.module('RDash').config(['$stateProvider', '$urlRouterProvider',
                     'tableroAreaAtencion@tableroMaster':{
                         templateUrl: 'templates/tablero-area-atencion.view.html',
                         controller: 'tableroAtnSrvCtrl',
+                    },
+                    'tableroAreaCom@tableroMaster':{
+                        templateUrl: 'templates/tablero-area-com.view.html',
+                        controller: 'tableroAreaComViewCtrl',
                     },
                     'tableroIniciativaMonto@tableroMaster':{
                         templateUrl: 'templates/tablero-iniciativa-rentas.view.html',

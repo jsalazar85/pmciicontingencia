@@ -71,7 +71,7 @@ angular
             //</editor-fold>
         }
     ])
-    .component('tableroAreaCreditoTabla', {
+    .component('tableroAreaCreditoTablaTest', {
         templateUrl:'templates/tablero-area-credito-tabla.comp.html',
         controller:'tableroReporteFormatoUnicoComp',
         bindings:{

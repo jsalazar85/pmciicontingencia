@@ -19,6 +19,15 @@ angular
 
 function busquedaCtrl ($scope,$rootScope,$state,$stateParams,dc,gc,ngProgressFactory,dss,cs,$interval,tools,cds,uiGridConstants)  {
 
+    $rootScope.selectedRowDetalle={};
+    $scope.mostrar=false;
+    $scope.currentMaster = {};
+    $scope.currentDetail = {};
+
+    var selectionCellTemplateCredito = '<div class="ngCellText ui-grid-cell-contents" style="cursor: pointer;">' +
+        ' <div ng-click="grid.appScope.rowClickGetDetalle(row)">{{COL_FIELD}}</div>' +
+        '</div>';
+
 	var dataRh=[
 		{
 			"txFuente": "DICTÁMENES ASEGURADORA",
@@ -40,35 +49,35 @@ function busquedaCtrl ($scope,$rootScope,$state,$stateParams,dc,gc,ngProgressFac
 	$scope.catLoc={
 		estados:[
 			{nuId:"%%",txEstado:'todos'  },
-			{nuId:1,txEstado:'AGUASCALIENTES'  },
-			{nuId:2,txEstado:'BAJA CALIFORNIA NORTE'  },
-			{nuId:3,txEstado:'BAJA CALIFORNIA SUR'  },
-			{nuId:4,txEstado:'CAMPECHE'  },
-			{nuId:5,txEstado:'COAHUILA'  },
-			{nuId:6,txEstado:'COLIMA'  },
-			{nuId:7,txEstado:'CHIAPAS'  },
-			{nuId:8,txEstado:'CHIHUAHUA'  },
-			{nuId:9,txEstado:'DISTRITO FEDERAL'  },
-			{nuId:10,txEstado:'DURANGO'  },
-			{nuId:11,txEstado:'GUANAJUATO'  },
-			{nuId:12,txEstado:'GUERRERO'  },
-			{nuId:13,txEstado:'HIDALGO'  },
-			{nuId:14,txEstado:'JALISCO'  },
-			{nuId:15,txEstado:'MEXICO'  },
-			{nuId:16,txEstado:'MICHOACAN'  },
-			{nuId:17,txEstado:'MORELOS'  },
-			{nuId:18,txEstado:'NAYARIT'  },
-			{nuId:19,txEstado:'NUEVO LEON'  },
-			{nuId:20,txEstado:'OAXACA'  },
-			{nuId:21,txEstado:'PUEBLA'  },
-			{nuId:22,txEstado:'QUERETARO'  },
-			{nuId:23,txEstado:'QUINTANA ROO'  },
-			{nuId:26,txEstado:'SONORA'  },
-			{nuId:27,txEstado:'TABASCO'  },
-			{nuId:28,txEstado:'TAMAULIPAS'  },
-			{nuId:29,txEstado:'TLAXCALA'  },
-			{nuId:30,txEstado:'VERACRUZ'  },
-			{nuId:31,txEstado:'YUCATAN'  }
+			{nuId:"01",txEstado:'AGUASCALIENTES'  },
+			{nuId:"02",txEstado:'BAJA CALIFORNIA NORTE'  },
+			{nuId:"03",txEstado:'BAJA CALIFORNIA SUR'  },
+			{nuId:"04",txEstado:'CAMPECHE'  },
+			{nuId:"05",txEstado:'COAHUILA'  },
+			{nuId:"06",txEstado:'COLIMA'  },
+			{nuId:"07",txEstado:'CHIAPAS'  },
+			{nuId:"08",txEstado:'CHIHUAHUA'  },
+			{nuId:"09",txEstado:'DISTRITO FEDERAL'  },
+			{nuId:"10",txEstado:'DURANGO'  },
+			{nuId:"11",txEstado:'GUANAJUATO'  },
+			{nuId:"12",txEstado:'GUERRERO'  },
+			{nuId:"13",txEstado:'HIDALGO'  },
+			{nuId:"14",txEstado:'JALISCO'  },
+			{nuId:"15",txEstado:'MEXICO'  },
+			{nuId:"16",txEstado:'MICHOACAN'  },
+			{nuId:"17",txEstado:'MORELOS'  },
+			{nuId:"18",txEstado:'NAYARIT'  },
+			{nuId:"19",txEstado:'NUEVO LEON'  },
+			{nuId:"20",txEstado:'OAXACA'  },
+			{nuId:"21",txEstado:'PUEBLA'  },
+			{nuId:"22",txEstado:'QUERETARO'  },
+			{nuId:"23",txEstado:'QUINTANA ROO'  },
+			{nuId:"26",txEstado:'SONORA'  },
+			{nuId:"27",txEstado:'TABASCO'  },
+			{nuId:"28",txEstado:'TAMAULIPAS'  },
+			{nuId:"29",txEstado:'TLAXCALA'  },
+			{nuId:"30",txEstado:'VERACRUZ'  },
+			{nuId:"31",txEstado:'YUCATAN'  }
 		],
 		/*tipos:[
 			{nu:0,tx:'todas'  },
@@ -85,7 +94,7 @@ function busquedaCtrl ($scope,$rootScope,$state,$stateParams,dc,gc,ngProgressFac
 			{nu:'DP',tx:'DAÑO PARCIAL'  },
 			{nu:'PT',tx:'PÉRDIDA TOTAL'  },
             {nu:'N',tx:'NOTIFICADO'  },
-            {nu:'NA',tx:'DESCONOCIDO'  },
+            {nu:'NA',tx:'DESCONOCIDO'  }
 		]
 
 	};
@@ -132,10 +141,9 @@ function busquedaCtrl ($scope,$rootScope,$state,$stateParams,dc,gc,ngProgressFac
                 width:"150"
 			},
 			{
-				name:"Pérdida Total",
+				name:"CESI",
 				field:"nuCesi",
 				type:"number",
-				cellFilter:"number:0",
 				aggregationType: uiGridConstants.aggregationTypes.sum,
 				footerCellFilter:"number:0",
 				aggregationHideLabel: false,
@@ -145,7 +153,6 @@ function busquedaCtrl ($scope,$rootScope,$state,$stateParams,dc,gc,ngProgressFac
 				field:"nuDelegacion",
 				name:"Delegación",
 				type:"number",
-				cellFilter:"number:0",
 				aggregationType: uiGridConstants.aggregationTypes.sum,
 				footerCellFilter:"number:0",
 				aggregationHideLabel: false,
@@ -155,7 +162,6 @@ function busquedaCtrl ($scope,$rootScope,$state,$stateParams,dc,gc,ngProgressFac
 				field:"nuInfonatel",
 				name:"Infonatel",
 				type:"number",
-				cellFilter:"number:0",
 				aggregationType: uiGridConstants.aggregationTypes.sum,
 				footerCellFilter:"number:0",
 				aggregationHideLabel: true,
@@ -165,7 +171,6 @@ function busquedaCtrl ($scope,$rootScope,$state,$stateParams,dc,gc,ngProgressFac
 				field:"nuOtro",
 				name:"Otro",
 				type:"number",
-				cellFilter:"number:0",
 				aggregationType: uiGridConstants.aggregationTypes.sum,
 				footerCellFilter:"number:0",
 				aggregationHideLabel: true,
@@ -175,7 +180,6 @@ function busquedaCtrl ($scope,$rootScope,$state,$stateParams,dc,gc,ngProgressFac
                 field:"nuDesconocido",
                 name:"Desconocido",
                 type:"number",
-                cellFilter:"number:0",
                 aggregationType: uiGridConstants.aggregationTypes.sum,
                 footerCellFilter:"number:0",
                 aggregationHideLabel: true,
@@ -199,71 +203,72 @@ function busquedaCtrl ($scope,$rootScope,$state,$stateParams,dc,gc,ngProgressFac
 		//showGridFooter: true,
 		data:[],// dataRh,
 		columnDefs:[
-			{
-				field:"txFuente", width: '12%',
-				name:"Fuente" ,
-				width:200
-			},
+            {
+                field:"txNSS", width: '6%',
+                displayName:"NSS" ,
+                width:130,
+                cellTemplate: selectionCellTemplateCredito
+            },
 			{
 				field:"txCredito", 
 				width: '6%',
 				name:"Crédito",
-                width:150
-			},
-			{
-				field:"txNSS", width: '6%',
-				displayName:"NSS" ,
-                width:130
-			},
-			{
-				field:"cvEstado", width: '4%',
-				displayName:"EstadoID",
-                width:125
+                width:150,
+                cellTemplate: selectionCellTemplateCredito
 			},
 			{
 				field:"txEstado", width: '12%',
 				name:"Estado" ,
-                width:125
+                width:125,
+                cellTemplate: selectionCellTemplateCredito
+			},
+            {
+                field:"txDano", width: '6%',
+                displayName:"Daño" ,
+                width:130,
+                cellTemplate: selectionCellTemplateCredito
+            },
+            {
+                field:"txCaso", width: '6%',
+                displayName:"Caso" ,
+                width:130,
+                cellTemplate: selectionCellTemplateCredito
+            },
+			{
+				field:"nuBrigadas", width: '6%',
+				displayName:"Brigada" ,
+                width:125,
+                cellTemplate: selectionCellTemplateCredito
 			},
 			{
-				field:"txMunicipio", width: '12%',
-				name:"Municipio" ,
-                width:125
+				field:"nuCesi", width: '6%',
+				displayName:"CESI" ,
+                width:125,
+                cellTemplate: selectionCellTemplateCredito
 			},
 			{
-				field:"txCanal", width: '6%',
-				name:"Canal" ,
-                width:125
+				field:"nuDelegacion", width: '4%',
+				name:"Delegación" ,
+                width:125,
+                cellTemplate: selectionCellTemplateCredito
 			},
 			{
-				field:"txRFC", width: '6%',
-				displayName:"RFC" ,
-                width:125
+				field:"nuInfonatel", width: '6%',
+				name:"Infonatel" ,
+                width:125,
+                cellTemplate: selectionCellTemplateCredito
 			},
 			{
-				field:"txCP", width: '6%',
-				displayName:"CP" ,
-                width:125
+				field:"nuOtro", width: '6%',
+				name:"Otro" ,
+                width:125,
+                cellTemplate: selectionCellTemplateCredito
 			},
 			{
-				field:"txDictamen", width: '4%',
-				name:"Dictamen" ,
-                width:125
-			},
-			{
-				field:"txEdificacion", width: '6%',
-				name:"Edificación" ,
-                width:125
-			},
-			{
-				field:"txDesastre", width: '6%',
-				name:"Desastre" ,
-                width:125
-			},
-			{
-				field:"txTipoPersona", width: '12%',
-				displayName:"Tipo de Persona" ,
-                width:125
+				field:"nuDesconocido", width: '12%',
+				displayName:"Desconocido" ,
+                width:125,
+                cellTemplate: selectionCellTemplateCredito
 			}
 
 		]
@@ -300,14 +305,13 @@ function busquedaCtrl ($scope,$rootScope,$state,$stateParams,dc,gc,ngProgressFac
                     field:"nuBrigadas",
                     name:"Brigada",
                     type:"number",
-                    cellFilter:"number:0",
                     aggregationType: uiGridConstants.aggregationTypes.sum,
                     footerCellFilter:"number:0",
                     aggregationHideLabel: true,
                     cellFilter:"number:0"
                 },
                 {
-                    name:"Pérdita Total",
+                    name:"CESI",
                     field:"nuCesi",
                     type:"number",
                     cellFilter:"number:0",
@@ -319,7 +323,6 @@ function busquedaCtrl ($scope,$rootScope,$state,$stateParams,dc,gc,ngProgressFac
                     field:"nuDelegacion",
                     name:"Delegacion",
                     type:"number",
-                    cellFilter:"number:0",
                     aggregationType: uiGridConstants.aggregationTypes.sum,
                     footerCellFilter:"number:0",
                     aggregationHideLabel: true,
@@ -329,7 +332,6 @@ function busquedaCtrl ($scope,$rootScope,$state,$stateParams,dc,gc,ngProgressFac
                     field:"nuInfonatel",
                     name:"Infonatel",
                     type:"number",
-                    cellFilter:"number:0",
                     aggregationType: uiGridConstants.aggregationTypes.sum,
                     footerCellFilter:"number:0",
                     aggregationHideLabel: true,
@@ -339,7 +341,6 @@ function busquedaCtrl ($scope,$rootScope,$state,$stateParams,dc,gc,ngProgressFac
                     field:"nuOtro",
                     name:"Otro",
                     type:"number",
-                    cellFilter:"number:0",
                     aggregationType: uiGridConstants.aggregationTypes.sum,
                     footerCellFilter:"number:0",
                     aggregationHideLabel: true,
@@ -349,7 +350,6 @@ function busquedaCtrl ($scope,$rootScope,$state,$stateParams,dc,gc,ngProgressFac
                     field:"nuDesconocido",
                     name:"Desconocido",
                     type:"number",
-                    cellFilter:"number:0",
                     aggregationType: uiGridConstants.aggregationTypes.sum,
                     footerCellFilter:"number:0",
                     aggregationHideLabel: true,
@@ -392,64 +392,144 @@ function busquedaCtrl ($scope,$rootScope,$state,$stateParams,dc,gc,ngProgressFac
 
 
 	$scope.buscar=function ($event) {
-		var elm=$event.currentTarget;
-		$(elm).prop('disabled', true);
-		var request={
-			txCredito : $scope.busqueda.nuCredito,
-			txEstado : $scope.busqueda.txEstado.nuId, //$scope.selectedEstado.nuId,
-			nuNSS : $scope.busqueda.nuNSS,
-			txDictamen: $scope.busqueda.txDictamen.nu
-		};
+        var elm = $event.currentTarget;
+        $(elm).prop('disabled', true);
+        var obConditions = [];
+        var condTxCredito = {
+            txCol: "TX_CREDITO",
+            txAlias: "",
+            varValue: $scope.busqueda.nuCredito,
+            txValueType: "TEXTO",
+            txLogicOperator: "AND",
+            txCompOperator: "="
+        };
+        var condTxEstado = {
+            txCol: "CV_ESTADO",
+            txAlias: "",
+            varValue: $scope.busqueda.txEstado.nuId,
+            txValueType: "TEXTO",
+            txLogicOperator: "AND",
+            txCompOperator: "LIKE"
+        };
+        var condNuNSS = {
+            txCol: "TX_NSS",
+            txAlias: "",
+            varValue: $scope.busqueda.nuNSS,
+            txValueType: "TEXTO",
+            txLogicOperator: "AND",
+            txCompOperator: "="
+        };
 
-		console.log(request);
-        console.log($scope.busqueda.txDictamen.nu);
+        var condTxDictamen = {
+            txCol: "TX_DICTAMEN",
+            txAlias: "",
+            varValue: $scope.busqueda.txDictamen.nu,
+            txValueType: "TEXTO",
+            txLogicOperator: "AND",
+            txCompOperator: "="
+        };
+
+        var condTxCaso = {
+            txCol: "CASO",
+            txAlias: "",
+            varValue: $scope.busqueda.txCaso,
+            txValueType: "TEXTO",
+            txLogicOperator: "AND",
+            txCompOperator: "="
+        };
+        var flag = false;
+
+        if ($scope.busqueda.nuCredito != undefined && $scope.busqueda.nuCredito !='') {
+            obConditions.push(condTxCredito);
+            flag = true;
+        }
+        if ($scope.busqueda.nuNSS != undefined && $scope.busqueda.nuNSS !='') {
+            obConditions.push(condNuNSS);
+            flag = true;
+        }
+        if ($scope.busqueda.txCaso != undefined && $scope.busqueda.txCaso!='') {
+            obConditions.push(condTxCaso);
+            flag = true;
+        }
+
+        if($scope.busqueda.txDictamen.nu !="%%"){
+            obConditions.push(condTxDictamen);
+            flag = true;
+        }
+
+        if($scope.busqueda.txEstado.nuId !="%%"){
+            obConditions.push(condTxEstado);
+        }else if(!flag && $scope.busqueda.txEstado.nuId =="%%"){
+            obConditions.push(condTxEstado);
+        }
 
 
-		//cds.doWorkTask('gridAtnSrv.busqueda.grid');
-        dc.getBusquedaTabla1Data(request,{}).then(
-        	function (response) {
+        console.log(obConditions);
+        // general
+        cds.addWorkTask('gridAtnSrv', {
+            url: gc.conf.xsServicesBaseUrl + '/execTabQueryFilter.xsjs',
+            query: {
+                idTab: 19,
+                idGra: 1,
+                idQry: 1,
+                lstObConditions: obConditions
+            },
+            success: function (response) {
+                console.log("success");
                 console.log(response);
-        		$scope.gridOptDet.data=response.data.direccion;
-                $scope.gridAtnSrv.opt.data=response.data.data2;
+                $scope.gridAtnSrv.opt.data = response.data;
                 $(elm).prop('disabled', false);
-
-            },function (response) {
-				console.log(response);
+            },
+            error: function (response, error) {
+                console.log("Error");
+                console.log(error);
                 $(elm).prop('disabled', false);
             }
-		);
+        });
+        cds.doWorkTask('gridAtnSrv');
+        // detalle
+        cds.addWorkTask('gridOptDet', {
+            url: gc.conf.xsServicesBaseUrl + '/execTabQueryFilter.xsjs',
+            query: {
+                idTab: 19,
+                idGra: 2,
+                idQry: 1,
+                lstObConditions: obConditions
+            },
+            success: function (response) {
+                console.log("success");
+                console.log(response);
+                $scope.gridOptDet.data = response.data;
+                $(elm).prop('disabled', false);
+            },
+            error: function (response, error) {
+                console.log("Error");
+                console.log(error);
+                $(elm).prop('disabled', false);
+            }
+        });
+        cds.doWorkTask('gridOptDet');
 
-/*
-		$.ajax({
-				url:gc.conf.xsServicesBaseUrl+'/dbConsultaDetalle.xsjs',
-				method:'GET',
-				dataType:'json',
-				crossDomain:true,
-				data:{dataobject:JSON.stringify(request)},
-			success: function(response){
-				console.log("success");
-				console.log(response);
-				$scope.gridOptDet.data=response.direccion;
-				$scope.apply();
-			},
-			error: function(response,error){
-				console.log("Error");
-				console.log(error);
-				$scope.gridOptDet.data=[];
-				$scope.apply();
-			}
-		});
-*/
-		
-		// Falta proceso de Busqueda
-	};
+    };
 
+    $scope.rowClickGetDetalle = function (row) {
+        console.log(row);
+        console.log(row.entity.txCredito);
+        gc.consulta={};
+        gc.consulta.currentDetail=$scope.currentDetail;
 
+        $rootScope.selectedRowDetalle.txEstado=row.entity.txEstado;
+        gc.selectedRowDetalle=$rootScope.selectedRowDetalle;
+        $scope.currentDetail = row.entity;
+        console.log(row.entity);
+        $scope.$emit('consultaDetalleRegistro', {currentDetail:$scope.currentDetail});
+
+    };
 
 	this.init=function() {
 		//$scope.lstAsignacion=dss.datos.lstAsignacion;
 		//$scope.busqueda.nuFuente = $scope.catLoc.tipos[0];
-		$scope.busqueda.txDictmen = $scope.catLoc.tiposDanos[0];
+		$scope.busqueda.txDictamen = $scope.catLoc.tiposDanos[0];
 		$scope.busqueda.txEstado = $scope.catLoc.estados[0];
         $scope.initGrid2();
 
