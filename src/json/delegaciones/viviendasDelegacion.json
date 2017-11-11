@@ -1,0 +1,113 @@
+{
+  "type": "serial",
+  "categoryField": "txEstado",
+  "rotate": true,
+  "colors": [
+    "#5BDAAF",
+    "#fdd400",
+    "#84b761",
+    "#cc4748",
+    "#cd82ad",
+    "#2f4074",
+    "#448e4d",
+    "#b7b83f",
+    "#b9783f",
+    "#b93e3d",
+    "#913167"
+  ],
+  "startDuration": 1,
+  "theme": "light",
+  "categoryAxis": {
+    "gridPosition": "start"
+  },
+  "chartCursor": {
+    "enabled": true
+  },
+  "chartScrollbar": {
+    "enabled": true
+  },
+  "trendLines": [],
+  "graphs": [
+    {
+      "fillAlphas": 1,
+      "id": "AmGraph-1",
+      "title": "graph 1",
+      "type": "column",
+      "valueField": "nuUniversoViviendas"
+    }
+  ],
+  "guides": [],
+  "valueAxes": [
+    {
+      "id": "ValueAxis-1",
+      "title": ""
+    }
+  ],
+  "allLabels": [],
+  "balloon": {},
+  "titles": [
+    {
+      "id": "Title-1",
+      "size": 15,
+      "text": "Viviendas Infonavit por estado"
+    }
+  ],
+  "dataProvider": [
+    {
+      "nuUniversoViviendas": "2371",
+      "txEstado": "MORELOS"
+    },
+    {
+      "nuUniversoViviendas": "32",
+      "txEstado": "TLAXCALA"
+    },
+    {
+      "nuUniversoViviendas": "9",
+      "txEstado": "BAJA CALIFORNIA SUR"
+    },
+    {
+      "nuUniversoViviendas": "0",
+      "txEstado": "CHIAPAS"
+    },
+    {
+      "nuUniversoViviendas": "0",
+      "txEstado": "DISTRITO FEDERAL"
+    },
+    {
+      "nuUniversoViviendas": "0",
+      "txEstado": "GUERRERO"
+    },
+    {
+      "nuUniversoViviendas": "0",
+      "txEstado": "MEXICO"
+    },
+    {
+      "nuUniversoViviendas": "0",
+      "txEstado": "OAXACA"
+    },
+    {
+      "nuUniversoViviendas": "0",
+      "txEstado": "PUEBLA"
+    },
+    {
+      "nuUniversoViviendas": "0",
+      "txEstado": "QUERETARO"
+    },
+    {
+      "nuUniversoViviendas": "0",
+      "txEstado": "TABASCO"
+    },
+    {
+      "nuUniversoViviendas": "0",
+      "txEstado": "TAMAULIPAS"
+    },
+    {
+      "nuUniversoViviendas": "0",
+      "txEstado": "VERACRUZ"
+    },
+    {
+      "nuUniversoViviendas": "0",
+      "txEstado": "MICHOACAN"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+<div class="container" style="background-color: white; margin-top: 60px">
+    <form>
+        <div class="form-group row m-0 p-0 bottom-line" style="background-color: #f6f6f6;">
+            <label for="inputEmail1" class="col-sm-12 col-form-label base-font-black-normal-md">ESTADO</label>
+            <div class="col-sm-10">
+                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect" ng-model="selectedEstado" ng-options="option.txEstado for option in lstEstado track by option.idEstado" disabled="disabled">
+                </select>
+            </div>
+        </div>
+        <div class="form-group row m-0 p-0 bottom-line" style="background-color: #f6f6f6;">
+            <label for="inputEmail2" class="col-sm-12 col-form-label base-font-black-normal-md">VIVIENDAS PENDIENTES POR VISITAR</label>
+            <div class="col-sm-10">
+                <input ng-model="nuViviendasPendientes" type="number" min="0" class="form-control" id="inputEmail2" placeholder="VIVIENDAS PENDIENTES POR VISITAR">
+            </div>
+        </div>
+        <div class="form-group row m-0 p-0 bottom-line" style="background-color: #f6f6f6;">
+            <label for="inputEmail3" class="col-sm-12 col-form-label base-font-black-normal-md">DICTAMEN FINAL POR ASEGURADORA COMO PÉRDIDA TOTAL</label>
+            <div class="col-sm-10">
+                <input ng-model="nuDicFinalAsePerdidaTotal" type="number" min="0" class="form-control" id="inputEmail3" placeholder="DICTAMEN FINAL POR ASEGURADORA COMO PÉRDIDA TOTAL">
+            </div>
+        </div>
+        <div class="form-group row m-0 p-0 bottom-line" style="background-color: #f6f6f6;">
+            <label for="inputEmail4" class="col-sm-12 col-form-label base-font-black-normal-md">DICTAMEN FINAL POR ASEGURADORA COMO DAÑO PARCIAL</label>
+            <div class="col-sm-10">
+                <input ng-model="nuDicFinalAseDanoParcial" type="number" min="0" class="form-control" id="inputEmail4" placeholder="DICTAMEN FINAL POR ASEGURADORA COMO DAÑO PARCIAL">
+            </div>
+        </div>
+        <div class="form-group row m-0 p-0 bottom-line" style="background-color: #f6f6f6;">
+            <label for="inputEmail5" class="col-sm-12 col-form-label base-font-black-normal-md">DICTAMEN FINAL POR ASEGURADORA COMO SIN DAÑOS</label>
+            <div class="col-sm-10">
+                <input ng-model="nuDicFinalAseSinDanos" type="number" min="0" class="form-control" id="inputEmail5" placeholder="DICTAMEN FINAL POR ASEGURADORA COMO SIN DAÑOS">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col">
+                <button type="button" class="btn btn-primary" ng-click="guardar()"><i class="fa fa-floppy-o" aria-hidden="true"></i><span class="pl-1">Guardar</span></button>
+            </div>
+
+            <div class="col" style="text-align: right;">
+                <button type="button" class="btn btn-danger" ng-click="cancelar()"><i class="fa fa-sign-out" aria-hidden="true"></i><span class="pl-1">Cancelar</span></button>
+            </div>
+        </div>
+    </form>
+</div>
+

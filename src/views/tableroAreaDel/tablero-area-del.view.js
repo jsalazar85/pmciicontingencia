@@ -23,7 +23,68 @@ function tableroAreaDelCtrl($scope,$rootScope,$state,$stateParams,dc,gc,ngProgre
     console.log("tableroAreaDelCtrl ******************************************");
     //Inicializador de controller
     $scope.init=function () {
+        $scope.initMock();
         cds.doWorkTask('grid4'); //RJLR
+    };
+    $scope.initMock = function() {
+        $scope.dataChart = [
+            {
+                "txEstado": "MORELOS",
+                "nuUniversoViviendas": "2371"
+            },
+            {
+                "txEstado": "TLAXCALA",
+                "nuUniversoViviendas": "32"
+            },
+            {
+                "txEstado": "BAJA CALIFORNIA SUR",
+                "nuUniversoViviendas": "9"
+            },
+            {
+                "txEstado": "CHIAPAS",
+                "nuUniversoViviendas": "0"
+            },
+            {
+                "txEstado": "DISTRITO FEDERAL",
+                "nuUniversoViviendas": "0"
+            },
+            {
+                "txEstado": "GUERRERO",
+                "nuUniversoViviendas": "0"
+            },
+            {
+                "txEstado": "MEXICO",
+                "nuUniversoViviendas": "0"
+            },
+            {
+                "txEstado": "OAXACA",
+                "nuUniversoViviendas": "0"
+            },
+            {
+                "txEstado": "PUEBLA",
+                "nuUniversoViviendas": "0"
+            },
+            {
+                "txEstado": "QUERETARO",
+                "nuUniversoViviendas": "0"
+            },
+            {
+                "txEstado": "TABASCO",
+                "nuUniversoViviendas": "0"
+            },
+            {
+                "txEstado": "TAMAULIPAS",
+                "nuUniversoViviendas": "0"
+            },
+            {
+                "txEstado": "VERACRUZ",
+                "nuUniversoViviendas": "0"
+            },
+            {
+                "txEstado": "MICHOACAN",
+                "nuUniversoViviendas": "0"
+            }
+        ];
     };
 
 
@@ -61,6 +122,7 @@ function tableroAreaDelCtrl($scope,$rootScope,$state,$stateParams,dc,gc,ngProgre
             },
             {
                 field:"txFecha",
+                type:"date",
                 name:"Fecha",
                 aggregationHideLabel: true
             },
@@ -79,8 +141,8 @@ function tableroAreaDelCtrl($scope,$rootScope,$state,$stateParams,dc,gc,ngProgre
     cds.addWorkTask('grid4',{
         url:gc.conf.xsServicesBaseUrl+'/execTabQuery.xsjs',
         query:{
-            idTab:5,
-            idGra:19,
+            idTab:21,
+            idGra:2,
             idQry:1
         },
         success:function (response) {

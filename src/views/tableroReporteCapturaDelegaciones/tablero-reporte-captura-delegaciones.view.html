@@ -1,0 +1,35 @@
+<div class="container-fluid h-100 w-100" style="margin-top: 55px !important;background-color: whitesmoke">
+    <div class="row h-100 w-100">
+       <div style="padding-top: 40px">
+            <div class="table-responsive exportarRCD">
+                <h1 style="color:#d91b32;text-transform: uppercase;">Reporte Captura Delegaciones</h1>
+                <table class="table table-striped table-bordered">
+                    <thead >
+                        <tr style="background-color:#d91b32;color:#FFF;text-transform: uppercase;text-align: center;">
+                            <th>ESTADO</th>
+                            <th>UNIVERSO DE VIVIENDAS INFONAVIT</th>
+                            <th>VIVIENDAS PENDIENTES POR VISITAR</th>
+                            <th>VIVIENDAS EN PROCESO DE REVISIÓN</th>
+                            <th>DICTAMEN FINAL POR ASEGURADORA COMO PÉRDIDA TOTAL</th>
+                            <th>DICTAMEN FINAL POR ASEGURADORA COMO DAÑO PARCIAL</th>
+                            <th>DICTAMEN FINAL POR ASEGURADORA COMO SIN DAÑOS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="ob in rows">
+                            <td>{{ob.txEstado}}</td>
+                            <td>{{ob.nuUniversoViviendas | number:0}}</td>
+                            <td>{{ob.nuViviendasProceso | number:0}}</td>
+                            <td>{{ob.nuViviendasPendientes | number:0}}</td>
+                            <td>{{ob.nuDicFinalAsePerdidaTotal | number:0}}</td>
+                            <td>{{ob.nuDicFinalAseDanoParcial | number:0}}</td>
+                            <td>{{ob.nuDicFinalAseSinDanos | number:0}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<button id="generaPPTX" ng-click="generaPPTX()">Exportar a PPTX</button>
+<button id="generaXLSX" ng-click="generaXLSX()">Exportar a Excel</button>

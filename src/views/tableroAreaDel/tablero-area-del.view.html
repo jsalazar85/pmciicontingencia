@@ -27,3 +27,27 @@
         <div id="grid4" ui-grid="gridOpt4" class="grid" style="width: 800px; height: 465px;"></div>
     </div>
 </div>
+<br>
+<div class="card text-center h-100">
+    <light-chart-container
+            str-title="Viviendas por delegación"
+            str-footer=""
+    >
+        <chart>
+            <am-chart-vertical-bar
+                    id="delegacion"
+                    json-chart-path="json/delegaciones/viviendasDelegacion.json"
+                    zoom="{
+                                    ini:0,
+                                    end:5
+                                }"
+                    service-cnf="{
+                                idTab:21,
+                                idGra:3,
+                                idQry:1
+                            }"
+                    >
+            </am-chart-vertical-bar>
+        </chart>
+    </light-chart-container>
+</div>

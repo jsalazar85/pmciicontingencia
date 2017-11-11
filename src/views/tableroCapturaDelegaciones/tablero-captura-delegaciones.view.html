@@ -1,0 +1,52 @@
+
+<style>
+    .gridBusqueda{
+        font-size: 12px;
+    }
+</style>
+<div id="tableroCapturaDelegacionesElement" class="container-fluid principalMain m-0 p-0" style="margin-top: 5px !important;">
+    <nav class="nav nav-tabs" id="myTab" role="tablist">
+        <a class="nav-item nav-link active" target="_self" id="nav-home2-tab1" data-toggle="tab" href="#nav-home81" role="tab" aria-controls="nav-home2-tab81" aria-expanded="true">
+            Captura de delegaciones
+        </a>
+        <a class="nav-item nav-link" target="_self" id="nav-home2-tab2" data-toggle="tab" href="#nav-home82" role="tab" aria-controls="nav-home2-tab82">
+            Reporte de captura de delegaciones
+        </a>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home81" role="tabpanel" aria-labelledby="nav-home2-tab81">
+           <div class="row no-gutters m-0 p-1 justify-content-between" style="background-color: whitesmoke;">
+                <div class="col-12 rounded p-1 m-0 mb-1" style="background-color: whitesmoke;">
+                    <div id="gridCapturaDel" ui-grid="gridCapturaDel" class="gridBusqueda" style="width: 100%;height: 600px;" ui-grid-auto-resize></div>
+                </div>
+                <div class="col-1 rounded p-2 m-0 mr-5" style="background-color: whitesmoke;">
+                    <button id="btnActualizar" type="button" class="btn btn-success" ng-click="actualizar($event)"><i class="fa fa-refresh" aria-hidden="true"></i></i><span class="pl-1">Actualizar</span></button>
+                </div>
+
+                  <!-- Modal Captura-->
+                    <div class="modal fade" id="modalCaptura" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Captura Delegaciones</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div ui-view="capturaRegistroDel"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-home82" role="tabpanel" aria-labelledby="nav-home2-tab82">
+            <div ui-view="reporteCapturaDel"></div>
+        </div>
+    </div>
+
+</div>
+
+

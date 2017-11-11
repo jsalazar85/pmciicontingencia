@@ -173,142 +173,155 @@ angular.module('RDash').config(['$stateProvider', '$urlRouterProvider',
             })
             .state('tableroMaster', {
                 url: '/tabmas',
-                views:{
-                    '':{
+                views: {
+                    '': {
                         templateUrl: 'templates/tablero-maestro.view.html',
-                        controller:'tableroMaestroViewCtrl'
+                        controller: 'tableroMaestroViewCtrl'
                     },
-                    'seccionSeguimientoGlobal@tableroMaster':{
+                    'seccionSeguimientoGlobal@tableroMaster': {
                         templateUrl: 'templates/tablero-seguimiento-global.view.html',
                         controller: 'tableroSeguimientoGlobalDinCtrl',
                     },
-                    'seccionPadron@tableroMaster':{
+                    'seccionPadron@tableroMaster': {
                         templateUrl: 'templates/seccion-padron.view.html',
                     },
-                    'seccionAreas@tableroMaster':{
+                    'seccionAreas@tableroMaster': {
                         templateUrl: 'templates/seccion-areas.view.html',
                     },
-                    'tableroAreaCartera@tableroMaster':{
+                    'tableroAreaCartera@tableroMaster': {
                         templateUrl: 'templates/tablero-area-cartera.view.html',
                         controller: 'tableroAreaCarteraCtrl',
                     },
-                    'seccionIniciativas@tableroMaster':{
+                    'seccionIniciativas@tableroMaster': {
                         templateUrl: 'templates/seccion-iniciativas.view.html',
                         controller: 'seccionIniciativasViewCtrl',
                     },
-                    'seccionResumen@tableroMaster':{
+                    'seccionResumen@tableroMaster': {
                         templateUrl: 'templates/seccion-resumen.view.html',
                     },
-                    'tableroCenso@tableroMaster':{
+                    'tableroCenso@tableroMaster': {
                         templateUrl: 'templates/tablero-censo.view.html',
                         controller: 'tableroCensoCtrl',
                     },
-                    'tableroDictamen@tableroMaster':{
+                    'tableroDictamen@tableroMaster': {
                         templateUrl: 'templates/tablero-dictamen.view.html',
                         controller: 'tableroDictamenCtrl',
                     },
 
-                    'tableroMapaView@tableroMaster':{
+                    'tableroMapaView@tableroMaster': {
                         templateUrl: 'templates/tablero-mapa.view.html',
                         controller: 'tableroMapaViewCtrl'
                     },
-                    'tableroAreaRH@tableroMaster':{
+                    'tableroAreaRH@tableroMaster': {
                         templateUrl: 'templates/tablero-area-rh.view.html',
                         controller: 'tableroAreaRHCtrl',
                     },
-                    'tableroAreaDel@tableroMaster':{
+                    'tableroAreaDel@tableroMaster': {
                         templateUrl: 'templates/tablero-area-del.view.html',
                         controller: 'tableroAreaDelCtrl',
                     },
-                    'tableroAreaAtencion@tableroMaster':{
+                    'tableroAreaAtencion@tableroMaster': {
                         templateUrl: 'templates/tablero-area-atencion.view.html',
                         controller: 'tableroAtnSrvCtrl',
                     },
-                    'tableroAreaCom@tableroMaster':{
+                    'tableroAreaCom@tableroMaster': {
                         templateUrl: 'templates/tablero-area-com.view.html',
                         controller: 'tableroAreaComViewCtrl',
                     },
-                    'tableroIniciativaMonto@tableroMaster':{
+                    'tableroIniciativaMonto@tableroMaster': {
                         templateUrl: 'templates/tablero-iniciativa-rentas.view.html',
                         controller: 'tableroIniciativaCtrl'
                     },
-                    'notaInformativa@tableroMaster':{
+                    'notaInformativa@tableroMaster': {
                         templateUrl: 'templates/nota-informativa.view.html'
                     },
-                    'tableroIniciativaCedRev':{
+                    'tableroIniciativaCedRev': {
                         templateUrl: 'templates/tablero-iniciativa-04.view.html',
                         controller: 'tableroIniciativa04ViewCtrl'
                     },
-                    'capturaInicioDetalle@tableroMaster':{
+                    'capturaInicioDetalle@tableroMaster': {
                         templateUrl: 'templates/captura-inicio-detalle-dinamico.view.html',
                         controller: 'capturaInicioDetalleDinamicoViewCtrl'
                     },
-                    'capturaObservacion@tableroMaster':{
+                    'capturaObservacion@tableroMaster': {
                         templateUrl: 'templates/captura-inicio-masterObs.view.html',
                         controller: 'capturaObservacionViewCtrl'
                     },
-                    'tableroIniciativaGenericoView@tableroMaster':{
+                    'tableroIniciativaGenericoView@tableroMaster': {
                         templateUrl: 'templates/tablero-iniciativa-generico.view.html',
                         controller: 'tableroIniciativaGenericoViewCtrl'
                     },
-                    'tableroTablaIniciativaGenericoView@tableroMaster':{
+                    'tableroTablaIniciativaGenericoView@tableroMaster': {
                         templateUrl: 'templates/tablero-tabla-iniciativa-generico.view.html',
                         controller: 'tableroTablaIniciativaGenericoViewCtrl'
                     },
-                    'tableroReporteGlobalImplMedidas@tableroMaster':{
+                    'tableroReporteGlobalImplMedidas@tableroMaster': {
                         templateUrl: 'templates/tablero-reporte-global-impl-medidas.view.html',
                         controller: 'tableroReporteGlobalImplMedidasViewCtrl'
                     },
-                    'tableroReporteGlobalUsoReserva@tableroMaster':{
+                    'tableroReporteGlobalUsoReserva@tableroMaster': {
                         templateUrl: 'templates/tablero-reporte-global-uso-reserva.view.html',
                         controller: 'tableroReporteGlobalUsoReservaViewCtrl'
                     },
-                    'tableroReporteFormatoUnico@tableroMaster':{
+                    'tableroReporteFormatoUnico@tableroMaster': {
                         templateUrl: 'templates/tablero-reporte-formato-unico.view.html',
                         controller: 'tablerReporteFormatUnicoCtrl'
                     },
-                    'tableroReporteFormatoUnicoS1@tableroMaster':{
+                    'tableroReporteFormatoUnicoS1@tableroMaster': {
                         templateUrl: 'templates/tablero-reporte-formato-unico-s1.view.html',
                         controller: 'tablerReporteFormatUnicoCtrl'
                     },
-                    'tableroReporteFormatoUnicoS2@tableroMaster':{
+                    'tableroReporteFormatoUnicoS2@tableroMaster': {
                         templateUrl: 'templates/tablero-reporte-formato-unico-s2.view.html',
                         controller: 'tablerReporteFormatUnicoCtrl'
                     },
-                    'tableroReporteFormatoUnicoS3@tableroMaster':{
+                    'tableroReporteFormatoUnicoS3@tableroMaster': {
                         templateUrl: 'templates/tablero-reporte-formato-unico-s3.view.html',
                         controller: 'tablerReporteFormatUnicoCtrl'
                     },
-                    'tableroReporteFormatoUnicoS4@tableroMaster':{
+                    'tableroReporteFormatoUnicoS4@tableroMaster': {
                         templateUrl: 'templates/tablero-reporte-formato-unico-s4.view.html',
                         controller: 'tablerReporteFormatUnicoCtrl'
                     },
-                    'tableroReporteFormatoUnicoS5@tableroMaster':{
+                    'tableroReporteFormatoUnicoS5@tableroMaster': {
                         templateUrl: 'templates/tablero-reporte-formato-unico-s5.view.html',
                         controller: 'tablerReporteFormatUnicoCtrl'
                     },
-                    'tableroReporteFormatoUnicoS6@tableroMaster':{
+                    'tableroReporteFormatoUnicoS6@tableroMaster': {
                         templateUrl: 'templates/tablero-reporte-formato-unico-s6.view.html',
                         controller: 'tablerReporteFormatUnicoCtrl'
                     },
-                    'tableroReporteFormatoUnicoS7@tableroMaster':{
+                    'tableroReporteFormatoUnicoS7@tableroMaster': {
                         templateUrl: 'templates/tablero-reporte-formato-unico-s7.view.html',
                         controller: 'tablerReporteFormatUnicoCtrl'
                     },
-                    'tableroReporteFormatoUnicoS8@tableroMaster':{
+                    'tableroReporteFormatoUnicoS8@tableroMaster': {
                         templateUrl: 'templates/tablero-reporte-formato-unico-s8.view.html',
                         controller: 'tablerReporteFormatUnicoCtrl'
                     },
-                    'tableroReporteFormatoUnicoS9@tableroMaster':{
+                    'tableroReporteFormatoUnicoS9@tableroMaster': {
                         templateUrl: 'templates/tablero-reporte-formato-unico-s9.view.html',
                         controller: 'tablerReporteFormatUnicoCtrl'
                     },
-                    'tableroAreaCreditoView@tableroMaster':{
+                    'tableroAreaCreditoView@tableroMaster': {
                         templateUrl: 'templates/tablero-area-credito.view.html',
                         controller: 'tableroAreaCredtioCtrl'
+                    },
+                    'seccionCapturaDel@tableroMaster': {
+                        templateUrl: 'templates/tablero-captura-delegaciones.view.html',
+                        controller: 'tableroCapturaDelegacionesViewCtrl'
+                    },
+                    'capturaRegistroDel@tableroMaster': {
+                        templateUrl: 'templates/captura-delegaciones.view.html',
+                        controller: 'capturaDelegacionesViewCtrl'
+                    },
+                    'reporteCapturaDel@tableroMaster': {
+                        templateUrl: 'templates/tablero-reporte-captura-delegaciones.view.html',
+                        controller: 'tableroReporteCapturaDelegacionesViewCtrl'
                     }
                 }
             })
+
             // .state('jsd', {
             //     url: '/tabmas',
             //     views:{
