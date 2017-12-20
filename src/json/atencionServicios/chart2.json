@@ -1,0 +1,65 @@
+{
+  "columnWidth": 1,
+  "marginBottom": 5,
+  "marginTop": 5,
+  "marginRight": 0,
+  "type": "serial",
+  "categoryField": "txAcreditado",
+  "rotate": true,
+  "startDuration": 1,
+  "fontFamily": "Helvetica",
+  "fontSize": 12,
+  "categoryAxis": {
+    "gridPosition": "start",
+    "axisColor": "#AAB3B3",
+    "gridThickness": 0,
+    "position":"left",
+    "inside":true,
+    "axisThickness":0,
+    "axisAlpha": 0
+  },
+  "trendLines": [],
+  "color":"#111111",
+  "graphs": [
+    {
+      "balloonText": "[[category]]:[[value]]",
+      "color": "#5bdaaf",
+      "fillAlphas": 1,
+      "fontSize": 18,
+      "id": "AmGraph-1",
+      "labelPosition": "right",
+      "title": "graph 1",
+      "type": "column",
+      "valueField": "nuTotal",
+      "visibleInLegend": false,
+      "fillColors": "#5bdaaf",
+      "lineColor": "#5bdaaf",
+      "columnWidth":"0.8"
+    }
+  ],
+  "guides": [],
+  "valueAxes": [
+    {
+      "id": "va1",
+      "position": "left",
+      "strictMinMax": true,
+      "title": "",
+      "labelsEnabled":true,
+      "fontSize": 10,
+      "rotate": true,
+      "axisAlpha": 1
+    }
+  ],
+  "legend": {
+    "enabled": false
+  },
+  "responsive": {
+    "enabled": true
+  },
+  "dataProvider": [
+    {
+      "txFuente":"",
+      "nuValor":0
+    }
+  ]
+}

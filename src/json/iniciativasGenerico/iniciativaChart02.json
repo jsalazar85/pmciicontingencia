@@ -1,0 +1,51 @@
+{
+  "language": "es",
+  "svgIcons": false,
+  "pathToImages":"amcharts/images/",
+  "type": "serial",
+  "theme": "light",
+  "dataProvider": [ ],
+  "gridAboveGraphs": true,
+  "startDuration": 1,
+  "rotate":true,
+  "graphs": [ {
+    "balloonText": "[[category]]: <b>[[value]]</b>",
+    "fillAlphas": 0.8,
+    "lineAlpha": 0.2,
+    "type": "column",
+    "valueField": "nuMontoTotal",
+    "labelText": "[[value]]",
+    "id": "g01"
+
+  } ],
+  "chartCursor": {
+    "categoryBalloonEnabled": false,
+    "cursorAlpha": 0,
+    "zoomable": false
+  },
+  "categoryField": "txEstado",
+  "categoryAxis": {
+    "gridPosition": "start",
+    "gridAlpha": 0,
+    "tickPosition": "start",
+    "tickLength": 20
+
+  },
+  "export": {
+    "enabled": true
+  },
+  "responsive": {
+    "enabled": true
+  },
+  "chartScrollbar": {
+      "graph": "g01",
+      "scrollbarHeight": 30,
+      "graphType": "column"
+  },
+  "valueAxes": [
+    {
+      "id": "ValueAxis-1",
+      "title": "Monto"
+    }
+  ]
+}

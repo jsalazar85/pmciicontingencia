@@ -1,0 +1,99 @@
+{
+  "zoomOutText": "",
+"language": "es",
+"type": "serial",
+"categoryField": "txEstado",
+"startDuration": 1,
+"rotate": true,
+"colors": [
+"#9ADED2",
+"#84C263",
+"#7E0212",
+"#d4d4d4"
+],
+"pathToImages":"amcharts/images/",
+"svgIcons": false,
+"categoryAxis": {
+"gridPosition": "start"
+},
+"trendLines": [],
+"graphs": [
+{
+"balloonText": "[[category]]:[[value]]",
+"fillAlphas": 1,
+"id": "AmGraph-1",
+"title": "Total",
+"type": "column",
+"valueField": "nuTotal",
+"labelText": "[[value]]"
+},
+{
+"balloonText": "[[category]]:[[value]]",
+"fillAlphas": 1,
+"id": "AmGraph-2",
+"title": "Brigada Infonavit",
+"type": "column",
+"valueField": "nuBriInf",
+"labelText": "[[value]]"
+},
+{
+"balloonText": "[[category]]:[[value]]",
+"fillAlphas": 1,
+"id": "AmGraph-3",
+"title": "Atención y Servicios",
+"type": "column",
+"valueField": "nuAteSer",
+"labelText": "[[value]]"
+},
+{
+"balloonText": "[[category]]:[[value]]",
+"fillAlphas": 1,
+"id": "AmGraph-4",
+"title": "Portal Infonavit",
+"type": "column",
+"valueField": "nuPorInf",
+"labelText": "[[value]]"
+},
+{
+  "balloonText": "[[category]]:[[value]]",
+  "fillAlphas": 1,
+  "id": "AmGraph-5",
+  "title": "Delegaciones",
+  "type": "column",
+  "valueField": "nuDel",
+  "labelText": "[[value]]"
+},
+  {
+    "balloonText": "[[category]]:[[value]]",
+    "fillAlphas": 1,
+    "id": "AmGraph-6",
+    "title": "Dictamenes Aseguradora",
+    "type": "column",
+    "valueField": "nuDicAse",
+    "labelText": "[[value]]"
+  }
+],
+"guides": [],
+"valueAxes": [
+{
+"id": "ValueAxis-1",
+"title": "Reportes"
+}
+],
+"allLabels": [],
+"balloon": {},
+"legend": {
+"enabled": true,
+"useGraphSettings": true
+},
+
+"dataProvider": [],
+"chartScrollbar": {
+"graph": "scrollbar",
+"scrollbarHeight": 30,
+"graphType": "AmGraph-1"
+},
+"responsive": {
+    "enabled": true
+  }
+}

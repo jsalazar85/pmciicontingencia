@@ -1,0 +1,62 @@
+{
+  "zoomOutText": "",
+"language": "es",
+"type": "serial",
+"categoryField": "txDelegacion",
+"startDuration": 1,
+"colors": [
+"#78d6eb",
+"#909090",
+"#7E0212",
+"#d4d4d4"
+],
+"pathToImages":"amcharts/images/",
+"svgIcons": false,
+"categoryAxis": {
+"gridPosition": "start"
+},
+"trendLines": [],
+"graphs": [
+{
+"balloonText": "[[category]]:[[value]]",
+"fillAlphas": 1,
+"id": "AmGraph-1",
+"title": "Formalizado",
+"type": "column",
+"valueField": "nuFormalizado",
+"labelText": "[[value]]"
+},
+{
+"balloonText": "[[category]]:[[value]]",
+"fillAlphas": 1,
+"id": "AmGraph-2",
+"title": "Tubería",
+"type": "column",
+"valueField": "nuTuberia",
+"labelText": "[[value]]"
+}
+],
+"guides": [],
+"valueAxes": [
+{
+"id": "ValueAxis-1",
+"title": ""
+}
+],
+"allLabels": [],
+"balloon": {},
+"legend": {
+"enabled": true,
+"useGraphSettings": true
+},
+
+"dataProvider": [],
+"chartScrollbar": {
+"graph": "scrollbar",
+"scrollbarHeight": 30,
+"graphType": "AmGraph-1"
+},
+"responsive": {
+    "enabled": true
+  }
+}

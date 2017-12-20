@@ -1,0 +1,43 @@
+{
+  "language": "es",
+  "type": "serial",
+  "categoryField": "txEstado",
+  "startDuration": 1,
+  "colors": [
+    "#9ADED2",
+    "#84C263",
+    "#7E0212",
+    "#d4d4d4"
+  ],
+  "pathToImages":"amcharts/images/",
+  "svgIcons": false,
+  "categoryAxis": {
+    "gridPosition": "start"
+  },
+  "trendLines": [],
+  "graphs": [
+    {
+      "balloonText": "[[category]]:[[value]]",
+      "fillAlphas": 1,
+      "id": "AmGraph-1",
+      "title": "Monto DAP",
+      "type": "column",
+      "valueField": "nuDAP",
+      "labelText": "[[value]]"
+    }
+  ],
+  "guides": [],
+  "valueAxes": [
+    {
+      "id": "ValueAxis-1",
+      "title": "Monto"
+    }
+  ],
+  "allLabels": [],
+  "balloon": {},
+
+  "dataProvider": [],
+  "responsive": {
+    "enabled": true
+  }
+}

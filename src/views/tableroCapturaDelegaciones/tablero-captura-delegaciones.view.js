@@ -21,6 +21,8 @@ angular
                 '</div>';
 
             $scope.gridCapturaDel = {
+                enableGridMenu: true,
+                exporterMenuCsv: false,
                 data:[
                     {
                         idEstado:17000,
@@ -106,6 +108,7 @@ angular
                         cellTemplate: selectionCellTemplateMObs
                     }
                 ]
+
             };
 
             $scope.getTableData = function() {
@@ -147,6 +150,32 @@ angular
                 $scope.currentDetail = row.entity;
                 $scope.$emit('capturaRegistroDelegaciones', {currentDetail:$scope.currentDetail});
             };
+
+            $scope.generaXLSXTmp = function(){
+                var nodos = document.getElementsByClassName("gridExportar");
+                var nodo = nodos[0];
+                console.log(nodo)
+                var wb = XLSX.utils.table_to_book(nodo, {sheet:"Reporte"});
+                var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'});
+                var fname = 'Reporte.xlsx';
+                try {
+                    saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), fname);
+                } catch(e) { if(typeof console != 'undefined') console.log(e, wbout); }
+                return wbout;
+            }
+
+            function s2ab(s) {
+                if(typeof ArrayBuffer !== 'undefined') {
+                    var buf = new ArrayBuffer(s.length);
+                    var view = new Uint8Array(buf);
+                    for (var i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+                    return buf;
+                } else {
+                    var buf = new Array(s.length);
+                    for (var i=0; i!=s.length; ++i) buf[i] = s.charCodeAt(i) & 0xFF;
+                    return buf;
+                }
+            }
 
             $scope.init = function() {
                 $scope.getTableData();
